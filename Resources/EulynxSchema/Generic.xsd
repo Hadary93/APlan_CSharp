@@ -1,0 +1,2657 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:db="http://dataprep.eulynx.eu/schema/DB/1.0" xmlns:generic="http://dataprep.eulynx.eu/schema/Generic/1.0" xmlns:nr="http://dataprep.eulynx.eu/schema/NR/1.0" xmlns:prorail="http://dataprep.eulynx.eu/schema/ProRail/1.0" xmlns:rfi="http://dataprep.eulynx.eu/schema/RFI/1.0" xmlns:rsmCommon="http://www.railsystemmodel.org/schemas/Common/1.2" xmlns:rsmSig="http://www.railsystemmodel.org/schemas/Signalling/1.2" xmlns:rsmTrack="http://www.railsystemmodel.org/schemas/Track/1.2" xmlns:sig="http://dataprep.eulynx.eu/schema/Signalling/1.0" xmlns:sncf="http://dataprep.eulynx.eu/schema/SNCF/1.0" xmlns:trv="http://dataprep.eulynx.eu/schema/TRV/1.0" elementFormDefault="qualified" targetNamespace="http://dataprep.eulynx.eu/schema/Generic/1.0">
+  <!--<dc:date>2021-12-21T16:28:00Z</dc:date><dc:creator>rtm2xsd 1.9.1</dc:creator><dc:source>Model 1.0, XMI 2.4.1, EA 13</dc:source>-->
+  <xs:annotation>
+    <xs:documentation>
+This XML schema file is part of the EULYNX DataPrep model which is licensed under EUPL 1.2.
+Detailed technical information is found on https://dataprep.eulynx.eu
+Please address queries to the contact stated on the EULYNX website https://eulynx.eu
+</xs:documentation>
+  </xs:annotation>
+  <xs:import namespace="http://dataprep.eulynx.eu/schema/RFI/1.0" schemaLocation="RFI.xsd"/>
+  <xs:import namespace="http://dataprep.eulynx.eu/schema/SNCF/1.0" schemaLocation="SNCF.xsd"/>
+  <xs:import namespace="http://dataprep.eulynx.eu/schema/Signalling/1.0" schemaLocation="Signalling.xsd"/>
+  <xs:import namespace="http://dataprep.eulynx.eu/schema/TRV/1.0" schemaLocation="TRV.xsd"/>
+  <xs:import namespace="http://www.railsystemmodel.org/schemas/Track/1.2" schemaLocation="RsmTrack.xsd"/>
+  <xs:import namespace="http://dataprep.eulynx.eu/schema/DB/1.0" schemaLocation="DB.xsd"/>
+  <xs:import namespace="http://www.railsystemmodel.org/schemas/Signalling/1.2" schemaLocation="RsmSignalling.xsd"/>
+  <xs:import namespace="http://dataprep.eulynx.eu/schema/NR/1.0" schemaLocation="NR.xsd"/>
+  <xs:import namespace="http://dataprep.eulynx.eu/schema/ProRail/1.0" schemaLocation="ProRail.xsd"/>
+  <xs:import namespace="http://www.railsystemmodel.org/schemas/Common/1.2" schemaLocation="RsmCommon.xsd"/>
+  <xs:complexType name="Topography">
+    <xs:annotation>
+      <xs:documentation>Container for topography, i.e. position and alignment components. 
+Coordinates are typically geographic but may include paper and display coordinates.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:BaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="usesAlignmentCantSegment" type="rsmCommon:AlignmentCantSegment"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="usesAlignmentCurve" type="rsmCommon:AlignmentCurve"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="usesAnchorPoint" type="rsmCommon:AnchorPoint"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="usesCant" type="rsmCommon:Cant"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="usesDiscretisedPointSet" type="rsmCommon:DiscretisedPointSet">
+            <xs:annotation>
+              <xs:documentation>A series of points, i.e. an polygon, representing an alignment.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="usesElevationAndInclination" type="rsmCommon:ElevationAndInclination"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="usesHorizontalAlignmentSegment" type="rsmCommon:HorizontalAlignmentSegment"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="usesIntrinsicCoordinate" type="rsmCommon:IntrinsicCoordinate"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="usesLineAlignmentCurve" type="rsmCommon:AlignmentCurve">
+            <xs:annotation>
+              <xs:documentation>A alignment curve that represents the chainage line.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="usesPositioningSystem" type="rsmCommon:PositioningSystem"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="usesPositioningSystemCoordinate" type="rsmCommon:PositioningSystemCoordinate">
+            <xs:annotation>
+              <xs:documentation>Coordinates in the national mapping grid.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="usesVerticalAlignmentSegment" type="rsmCommon:VerticalAlignmentSegment"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="MaterialTypes">
+    <xs:annotation>
+      <xs:documentation>A list of material types.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="timber">
+        <xs:annotation>
+          <xs:documentation>wood</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="concrete">
+        <xs:annotation>
+          <xs:documentation>beton</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="steel">
+        <xs:annotation>
+          <xs:documentation>steel sleepers are incompatible with track circuits</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="synthetic">
+        <xs:annotation>
+          <xs:documentation>plastic
+DE: Kunststoff
+NL: kunststof
+FR: mati&amp;#232;re plastique </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType abstract="true" name="BaseObject">
+    <xs:annotation>
+      <xs:documentation>The EULYNX base object inherits an identity from the RSM base object. This identity acts as an unique anchor that other objects can refer to. </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="rsmCommon:BaseObject"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tElementWithIDref">
+    <xs:attribute name="ref" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>The XSD generator can be hard coded so that the ref attribute is restricted to the pattern (urn:uuid:)?[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}|\{[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\}</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:element name="dataContainer" type="generic:DataContainer"/>
+  <xs:complexType name="DataContainer">
+    <xs:annotation>
+      <xs:documentation>Container for a structured data set that describes the state of signalling assets in a data release.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:BaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="hasExplanatoryNote" type="generic:Attachment">
+            <xs:annotation>
+              <xs:documentation>Details how the data release was produced. This allows a user of a snapshot data set to assess the quality of the data. E.g. notes about conversion problems or gaps in the data.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="ownsDataPrepEntities" type="generic:DataPrepEntities">
+            <xs:annotation>
+              <xs:documentation>Storage for EULYNX DP objects. Objects that are in the national domain, e.g. NR, ProRail, DB, SNCF, etc., are stored in their own instance of signalling entities.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="ownsRsmEntities" type="generic:RsmEntities"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LineSideDetectionEvaluator">
+    <xs:annotation>
+      <xs:documentation>A line-side detection evaluator typically processes inputs from detectors of dangerous situations. </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:LineSideSpotSystem">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="1" name="isOfDetectorType" nillable="true" type="generic:LineSideDetectorTypes"/>
+          <xs:element maxOccurs="1" minOccurs="0" name="reportsAlarms" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>True when the evaluator reports alarms. False otherwise.
+Not informed when irrelevant.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="reportsAlarmsTo" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Describes the system to which alarms are reported.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType abstract="true" name="ObjectStatus">
+    <xs:annotation>
+      <xs:documentation>An object-configuration can reflect a particular status, typically in construction phases.
+For instance, a signal can be disconnected so drivers disregard the signal. The signal would then own a configuration associated with an out-of-service status.
+This abstract class reflects an object status and the IM can specialise the object status that describes national needs.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfigurationProperty"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ProjectMetaData">
+    <xs:annotation>
+      <xs:documentation>Organisational and subject meta-data that apply globally to planning groups within a project stage.
+de-DE: LST Planung Projekt</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:BaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasDateOfCompletion" type="xs:dateTime">
+            <xs:annotation>
+              <xs:documentation>The planned finish date of the project. 
+This allows sorting projects by date.
+Usually, only the year, month and optionally day are meaningful.
+</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasProjectLead" type="generic:Actor">
+            <xs:annotation>
+              <xs:documentation>The responsible project manager (PM). May be filled with minimal data if there are concerns about privacy.
+fr-FR: SNCF: ce champ est obligatoire.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="isOwnedByOrganisation" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Designates the organisational unit with the Infrastructure Manager (IM) in charge of the project.
+E.g. IM regional organisation or corridor project organisation</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>generic:Organisation</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="knowsOrganisation" type="generic:Organisation">
+            <xs:annotation>
+              <xs:documentation>Information about stakeholder organisations are stored in the project meta data.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="programmeDesignation" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Top level scheme or programme designation.
+E.g. national ETCS roll-out.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="projectDesignation" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The designation of the project.
+E.g.  ETCS resignalling yard Euville-la-Jolie.
+en-UK: project or scheme</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="projectNumber" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The project number used for accounting purposes. Represented by a string so it can be composed of several numbers.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="1" name="splitsIntoGroupMetaData" nillable="true" type="generic:ProjectStageGroupMetaData">
+            <xs:annotation>
+              <xs:documentation>The project meta-data splits into one or more groups of meta-data. </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ProjectStageGroupMetaData">
+    <xs:annotation>
+      <xs:documentation>Meta-data informing a group of project stages. Stages are grouped to reflect common qualities such as:
+&lt;ul&gt;
+ &lt;li&gt;allocation to consulting engineering firm (e.g. stages x-y by ACME railway engineering GmbH).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+ &lt;li&gt;area&lt;/li&gt;
+ &lt;li&gt;discipline (aka subject matter), e.g. geo, interlocking, ETCS&lt;/li&gt;
+&lt;/ul&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:BaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="coversObservationArea" type="rsmCommon:AreaLocation">
+            <xs:annotation>
+              <xs:documentation>This group of planning stages covers the given observation area. The objects in this area cannot be changed.
+de-DE: Betrachtungsbereich</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="coversPlanningArea" type="rsmCommon:AreaLocation">
+            <xs:annotation>
+              <xs:documentation>Area where the actual engineering is carried out. Changes to objects are allowed and to be expected within this area.
+de-DE: Planungsbereich</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="dataCategory" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Marks the stage in the data-flow life cycle. E.g. 
+&lt;ul&gt;
+ &lt;li&gt;first digitisation of as-is quality checked data (first assembly of digital inventory).&lt;/li&gt;
+ &lt;li&gt;Insertion of topological nodes to divide-and-rule&lt;/li&gt;
+ &lt;li&gt;Version bumping&lt;/li&gt;
+&lt;/ul&gt;
+Similar to &lt;i&gt;planningType&lt;/i&gt; attribute in project stage meta data. 
+SNCF: not stored in plans because done in the data factory.
+DB: Planung_G_Art_Besonders
+
+</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="discipline" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Discipline, subject matter, e.g. interlocking, geo-information, ETCS, etc.
+This supports the compartmentalising and sequencing signalling design, typically
+1. GEO layout
+2. IL engineering
+3. signal positioning and sighting
+4. ETCS engineering
+A responsible designer can sign for the compartment of the engineering work under his responsibility, Mr. S. Signaller signed off for his discipline, IL engineering, only. </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasDateOfCompletion" type="xs:dateTime">
+            <xs:annotation>
+              <xs:documentation>The planned date of completion of this group of project stages.
+Supports project managers to forecast, timely ordering, and resource planning.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasReferenceOperationalLocality" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Reference to the locality to which the meta-data apply. This links the project to company-wide planning and documentation. E.g. Projet Grand Paris&lt;i&gt;.&lt;/i&gt;</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>generic:OperationalLocality</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="hasRequirementSpecification" type="generic:Attachment">
+            <xs:annotation>
+              <xs:documentation>Document describing the scheme requirements, operational objectives.
+e.g.  "increase speed on Dresden - Leipzig to 200 kmh" 
+This helps the supplier to design requirement validation tests.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="isCreatedByOrganisation" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The design organisation, engineering company, that created the plans for this group of plans.
+fr-FR: bureau d'&amp;#233;tudes (champ obligatoire)
+de-DE: Ingenieurb&amp;#252;ro</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>generic:Organisation</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="isOwnedByOrganisation" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The sub-organisation of the IM or regional organisation of the IM that is responsible for, and owns the plans and data.
+
+This allows addressing the correct organisation.
+
+SNCF: signifie la r&amp;#233;gion en &lt;i&gt;possession des plans &lt;/i&gt;(champ obligatoire)
+</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>generic:Organisation</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="modifiedSubSystem" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Designates the subsystem that is subject to planned changes, e.g. decentral interlocking.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="modifiedSystem" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Designates the facility or system that is subject to planned changes, e.g. "signalling system" or  "interlocking central unit".</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="projectSectionDescription" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Description of the geographic zone under planning. 
+Typically indicates that the present group of project stages applies to a section of a larger project
+E.g "section Dresden Hbf - Dresden Neustadt" (which is part of the larger project Dresden - Leipzig)
+
+DE: Bauabschnitt</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="referenceLineKilometre" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Reference chainage (aka kilometrage/mileage), where this group of project stages is centered, or e.g. the largest station in the planning area.
+E.g. km 125,35 +5,25 (m)
+en-UK: Engineer's line reference (ELR)
+de-DE: Strecke-KM auf fuehrender Strecke
+Note that the planning area location provides the precise machine-readable information.
+
+</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="referenceLineSection" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Informs the limits on the reference line of the planning area, e.g. "Km 12.7 to Km 13.5".
+Exact machine-readable information is found in the planning area.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="refersToProjectReferenceLine" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>This group of project stages is centered on this line.
+de-DE: fuehrende Strecke
+en-UK: Engineer's Line Reference.
+Definition of the leading line supports orienting and plotting layout plans according to rules such as "the project plan shall be drawn such that the leading line plots with kilometrage counting up from left to right" or "London to the left", or "Paris &amp;#224; gauche, kilom&amp;#232;tre 0".</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>generic:Line</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="requestedSchemaVersion" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Version of the EULYNX DP schema (XSD version) that the data engineer was requested to use for the present data set.
+Note that a validation tool looks for xsi:schemaLocation in the header of the XML instance for the XSD to validate against. This XSD can differ from the present attribute because data engineers may need to apply a different version in the course of their work. </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="1" name="splitsIntoStageMetaData" nillable="true" type="generic:ProjectStageMetaData">
+            <xs:annotation>
+              <xs:documentation>The property group splits into meta-data for this single stage.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="stageGroupDesignation" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Designation of the group of planning stages, expressing the intent of the grouping, e.g.  "stages resignalling design by ACME signalisation ferroviaire S.A."</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LineSideLinearConstruction">
+    <xs:annotation>
+      <xs:documentation>Facade for linear- or area-located constructions such as over bridge, under bridge, tunnel, noise protection barrier.
+The construction has either a linear- or an area-location.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:LineSideInstallation">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="isAreaLocatedAt" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The line-side construction has an area location. Appropriate for dual-track tunnels or bridges over several tracks.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:AreaLocation</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="isLinearLocatedAt" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The line-side construction has a linear location. Appropriate for constructions like a noise wall or a single-track tunnel.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:LinearLocation</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="dataPrepEntities" type="generic:DataPrepEntities"/>
+  <xs:complexType name="DataPrepEntities">
+    <xs:annotation>
+      <xs:documentation>Container for objects in the EULYNX DP signalling domain.
+de-DE: LST Daten</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:BaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="knowsAssetAndState" type="sig:AssetAndState"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsAccessPoint" type="sig:AccessPoint"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsAlignmentCantSegment" type="generic:AlignmentCantSegment"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsAnchorPoint" type="generic:AnchorPoint"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsAnnotation" type="generic:Annotation"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsAspect" type="sig:Aspect"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsAspectProving" type="sig:AspectProving"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsAssetUser" type="generic:AssetUser"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsAtpProtectiveDistance" type="sig:TpsProtectionDistance"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsAttachmentDocument" type="generic:Attachment"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsAutomatic" type="sig:Automatic">
+            <xs:annotation>
+              <xs:documentation>Set of autoroutes</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsAutomaticRouteSettingSystem" type="sig:AutomaticRouteSettingSystem"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsBackToBackLocking" type="sig:BackToBackLocking"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsBaliseGroupLinking" type="sig:BaliseGroupLinking"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsBarrierMechanism" type="sig:BarrierMechanism"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsBaselineOfRuleSet" type="generic:BaselineOfRuleSet"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsBinaryDataFile" type="sig:BinaryDataFile"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsBlockSystem" type="sig:BlockSystem"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsCable" type="sig:Cable"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsCableDuct" type="sig:CableRoute"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsCableJoint" type="sig:CableJoint"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsCableJointInstallation" type="sig:CableJointInstallation"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsCableProperties" type="sig:CableProperties"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsCableRouteJunction" type="sig:CableRouteJunction"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsCant" type="generic:Cant"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsChangeMarker" type="sig:ChangeMarker"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsCivilStructure" type="sig:CivilStructure"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsCompositeRoute" type="sig:CompositeRoute"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsConditionSectionsClear" type="sig:ConditionSectionsClear"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsConflictingRoute" type="sig:ConflictingRoute"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsControlArea" type="sig:ControlArea"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsControlRelation" type="sig:ControlRelation"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsControlledTrackAsset" type="sig:ControlledTrackAsset"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsDADoverlap" type="sig:DirectionAuthorityDependentOverlap"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsDangerArea" type="sig:DangerArea"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsDangerAreaTrack" type="sig:DangerAreaTrack"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsDescription" type="generic:Description"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsDispatchAnnouncerAssignment" type="sig:DispatchAnnouncerAssignment"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsEdge" type="generic:Edge"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsElevation" type="generic:ElevationAndInclination"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsEquipmentSupport" type="sig:EquipmentSupport"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsEtcsAcknowledgement" type="sig:EtcsAcknowledgement"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsEtcsEndOfAuthority" type="sig:EtcsEndOfAuthority"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsEtcsMaSection" type="sig:EtcsMaSection"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsEtcsNationalValueSet" type="sig:EtcsNationalValueSet"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsEtcsPacket" type="sig:EtcsPacket"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsEtcsPointCrossing" type="sig:EtcsPointCrossing"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsEtcsPositionReportParametersArea" type="sig:EtcsPositionReportParametersArea"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsEtcsProgrammingFileSet" type="sig:EtcsProgrammingFileSet"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsEtcsSignalProperties" type="sig:EtcsSignalProperties"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsEtcsSystemVersion" type="sig:EtcsSystemVersion"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsEtcsTelegram" type="sig:EtcsTelegram"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsEtcsTelegramConditionRelation" type="sig:EtcsTelegramConditionRelation"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsFlankProtection" type="sig:FlankProtection"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsFoulTrackControl" type="sig:FoulTrackControl"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsGeometricCoordinate" type="generic:GeometricCoordinate"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsHorizontalAlignmentSegment" type="generic:HorizontalAlignmentSegment"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsHybridLevel3Timers" type="prorail:HybridLevel3Timers"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsIllumination" type="sig:Illumination"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsInfrastructureBorder" type="sig:InfrastructureBorder"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsIntentionallyDarkAllowed" type="sig:IntentionallyDarkAllowed"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsIpAddressAssignment" type="sig:IpAddressAssignment"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsKey" type="sig:Key">
+            <xs:annotation>
+              <xs:documentation>Physical or numerical keys used to unlock (sub-)systems of the interlocking.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsLensDiffuser" type="sig:LensDiffuser"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsLeuModule" type="sig:LeuModule"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsLevelCrossingActivation" type="sig:LevelCrossingActivation"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsLevelCrossingClearanceDetectionSystem" type="sig:LevelCrossingClearanceDetectionSystem"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsLevelCrossingDeactivation" type="sig:LevelCrossingDeactivation"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsLevelCrossingLocalOperationUiElement" type="sig:LevelCrossingLocalOperationUiElement"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsLevelCrossingRouteRelation" type="sig:LevelCrossingRouteRelation"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsLevelCrossingSignalRelation" type="sig:LevelCrossingSignalRelation"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsLevelCrossingTimerSet" type="sig:LevelCrossingTimerSet"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsLine" type="generic:Line"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsLineBlockInformation" type="sig:LineBlockInformation"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsLineSideDetector" type="generic:LineSideDetector"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsLineSideInstallation" type="generic:LineSideInstallation"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsLinearElement" type="generic:LinearElement"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsLocalOperatingArea" type="sig:LocalOperatingArea"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsLocalOperatingAreaUiElement" type="sig:LocalOperatingAreaUiElement"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsLocalOperatingZone" type="sig:LocalOperatingZone"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsLocalOperatingZoneLimit" type="sig:LocalOperatingZoneLimit"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsLocalOperatingZoneRelation" type="sig:LocalOperatingZoneRelation"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsLocalOperationDevice" type="sig:LocalOperationDevice"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsLocationProxy" type="generic:LocationProxy"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsLock" type="sig:Lock"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsLockCombination" type="sig:LockCombination"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsLockoutArea" type="sig:LockoutArea"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsLozAssetRelation" type="sig:LozAssetRelation"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsManualOverlapRelease" type="sig:ManualOverlapRelease"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsMappingView" type="generic:MappingView"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsNUSR" type="sig:NotUpgradeableSpeedRestriction">
+            <xs:annotation>
+              <xs:documentation>a set of speed restrictions that cannot be upgraded.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsNode" type="generic:Node"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsNonReplacement" type="sig:NonReplacement"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsNonStopMovement" type="sig:NonStopMovement"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsNormalisation" type="sig:Normalisation"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsOperationalLocality" type="generic:OperationalLocality"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsOppositeTrackSignal" type="sig:OppositeTrackSignal"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsPowerOutputChannelProperties" type="sig:PowerOutputChannelProperties"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsPowerSourceRelation" type="sig:PowerSourceRelation"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsPowerSupplyModule" type="sig:PowerSupplyModule"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsRbcInterlockingGroup" type="sig:RbcInterlockingGroup"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsRbcProperties" type="sig:RbcProperties"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsRbcWatchdog" type="sig:RbcWatchdog"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsReferenceDrawing" type="generic:ReferenceDrawing"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsRegisteredIntrinsicCoordinate" type="generic:RegisteredIntrinsicCoordinate"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsRoadTrafficSign" type="sig:RoadTrafficSign"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsRoute" type="sig:Route"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsRouteApproacLocking" type="sig:RouteApproachLocking"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsRouteBody" type="sig:RouteBody"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsRouteBodyProperty" type="sig:RouteBodyProperty"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsRouteCondition" type="sig:RouteCondition"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsRouteProperty" type="sig:RouteProperty"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsSafetyDistance" type="sig:SafetyDistance"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsSectionsForFlankProtection" type="sig:SectionsForFlankProtection"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsSegment" type="generic:Segment"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsShuntingRouteSectionProving" type="sig:ShuntingRouteSectionProving"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsSignalAlignment" type="sig:SignalAlignment"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsSignalAspectDegradation" type="sig:SignalAspectDegradation"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsSignalFrame" type="sig:SignalFrame"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsSignalFrameComponent" type="sig:SignalFrameComponent"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsSignalFunction" type="sig:SignalFunction"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsSignalLocation" type="sig:SignalLocation"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsSignalMessage" type="sig:SignalMessage"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsSignalSightingDistance" type="sig:SignalSightingDistance"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsSignalType" type="sig:SignalType"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsSignalVector" type="sig:SignalVector"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsSignalplan" type="sig:SignalPlan"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsSpecialPositionArrangement" type="sig:SpecialPositionArrangement"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsSpeedProfile" type="sig:SpeedProfile"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsStandOutControl" type="sig:StandOutControl"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsStoppingPoint" type="sig:StoppingPoint"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsSwingingOverlap" type="sig:SwingingOverlap"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsSynchedFlashing" type="sig:SynchedFlashing"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsSystemState" type="sig:SystemState"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsTdsOccupanyOverrideGroup" type="sig:TdsOccupancyOverrideGroup"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsTerminalElement" type="generic:TerminalElement"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsTpArea" type="sig:TpArea"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsTpsDataTransmissionSystemProperties" type="sig:TpsDataTransmissionSystemProperties"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsTpsDeviceProperties" type="sig:TpsDeviceProperties"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsTpsRelation" type="sig:TpsRelation"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsTrackAsset" type="sig:TrackAsset"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsTrackAssetConfiguration" type="sig:TrackAssetConfiguration"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsTrackConditionArea" type="sig:TrackConditionArea"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsTrackCrossingProperties" type="sig:TrackCrossingProperties"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsTrackProperty" type="sig:TrackProperty"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsTrainCategory" type="sig:TrainCategory"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsTrainDescriberDisplayField" type="sig:TrainDescriberDisplayField"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsTrainDescriberSystem" type="sig:TrainDescriberSystem"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsTrainSelectionProperties" type="sig:TrainSelectionProperties"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsTriggerAssignment" type="sig:TriggerAssignment"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsTunnelSignal" type="sig:TunnelSignal"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsVerticalAligmentSegment" type="generic:VerticalAligmentSegment"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsView" type="generic:View"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsWarningArea" type="sig:WarningArea"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsWarningComponent" type="sig:WarningComponent"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsWarningSystem" type="sig:WarningSystem"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="usesPositionedRelationSet" type="generic:PositionedRelationSet"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="HorizontalAlignmentSegment">
+    <xs:annotation>
+      <xs:documentation>Class for enriching the RSM alignment segment with information about the source of the data (GIS) and EULYNX DP  configuration properties such as designation and applicable rule set. </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element name="refersToRsmAlignmentSegment" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Reference to the alignment curve as defined in the RSM namespace.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:HorizontalAlignmentSegment</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType abstract="true" name="AdditionalInformation">
+    <xs:annotation>
+      <xs:documentation>Extra information as free text that applies to the object under configuration and that can't be captured by other classes.
+Not to be confused with annotation.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfigurationProperty">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="text" nillable="true" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="rsmEntities" type="generic:RsmEntities"/>
+  <xs:complexType name="RsmEntities">
+    <xs:annotation>
+      <xs:documentation>Container for entities defined in the Rail System Model namespace. RSM subject matter is mainly topology and topography.
+de-DE: GEO Daten</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:BaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsOnTrackSignallingDevice" type="rsmSig:OnTrackSignallingDevice">
+            <xs:annotation>
+              <xs:documentation>Generic term for signalling equipment such as signals and train detection/protection equipment.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsPoint" type="rsmTrack:Turnout"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsRouteBody" type="rsmSig:RouteBody"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsSignal" type="rsmSig:Signal"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsVehicleStop" type="rsmTrack:VehicleStop"/>
+          <xs:element maxOccurs="1" minOccurs="0" name="usesCablingTopology" type="generic:Topology">
+            <xs:annotation>
+              <xs:documentation>Container for the RSM elements that constitute the cabling network.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="usesEtcsTopology" type="generic:Topology"/>
+          <xs:element maxOccurs="1" minOccurs="0" name="usesLineTopology" type="generic:Topology">
+            <xs:annotation>
+              <xs:documentation>define one linear element for each line to carry the line kilometreage.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="usesLocation" type="rsmCommon:BaseLocation">
+            <xs:annotation>
+              <xs:documentation>Contains spot-, linear- and area-location</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="usesProperty" type="rsmCommon:BaseProperty">
+            <xs:annotation>
+              <xs:documentation>Defines and uses observed properties such as the length of a linear element</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="usesQuantityKind" type="rsmCommon:QuantityKind">
+            <xs:annotation>
+              <xs:documentation>Quantity kind used in this data set.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="usesTopography" type="generic:Topography">
+            <xs:annotation>
+              <xs:documentation>Topographic data 
+de-DE: GEO-Daten</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="usesTrackTopology" type="generic:Topology">
+            <xs:annotation>
+              <xs:documentation>Container for the RSM elements that constitute the track topology.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="usesUnit" type="rsmCommon:Unit">
+            <xs:annotation>
+              <xs:documentation>SI unit used in this data set.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ObjectInView">
+    <xs:annotation>
+      <xs:documentation>The position of an object in a specific view.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:BaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="1" name="hasViewCoordinate" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The symbol representing the object has this position in the present view. When multiple, it can represent a polygon.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:GeometricCoordinate</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="refersToObject" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Reference to the object that is positioned in this view.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>generic:BaseObject</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="PullWire">
+    <xs:annotation>
+      <xs:documentation>A pull wire when activated detects obstacles, e.g. caused by land slip or low flying aircraft, over some distance.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:LineSideDetector"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ReferenceDrawingParameter">
+    <xs:annotation>
+      <xs:documentation>Some reference drawings contain parameterised sketches that need a specific value in a concrete engineering planning. This concrete value is stored as a key-value pair where the key is the name of the parameter in the drawing and the value is the applicable value.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:BaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="name" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Name of the parameter in the reference drawing.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="value" nillable="true" type="xs:decimal">
+            <xs:annotation>
+              <xs:documentation>Concrete value for the given parameter.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType abstract="true" name="Designation">
+    <xs:annotation>
+      <xs:documentation>Abstract class for defining labels or complex names to designate a track asset. Alternatively, use the SimpleDesignation class.
+
+Note: Labels and national labelling rules should be defined in the national namespace. </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfigurationProperty"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Attachment">
+    <xs:annotation>
+      <xs:documentation>Additional source of information. 
+For instance:  approval document, drawing, sketches, calculations, d&amp;#233;rogation (Fr). 
+This should be enriched at the national level with types according to document types such as as-built validation document, etc.
+
+Do not use as a convenience class for storing information covered by existing attributes.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:BaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="content" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The document content given as a blob of bytes typically in Base64 encoding.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="contentType" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The MIME type of the content.
+See: https://www.iana.org/assignments/media-types/media-types.xhtml</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="fileName" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The name of the file or an Uniform Resource Indicator (uri), reference to a document in a data base.
+The file name may include the extension and relative path.
+</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="View">
+    <xs:annotation>
+      <xs:documentation>Informs where to plot objects in a particular view or layout. The function and description of the view are given by the configuration properties.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="1" name="ownsObjectInView" nillable="true" type="generic:ObjectInView">
+            <xs:annotation>
+              <xs:documentation>A list of tuples (object,coordinate in a given view).</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="VerticalAligmentSegment">
+    <xs:annotation>
+      <xs:documentation>Class for enriching the RSM alignment segment with information about the source of the data (GIS) and EULYNX DP  configuration properties such as designation and applicable rule set. </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasLength" type="rsmCommon:Length">
+            <xs:annotation>
+              <xs:documentation>The length of the segment. Suggested use is the storage of a validated length resulting from a relatively complex calculation.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="refersToRsmVerticalAlignmentSegment" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Reference to the vertical alignment segment as defined in the RSM namespace.
+The bounds of the linear location inform the start and end of the segment. </xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:VerticalAlignmentSegment</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Node">
+    <xs:annotation>
+      <xs:documentation>Node in a graph model. 
+This allows mapping a node to the underlying track topology that is defined in terms of RSM. 
+</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="isLocatedOnTrackTopology" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>A node can be defined as spot location on the track topology.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:SpotLocation</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Description">
+    <xs:annotation>
+      <xs:documentation>Detailed description of the object under configuration.
+Not to be confused with annotation.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:AdditionalInformation"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType abstract="true" name="LocationProxy">
+    <xs:annotation>
+      <xs:documentation>Facade for a location that may, or not, be associated with an asset.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="MappingView">
+    <xs:annotation>
+      <xs:documentation>The cut-out of a map that is overlaid on the drawing of the track. The area location is defined by means of corner coordinates in both geographical and paper coordinates such that the overlay fits. This creates a view of rail and civil utility layers needed to design level crossings.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="appliesToTrackCrossing" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The mapping view for a given track crossing.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:TrackCrossing</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="hasArea" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The outline, a polygon, that corresponds to the mapping view.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:AreaLocation</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="refersToAttachedMap" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Reference to an attached map that acts as a geographic underlay for the planning of the level crossing.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>generic:Attachment</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="OutOfService">
+    <xs:annotation>
+      <xs:documentation>The asset that owns this configuration-status is decommissioned: the element is physically present but disconnected or no longer controlled from the signalling installation (logically disconnected through software).</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ObjectStatus"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Organisation">
+    <xs:annotation>
+      <xs:documentation>The business contact data within an organisation.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:BaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="addressPostalCodeLocation" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The postal code and town parts of the address written according to national postal regulations.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="addressStreet" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Either street and house number, or postbox. </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="email" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Professional e-mail address.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="name" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The name of the organisation or business. </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="organisationalUnit" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The unit or department within the organisation. </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="telephone" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Telephone number in national notation.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SourceInformation">
+    <xs:annotation>
+      <xs:documentation>Information about the source of the data.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfigurationProperty">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasExpiryDate" type="xs:dateTime">
+            <xs:annotation>
+              <xs:documentation>The expiry date of the information in the source, if relevant.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasSourceDate" type="xs:dateTime">
+            <xs:annotation>
+              <xs:documentation>The date of the source.  This is intended to be the date of the survey, if that is the source, the date on the document, if taken from records, else the date of retrieval from the source.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="key" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Key that identifies the record in the source.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="source" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Name of the asset management system, database or process at the origin of the data. E.g. SAP, GIS, InfraAtlas, Ariane, site survey.
+</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="sourceDescription" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Describes the data source in more details.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="sourceNote" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Miscellaneous notes or comments about the data source.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="sourceQuality" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The quality of the data. This is given as free text, as various systems may be used to describe the quality, e.g. precision and reliability quantification of survey data.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="sourceVersion" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The version or issue number of the source used, if relevant.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Line">
+    <xs:annotation>
+      <xs:documentation>A set of tracks in a given area that all use the same linear positioning system. This is an operational grouping.
+de-DE: Strecke</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="capacity" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>The number of trains per hour for which this line is designed.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="endsAtLocality" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Reference to a locality where the line ends.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>generic:OperationalLocality</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="isLocatedAt" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The line is located inside this area.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:AreaLocation</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="startsAtLocality" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Reference to a locality where the line starts.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>generic:OperationalLocality</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="usesLinearPositioningSystem" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The line uses this linear positioning system.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:LinearPositioningSystem</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Configuration">
+    <xs:annotation>
+      <xs:documentation>Configuration information.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:BaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="appliesToBaselineOfRuleSet" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>generic:BaselineOfRuleSet</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="hasConfigurationProperty" type="generic:ConfigurationProperty">
+            <xs:annotation>
+              <xs:documentation>The object has this configuration item.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="refersToAnnotation" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>generic:Annotation</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="refersToBaselineDocument" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>In case the time stamp does not uniquely define the applied set of rules and regulations, an attachment/document describing the applicable implementation can be referred to.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>generic:Attachment</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="refersToOperationalLocality" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>generic:OperationalLocality</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="StatusInformation">
+    <xs:annotation>
+      <xs:documentation>The status that the actor achieved at the given stage.
+The status reflects the actor's role in the business process;
+Typical states are: designed, checked, approved.
+
+The status information is like an entry in the amendment log that accompanies legacy paper plans.
+E.q.  "quality checked on 2024/6/30 by A.M." or
+"data set initial creation by B.J. on 2021/9/8"</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:BaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="achievedByActor" type="generic:Actor">
+            <xs:annotation>
+              <xs:documentation>The new status in the workflow was achieved by this actor.
+May be left out if the status was achieved by the organisation rather than a particular actor (e.g. initial creation).</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="amendmentDescription" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Describes the amendment and possibly reason for it.
+E.g. "approval review meeting".</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="certificationIdentifier" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Professional registration number, asserting the actor's qualification.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="dateProcessStepAchieved" nillable="true" type="xs:dateTime">
+            <xs:annotation>
+              <xs:documentation>Date when the status was achieved by the actor.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="isDocumentedInAttachment" type="generic:Attachment">
+            <xs:annotation>
+              <xs:documentation>The work executed to achieve the process step or the result of the work (e.g. note of approval in principle, quality approval note) is documented in an attachment.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="statusName" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Names the status of the planning phase that was achieved. Suggested names, to be tailored to national rules: 
+&lt;ul&gt;
+ &lt;li&gt;initial creation&lt;/li&gt;
+ &lt;li&gt;quality checked&lt;/li&gt;
+ &lt;li&gt;formally checked&lt;/li&gt;
+ &lt;li&gt;technically reviewed&lt;/li&gt;
+ &lt;li&gt;approved for construction&lt;/li&gt;
+ &lt;li&gt;approved in principle&lt;/li&gt;
+&lt;/ul&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="OperationalLocality">
+    <xs:annotation>
+      <xs:documentation>Yard, region or zone for administrative purposes, without further technical definitions.
+&lt;ul&gt;
+ &lt;li&gt;DB: &amp;#214;rtlichkeit, z.B. Hamburg Airport ("AAI"). Controller X operates Hamburg Airport and Hamburg Reeperbahn&lt;/li&gt;
+ &lt;li&gt;ProRail: emplacementen, gebieden, aansluitingen Dt, UT, Ams, Amf, Amfa...&lt;/li&gt;
+ &lt;li&gt;SBB: Betriebspunkt&lt;/li&gt;
+ &lt;li&gt;RFI: Area di giurisdizione&lt;/li&gt;
+ &lt;li&gt;SNCF: zone ou sous-zone d'action d'un poste&lt;/li&gt;
+ &lt;li&gt;NR: used for rail nodes. Assets are not linked to an operational locality but rather to the signal box, which maps to a control area.&lt;/li&gt;
+&lt;/ul&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="abbreviation" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Abridged name of the locality according to national rules and code lists.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasValidityPeriod" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Time frame that limits the lifetime of the locality. Can be an open interval.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:ValidityPeriod</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="isAreaLocatedAt" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The outline of the operational locality, a polygon.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:AreaLocation</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="isLocatedAt" type="rsmCommon:LinearCoordinate"/>
+          <xs:element maxOccurs="1" minOccurs="0" name="isLocatedAtAnchorPoint" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The operational locality can be anchored to the line.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>generic:AnchorPoint</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="isPartOfOperationalLocality" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The locality can be part of a bigger one, e.g. parts of a station belong to a station. 
+Station can be a part of an administrative area.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>generic:OperationalLocality</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="longName" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Long name</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="shortName" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Short (abbreviated) name, i.e. limited number of letters/digits.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="type" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The locality type according to national rules, e.g. station, stop, junction, cross-over.
+de-DE: Art der &amp;#214;rtlichkeit. </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Changes">
+    <xs:annotation>
+      <xs:documentation>Change-set that explicitly lists the objects that are subject to change. Can also be revealed by comparison of initial and final state.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="created" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Reference to new object.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:BaseObject</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="deleted" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Reference to removed object.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:BaseObject</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="updated" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Reference to modified object.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:BaseObject</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="OperatorPosition">
+    <xs:annotation>
+      <xs:documentation>The position of the operator relative to the equipment, when viewed from the associated track.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="left">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="right">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="far">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="near">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="AlignmentCantSegment">
+    <xs:annotation>
+      <xs:documentation>Class for enriching the RSM alignment segment with information about the source of the data (GIS) and EULYNX DP  configuration properties such as designation and applicable rule set.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasLength" type="rsmCommon:Length">
+            <xs:annotation>
+              <xs:documentation>The length of the segment. 
+Suggested use is the storage of a validated length resulting from a relatively complex calculation.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="refersToRsmAligmentCantSegment" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Reference to the cant segment as defined in the RSM namespace.
+</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:AlignmentCantSegment</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LocationDescription">
+    <xs:annotation>
+      <xs:documentation>Describes a location by an asset that is not part of the data set but referenced within an other data set (outside the current EULYNX XML).</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:LocationProxy">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="referencePoint" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Name of a well-identifiable object acting as a reference for locating an other track asset.
+For instance: Milepost 23 1/2</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="TimeFramedDataRelease">
+    <xs:annotation>
+      <xs:documentation>Engineering data release including information about time frames that reveal changes to the objects contained therein. </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:DataRelease">
+        <xs:sequence>
+          <xs:element name="appliesToDataSet" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>A snapshot of the situation plus the planned changes.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>generic:DataContainer</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="final" type="generic:TimeFrame">
+            <xs:annotation>
+              <xs:documentation>The objects in the final state.
+</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="initial" type="generic:TimeFrame">
+            <xs:annotation>
+              <xs:documentation>The objects in the initial state.
+An initial time frame is mandatory for NR.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="intermediate" type="generic:TimeFrame">
+            <xs:annotation>
+              <xs:documentation>Removed+introduced equipment, NR: 
+&lt;ul&gt;
+ &lt;li&gt;existing (black)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+ &lt;li&gt;recovered (green in UK, yellow on the continent, to be removed at this step)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+ &lt;li&gt;new(red)&lt;/li&gt;
+&lt;/ul&gt;
+This allows visualising the changes in a file.
+</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="RelationSetType">
+    <xs:annotation>
+      <xs:documentation>List of types that can be allocated to a set of positioned relations.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="temporaryConnection">
+        <xs:annotation>
+          <xs:documentation>Node created to split or carve out a part of the topology. 
+Allows creating independent topologies to be (re-)engineered in parallel and merged back after completion.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="cut">
+        <xs:annotation>
+          <xs:documentation>Node created to split a linear element considered too long for practical purposes.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="legacy">
+        <xs:annotation>
+          <xs:documentation>Node created e.g. at import from a classical node-edge model, for seamless tracing of legacy graphs.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="Annotation">
+    <xs:annotation>
+      <xs:documentation>For storing remarks in form of text or attached documents.
+For instance: &lt;i&gt;according to minutes of meeting 03.12.2019&lt;/i&gt;.
+Not to be confused with description.
+de-DE: Bearbeitungsvermerk</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:BaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="comment" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Describes the annotation in free text form not restricted in length.
+Non-text binary information such as images can be stored as attachment.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="createdByRole" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The role of the person who created the annotation.
+For instance: designer/engineer, checker or approver (NR).
+Other roles can be specified.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="hasTimeStamp" nillable="true" type="xs:dateTime">
+            <xs:annotation>
+              <xs:documentation>Date and time when the annotation was created.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="refersToAttachment" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Allows adding accompanying documents. This could for instance link to a exception procedure, french derogation.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>generic:Attachment</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="shortComment" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Short summary of the comment.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="validity" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Tag for the validity in terms of scope or time span.
+For instance: construction phase 2, resignalling project, entire lifecycle.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="CoveredObject">
+    <xs:annotation>
+      <xs:documentation>The asset that owns this configuration-status is made invisible to the driver or train. It typically applies to signals or balises. If the asset is a controlled asset, the signalling system still controls the asset.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ObjectStatus"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Flyover">
+    <xs:annotation>
+      <xs:documentation>A structure where tracks cross at different levels.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:LineSideLinearConstruction">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="1" name="refersToDiveunderLinearElement" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Refers to the dive-under track(s), i.e. the linear element(s) right underneath the fly-over.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:LinearElement</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="1" name="refersToFlyoverLinearElement" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Refers to the fly-over track(s), i.e. the linear element(s) that cross over the fly-under tracks.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:LinearElement</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType abstract="true" name="ConfigurationProperty">
+    <xs:annotation>
+      <xs:documentation>A configuration property that typically applies to an individual object. </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:BaseObject"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Cant">
+    <xs:annotation>
+      <xs:documentation>Class for enriching the RSM cant with information about the source of the data (GIS).</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element name="refersToRsmCant" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Reference to the cant as defined in the RSM namespace.
+</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:Cant</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LocationReference">
+    <xs:annotation>
+      <xs:documentation>Reference to the protected infrastructure object &lt;i&gt;e.g. a signal or fouling point.&lt;/i&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:LocationProxy">
+        <xs:sequence>
+          <xs:element name="refersToTrackAsset" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:TrackAsset</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="TimeFrame">
+    <xs:annotation>
+      <xs:documentation>Describes the time periods to which the railway equipment and layouts will be attached. The time periods may be specified as actual dates or as sequences. Time Frames may overlap. Several Time Frames may occupy the same spot in a sequence, allowing options to be specified. </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:BaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="1" name="appliesToObject" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The time frame information applies to this object or object-component.
+Mandatory in NR (SDEF approach).</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:BaseObject</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasEndDateTime" type="xs:dateTime"/>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasStartDateTime" type="xs:dateTime"/>
+          <xs:element maxOccurs="1" minOccurs="0" name="name" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The name of the Time Frame, e.g. the project phase.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="nextTimeFrame" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Reference to a next time frame. This allows the chaining of time frames.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>generic:TimeFrame</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="note" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>A field to hold any comment or miscellaneous information.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DeltaDataRelease">
+    <xs:annotation>
+      <xs:documentation>A delta release of engineering data reveals changes by comparing the initial state with the final state. 
+The subset of engineering data can be restricted to a given subject matter.
+The engineering data are separated from the organisational meta-data.
+de-DE: Ausgabe Fachdaten</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:DataRelease">
+        <xs:sequence>
+          <xs:element name="finalState" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Subset of subject matter data in the final state; a snapshot of the situation that is the target of a project stage.
+de-DE: LST Zustand Ziel</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>generic:DataContainer</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasChanges" type="generic:Changes">
+            <xs:annotation>
+              <xs:documentation>The delta data release has this set of changes.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="initialState" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Subset of subject matter data in the initial state; a snapshot of the as-is situation at the start of a project stage.
+de-DE: LST Zustand Start</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>generic:DataContainer</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="OutOfServicePreparative">
+    <xs:annotation>
+      <xs:documentation>The asset that owns this configuration-status has been physically modified or built in preparation for a later phase of construction. The signalling system is unaware of this modification and does not control it. Typical example is the addition of a speed indicator that will be taken into service at a later date.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:OutOfService"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="LeftRightCentreTypes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="left">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="right">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="centre">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="TerminalElement">
+    <xs:annotation>
+      <xs:documentation>A dangling end of the (known) topology. </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element name="isOfType" nillable="true" type="generic:TerminusTypes"/>
+          <xs:element name="refersToRsmNetElement" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Reference to a non-linear element of the network topology.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:NonLinearElement</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ControlCode">
+    <xs:annotation>
+      <xs:documentation>The string that is typed on the control console to call a route or more generally to control a track asset.
+This can be used if the string can't be generated from the designation of the asset, designation of the route or entry/exit signals
+de-De: Bedienstring
+en-GB: console code</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfigurationProperty">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="name" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The console code given as a string.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SimpleDesignation">
+    <xs:annotation>
+      <xs:documentation>A simple designated name and/or abbreviation, like  "Derby" for  "Derby interlocking".
+</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:Designation">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="name" nillable="true" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="RegisteredIntrinsicCoordinate">
+    <xs:annotation>
+      <xs:documentation>A point stored in a GIS with an address. The point is typically situated at the ends of alignment segments. Used for track and line alignment.   
+de-DE: GEO_Knoten</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="4" minOccurs="1" name="refersToRsmIntrinsicCrd" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Reference to the corresponding intrinsic coordinate(s) in the RSM namespace, i.e. relative position on a linear element of the topology. </xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:IntrinsicCoordinate</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="PostProcessingInformation">
+    <xs:annotation>
+      <xs:documentation>Information about corrections that were applied to the data during the planning process. This excludes processing at the moment of observation and storage of the original data set.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:BaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="description" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Description of the correction methods and/or applied algorithms.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="toolName" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Name of the applied tool.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="toolVersion" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Version of the applied tool.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Topology">
+    <xs:annotation>
+      <xs:documentation>Container for topology components. The user defines separate containers for rail, cabling, energy and other topologies.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:BaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="usesNetElement" type="rsmCommon:PositioningNetElement">
+            <xs:annotation>
+              <xs:documentation>Contains the elements of the topology, notably the linear elements.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="usesPositionedRelation" type="rsmCommon:PositionedRelation">
+            <xs:annotation>
+              <xs:documentation>Contains a set of positioned relations that govern how the linear elements connect.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="PlanningCorrection">
+    <xs:annotation>
+      <xs:documentation>Class that allows highlighting the differences between a approved data release and a revised data release. This helps V&amp;amp;V staff evaluate the desired corrections.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:BaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="basedOnProjectStage" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Human-readable designation of a project stage that was the basis for this correction.
+This may be an external file not delivered in the present file.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="correctionType" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The type of correction, indicating the severity of the change. This acts as a hint to the kind of attention that V&amp;amp;V should pay.
+de-DE: &amp;#196;nderungsmitteilung</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="hasCorrectedProjectStage" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Reference to the revised stage.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>generic:ProjectStageMetaData</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="isBasedOnProjectStage" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Stores the GUID of the project stage instance that needs correction; the referenced project stage might not be included with the current EULYNX DP file.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>generic:ProjectStageMetaData</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LocationOfInterest">
+    <xs:annotation>
+      <xs:documentation>Point of interest to the signalling system.
+Often a location that is well-identifiable, e.g. as to attract attention to a dangerpoint, e.g. to the tip of a point or gauge conflict or end of platform. 
+Can be used for specifying dangerpoints, end of overlap or ATP protected location, a location where speed changes.
+fr-FR: point remarquable</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:LocationProxy">
+        <xs:sequence>
+          <xs:element name="isLocatedAt" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:SpotLocation</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="refersToBigMetalMassArea" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Reference to a massive metal structure such as a bridge.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:BigMetalMassArea</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="refersToDangerAreaTrack" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:DangerAreaTrack</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="refersToPlatformEdge" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:PlatformEdge</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="AnchorPoint">
+    <xs:annotation>
+      <xs:documentation>Class for enriching the RSM anchor point with configuration properties such as designation and applicable rule set. 
+Can be used to represent kilometre-posts and chainage breaks.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element name="appliesToLine" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The line to which the anchor point applies</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>generic:Line</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="refersToRegisteredIntrinsicCoord" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Reference to the point coordinate as registered in the GIS, where the chainage anchor is located.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>generic:RegisteredIntrinsicCoordinate</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="refersToRsmAnchorPoint" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Information about location of the anchor point in the railway network and position on the map is stored in the RSM namespace.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:AnchorPoint</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="eulynxDataPrepInterface" type="generic:EulynxDataPrepInterface"/>
+  <xs:complexType name="EulynxDataPrepInterface">
+    <xs:annotation>
+      <xs:documentation>Root, or entry point to the EULYNX DataPrep data exchange interface.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:BaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="containsDataRelease" type="generic:DataRelease"/>
+          <xs:element maxOccurs="unbounded" minOccurs="1" name="hasDataContainer" nillable="true" type="generic:DataContainer">
+            <xs:annotation>
+              <xs:documentation>A container of discipline-specialist data. Can contain a state at a given moment in time or a planning. </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasPlanningCorrection" type="generic:PlanningCorrection">
+            <xs:annotation>
+              <xs:documentation>This EULYNX DP file refers to a planning corrective.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="hasProjectMetaData" type="generic:ProjectMetaData">
+            <xs:annotation>
+              <xs:documentation>Project planning for a (re-)signalling project.
+de-DE: LST Planung Projekt</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="hasTimeStamp" nillable="true" type="xs:dateTime">
+            <xs:annotation>
+              <xs:documentation>Timestamp when the data set was generated.
+de-DE: Erzeugung Zeitstempel</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="remarks" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Short description of particularities of the data generation process that can't be captured otherwise. Specific information can be added as an attachment to the configuration properties under this item.
+E.g. generated by tool identified by tool/version x.y according to process yz and amended manually.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="toolDescription" type="xs:string"/>
+          <xs:element maxOccurs="1" minOccurs="1" name="toolName" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Name of the tool that generated the EULYNX DP data set. </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="toolVersion" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Version of the tool that generated the EULYNX DP data set.
+It is highly recommended that this attribute trace back correctly to the tool version because it allows tracing errors to the production environment which may be highly volatile.
+Alternatively, a hand-edited file can state "manual production".</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="AlignmentSourceInformation">
+    <xs:annotation>
+      <xs:documentation>Meta-data about the source of the alignment data. This provides an indication for the quality of the data.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:SourceInformation">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasDateStamp" type="xs:dateTime">
+            <xs:annotation>
+              <xs:documentation>Baseline date of the source data. The actual date can be the date of survey (observation), last modification, acceptance or release.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="hasPostProcessingInfo" type="generic:PostProcessingInformation">
+            <xs:annotation>
+              <xs:documentation>Refers to the methods and tools applied to correct the data set. If more than one were applied, the user can list the processing steps in order of application. </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType abstract="true" name="ConfiguredBaseObject">
+    <xs:annotation>
+      <xs:documentation>Provides an identity plus a configuration.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:BaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasConfiguration" type="generic:Configuration"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="AssetUser">
+    <xs:annotation>
+      <xs:documentation>The party that uses the asset and may be affected if changes are made to the asset.
+</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="name" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The name of the party.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DataRelease">
+    <xs:annotation>
+      <xs:documentation>A set of objects plus information about planned changes to these objects.
+de-DE: Ausgabe Fachdaten</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:BaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="discipline" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The discipline is the specialism, or subject matter, to which the data set is most relevant, e.g. survey data (geodata, alignment), interlocking, ETCS, signal sighting, train describer, level crossing. 
+A general data release can be tagged "signalling".
+de-DE: Untergewerk</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="TerminusTypes">
+    <xs:annotation>
+      <xs:documentation>List of types that can be allocated to a terminal element.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="endOfTopology">
+        <xs:annotation>
+          <xs:documentation>Node at the end of the (known) topology.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="endOfDigitisedArea">
+        <xs:annotation>
+          <xs:documentation>Node at the end of the digitised topology.
+The IM may well own the network beyond this point but the topology isn't available in terms of EULYNX DP and RSM topology. </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ProjectStageMetaData">
+    <xs:annotation>
+      <xs:documentation>Meta-data informing a single project stage.
+de-DE: Planung Einzel</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:BaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="basedOnPreviousStage" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Reference to the previous planning stage, if available, on which the current data release is based. Textual reference such as  "Planning stage 02.03, removal point W12".
+Can be used as alternative or complement to a UUID reference.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="constructionPhase" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The name of a phase within the (re-)signalling project that summarises the goal that the individual stages in this phase aim to achieve.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="forInformation" nillable="true" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>True: this release is for information only, e.g. for the purpose of resource allocation before the stage starts.
+False: this release is part of the formal design process.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasDateOfCompletion" type="xs:dateTime">
+            <xs:annotation>
+              <xs:documentation>The planned date of completion for this planning phase. 
+This date of final information is not to be confused with date of taking into service. The data are incorporated into the data management systems within a given delay &lt;i&gt;after&lt;/i&gt; the taking into service.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasDateOfRuleSet" type="xs:dateTime">
+            <xs:annotation>
+              <xs:documentation>The date stamp of the baseline of the rule set that governs the planning activities.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasDetailOnMaterial" type="generic:Attachment">
+            <xs:annotation>
+              <xs:documentation>Details about materials relevant to the supplier such as desired reuse of materials, or availability of materials in storage.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasGeneralNote" type="generic:Attachment">
+            <xs:annotation>
+              <xs:documentation>General notes about the planning step, e.g. scheme and project description  "High-speed line Berlin to Madrid, construction of yard Kehl, the track had to be shortened lacking space, alternative solution was to insert an extra signal at position xy ....". The notes shouldn't be abused for storing information that redunds the data set.
+de-DE: Erl&amp;#228;uterungsbericht</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="hasObjectsInPlanningArea" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The objects in the planning area that may be modified in the course of the project stage.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:BaseObject</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="1" name="hasStatusInformation" nillable="true" type="generic:StatusInformation">
+            <xs:annotation>
+              <xs:documentation>Documents the status in the workflow.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="isBasedOnRegistryOfSpeeds" type="generic:Attachment">
+            <xs:annotation>
+              <xs:documentation>The registry of design speeds used for the planning and signalling engineering. 
+de-DE: VzG
+nl-NL: OS-blad, kan als string worden opgegeven. </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="levelOfDetail" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Indicates the level of detail of the project stage.
+Suggestions, should be tailored to national rules:
+&lt;ul&gt;
+ &lt;li&gt;feasibility (rarely in data)&lt;/li&gt;
+ &lt;li&gt;pre-design&lt;/li&gt;
+ &lt;li&gt;draft design - preferred variant&lt;/li&gt;
+ &lt;li&gt;detailed design - for quotation/to be ordered, supplier neutral&lt;/li&gt;
+ &lt;li&gt;detailed design - supplier specific&lt;/li&gt;
+&lt;/ul&gt;
+de-DE: Planungsphase</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="planningType" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Indicates the use case for which the data were produced. 
+This can distinguish stages that are internal to the data production process (corrections) from the release to external data consumers. 
+Suggested planning types: 
+&lt;ul&gt;
+ &lt;li&gt;first digitisation&lt;/li&gt;
+ &lt;li&gt;revision due to data base correction&lt;/li&gt;
+ &lt;li&gt;revision due to survey data&lt;/li&gt;
+ &lt;li&gt;"project target type"  would indicate that the release aims to reflect the goal of the project.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+ &lt;li&gt;as-constructed (as-built)&lt;/li&gt;
+&lt;/ul&gt;
+de-DE: Planungsart (zB. Bauzustand)</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="referenceToPreviousStep" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Reference to the previous planning step on which the current data release is based. The referenced project stage might not be part of the current file.
+Can be used as alternative or complement to a textual reference attribute.
+</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>generic:ProjectStageMetaData</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="refersToDataRelease" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Reference to an individual released engineering data set of the given discipline.
+de-DE: ID-Ausgabe-Fachdaten
+</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>generic:DataRelease</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="registryOfSpeeds" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Version and/or name of the registry of speeds that governed the engineering.
+Alternatively, this information can be provided in an attachment.
+nl-NL: naam en versie van OS-blad</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="releaseNumber" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Identifies a release, i.e. an incremental modification, for a planning stage.
+String format allows for the release number to have a leading zero digit.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="sequenceIndex" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Number or letter for sequencing the stages. 
+On schematic drawings, this version may inform status information, e.g. 2 for a development release, A for an approved version.
+SNCF: the sequence indicator can differ per discipline.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="stageDesignationLong" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The designation of the planning stage.
+Typically describes the goal of this individual stage.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="stageDesignationShort" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The designation of the planning stage, shortened to fit in a title block. </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="LineSideDetectorTypes">
+    <xs:annotation>
+      <xs:documentation>Types of line side detectors of events that can affect the safety of train traffic.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="hotAxleBox">
+        <xs:annotation>
+          <xs:documentation>Detects an overheating bearing in a passing axle box.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="blockedBrakes">
+        <xs:annotation>
+          <xs:documentation>Detects blocked brakes.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="avalancheLandSlip">
+        <xs:annotation>
+          <xs:documentation>Detects avalanches, land slip, or rock-fall.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="flooding">
+        <xs:annotation>
+          <xs:documentation>Detects flooded tracks.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="earthquake">
+        <xs:annotation>
+          <xs:documentation>Seismometer detecting earthquakes</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="fireAndSmoke">
+        <xs:annotation>
+          <xs:documentation>Detects fire and/or smoke.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="lateralWind">
+        <xs:annotation>
+          <xs:documentation>Detects high winds from the side.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="chemical">
+        <xs:annotation>
+          <xs:documentation>Warns about the presence of dangerous compounds near a chemical industry site.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="roadVehicle">
+        <xs:annotation>
+          <xs:documentation>Detects a vehicle on the track, e.g. fallen from a bridge or embankment.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="wheelImpactLoad">
+        <xs:annotation>
+          <xs:documentation>Detects impacts by damaged wheels</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType abstract="true" name="Segment">
+    <xs:annotation>
+      <xs:documentation>A stretch of track where a given property like speed or gradient applies. The property is constant in the segment.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="hasTracksideSignal" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>A segment refers to signals that indicate the new property like speed at or near the beginning of that segment. Note that a signal has its own spot location.
+fr-FR: permet d'associer un signal  limite de vitesse en aval. Ne sera pas utilis&amp;#233; en France.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:Signal</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="isLocatedAt" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:LinearLocation</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="PositionedRelationSet">
+    <xs:annotation>
+      <xs:documentation>Class for enriching the RSM positioned relation with configuration properties such as designation and applicable rule set. </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="isOfType" type="generic:RelationSetType"/>
+          <xs:element maxOccurs="unbounded" minOccurs="1" name="refersToRsmPositionedRelation" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Refers to a set of RSM positioned relations that connect linear elements. </xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:PositionedRelation</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="GeometricCoordinate">
+    <xs:annotation>
+      <xs:documentation>Class for enriching the RSM coordinate with information about the source of the data (GIS).
+de-DE: GEO-Punkt</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element name="refersToGeometricCoordinate" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Reference to the geometric coordinate as defined in the RSM namespace.
+</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:GeometricCoordinate</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaselineOfRuleSet">
+    <xs:annotation>
+      <xs:documentation>A basline of rules and regulations that apply to the configured item at the given date.
+This set of rules applies to a configuration that is valid from the given date onwards. Note that no expiry date is given. 
+de-DE: Regelwerk</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:BaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="hasDateOfRuleSet" nillable="true" type="xs:dateTime">
+            <xs:annotation>
+              <xs:documentation>The object was designed according to a set of rules and regulations that has this date stamp.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Edge">
+    <xs:annotation>
+      <xs:documentation>An edge in a topological network. Used to express networks that overlay the existing track topology.
+This edge can map to a linear element in the track topology or to a linear location if there is no one-to-one mapping.
+</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="appliesToLinearElement" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The edge matches this RSM linear element. The linear element either exists in the track topology or is separated from the track topology.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:LinearElement</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="hasNodeA" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>generic:Node</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="hasNodeB" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>generic:Node</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="isLocatedOnTrackTopology" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The edge is defined as a linear location on the track topology.
+The linear location can span mutliple linear elements.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:LinearLocation</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LineSideSpotSystem">
+    <xs:annotation>
+      <xs:documentation>Facade for spot-located devices such as hot axle box detector, telecom antenna, catenary post, track lubricator.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:LineSideInstallation">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="isHousedIn" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Reference to the housing of the detector.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:EquipmentSupport</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="isLocatedAt" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:SpotLocation</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Note">
+    <xs:annotation>
+      <xs:documentation>Informal note or comment.
+Lightweight form of an annotation.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:AdditionalInformation"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="TrackLubricator">
+    <xs:annotation>
+      <xs:documentation>A track lubricator applies grease to the rail head to lower flange friction around tight curves. It is mounted on the rail.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:LineSideSpotSystem"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LineSideDetector">
+    <xs:annotation>
+      <xs:documentation>A line-side detector or scanner that raises an alarm when a dangerous situation arises.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="appliesToLineSideDetectionSystem" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The detector provides input to this associated evaluator.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>generic:LineSideDetectionEvaluator</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="isActivatedByTriggerAssignment" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The detector is activated by the detection of train passage (UK: strike-in).
+nl-NL: relatie met railcontact</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:TriggerAssignment</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="isLocatedAt" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Detectors have either a spot or linear location.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:BaseLocation</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="type" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Describes the type of detector. </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="LeftRight">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="left">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="right">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType abstract="true" name="LineSideInstallation">
+    <xs:annotation>
+      <xs:documentation>Technical line-side installation relevant to, but not planned by signalling.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="installationType" type="xs:string"/>
+          <xs:element maxOccurs="1" minOccurs="0" name="refersToCivilStructure" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The line-side installation, e.g. a mast or a bridge, may be registered as a civil structure.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:CivilStructure</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LinearElement">
+    <xs:annotation>
+      <xs:documentation>Class for enriching the RSM linear element with configuration properties such as designation and applicable rule set. 
+</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element name="refersToRsmLinearElement" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Reference to linear element in the RSM.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:LinearElement</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Actor">
+    <xs:annotation>
+      <xs:documentation>A party, typically a person and his/her contact data, who participates in the planning creation process.
+The fields can be filled as far as privacy rules allow. For instance, NR only uses initials on plans, while SCNF requires full name and initials.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:BaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="fullName" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The official full name as provided by the actor.
+de-DE: Nachname</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="initials" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>First letters of the name, as imposed by restrictions in the document placeholders.
+de-DE: Nachname des Akteurs, beschr&amp;#228;nkt auf 5 Zeichen</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="isInOrganisation" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The actor answers to this organisation.
+The fields can be filled as far as privacy rules allow.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>generic:Organisation</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="shortName" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The name that is shortened, e.g. to fit into document placeholders.
+de-DE: Nachname des Akteurs, beschr&amp;#228;nkt auf 10 Zeichen</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SupplierInformation">
+    <xs:annotation>
+      <xs:documentation>Information about OEM and supplier. For instance:
+&lt;ul&gt;
+ &lt;li&gt;Movares &lt;i&gt;supplies &lt;/i&gt;an interlocking manufactured by &lt;i&gt;OEM &lt;/i&gt;Hima.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+ &lt;li&gt;Siemens &lt;i&gt;supplies &lt;/i&gt;axle counters from &lt;i&gt;OEM &lt;/i&gt;Frauscher&lt;/li&gt;
+&lt;/ul&gt;
+Useful if a resignalling project needs the as-built information.
+</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfigurationProperty">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="oemName" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Name of the Original Equipment Manufacturer, e.g. CAF, Thales, Alstom, Siemens.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="oemProductName" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Type description by the OEM
+e.g. Eurobalise &lt;i&gt;S21&lt;/i&gt;
+or track circuit UM71 </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="supplierName" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The company that supplied the equipment. 
+</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ElevationAndInclination">
+    <xs:annotation>
+      <xs:documentation>Mirror class of the homonymous RSM class that provides an elevation and inclination at a given spot location.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element name="refersToRsmElevationAndInclination" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:ElevationAndInclination</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ReferenceDrawing">
+    <xs:annotation>
+      <xs:documentation>Pointer to (a set of) reference drawings (aka control drawings) for civil and mechanical engineering purposes. May range from a reference to paper documents to 3D CAD-files.
+National end-users can tailor this class to their needs.
+Not to be used for drawings of &lt;i&gt;specific &lt;/i&gt;objects: instantiate an Attachment class instead.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="name" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Name of the reference drawing as mentioned on the drawing itself.
+(German: Regelzeichnungsnummer)</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="parameterizedBy" type="generic:ReferenceDrawingParameter"/>
+          <xs:element maxOccurs="1" minOccurs="1" name="subtitle" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Subtitle of the reference drawing.
+</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="title" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Title of the reference drawing.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="variant" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>To identify a specific variant out of different shapings within the reference drawing.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DummyMode">
+    <xs:annotation>
+      <xs:documentation>The asset that owns this configuration-status has been replaced by a dummy, i.e. a stubbed object that mimics the real object such that the signalling system can operate normally. The dummy has no role other than providing the I/O that the signalling system expects.
+Typically used for points or level crossings.
+(German  "Betriebsartenstecker")</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ObjectStatus"/>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>
+

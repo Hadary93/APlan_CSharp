@@ -1,0 +1,120 @@
+﻿<Application x:Class="APLan.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:APLan"
+             xmlns:viewModels="clr-namespace:APLan.ViewModels"
+             xmlns:converters="clr-namespace:APLan.Converters"
+             xmlns:helperClasses="clr-namespace:APLan.HelperClasses"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <!--Converters-->
+        <converters:XvalueConverter x:Key="xValueConverter"></converters:XvalueConverter>
+        <converters:YvalueConverter x:Key="yValueConverter"></converters:YvalueConverter>
+
+        <converters:XvalueConverterSignalsPlanning x:Key="xValueConverterSignal"></converters:XvalueConverterSignalsPlanning>
+        <converters:YvalueConverterSignalsPlanning x:Key="yValueConverterSignal"></converters:YvalueConverterSignalsPlanning>
+
+        <converters:CoordinatesConverter x:Key="coordinateConverter"></converters:CoordinatesConverter>
+        <converters:CoodrinatesSinglePointConverter x:Key="SingleCoordinateConverter"></converters:CoodrinatesSinglePointConverter>
+
+        
+        <converters:MultiBindingConverter x:Key="multiBindingConverter"></converters:MultiBindingConverter>
+        <converters:StringToDoubleConverter x:Key="stringToDoubleconverter"></converters:StringToDoubleConverter>
+
+        <!--export-->
+        <viewModels:ExportWindowViewModel x:Key="exportWindowViewModel"/>
+
+        <!--Drawing-->
+        <viewModels:DrawViewModel x:Key="drawViewModel"/>
+        <viewModels:CanvasToolsTabViewModel x:Key="canvasToolsTabViewModel"/>
+
+        <!--visualizedData-->
+        <viewModels:VisualizedDataViewModel x:Key="visualizedDataViewModel"/>
+
+        <!--upperTab-->
+        <viewModels:NewProjectViewModel x:Key="newProjectViewModel"/>
+        <viewModels:MainMenuViewModel x:Key="mainMenuViewModel"/>
+
+        <!--Validator-->
+        <viewModels:EulynxValidatorViewModel x:Key="EulynxValidatorViewModel"/>
+
+        <!--plan-->
+        <viewModels:PlanningTabViewModel x:Key="planTabViewModel"></viewModels:PlanningTabViewModel>
+
+        <!--templateSelection-->
+        <helperClasses:TemplateSelectorForSelected x:Key="selectedTemplateSelector"></helperClasses:TemplateSelectorForSelected>
+        <helperClasses:TemplateSelectorForLoadedObjects x:Key="selectedTemplateSelectorForLoadedObjects"></helperClasses:TemplateSelectorForLoadedObjects>
+
+
+        <!--symbolsTab-->
+        <viewModels:SymbolsTabViewModel x:Key="symbolsTabViewModel"/>
+
+
+        <!--selection templates-->
+        <!--for polyLines-->
+        <DataTemplate x:Key="CustomPolylineTempalte" DataType="{x:Type Path}">
+            <TreeView BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                <TreeViewItem Header="{Binding DataContext.Name}" BorderThickness="0" IsExpanded="True">
+                    <ListView ItemsSource="{Binding DataContext.Data}" FontWeight="Bold" >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <WrapPanel Background="Transparent" IsHitTestVisible="False">
+                                    <TextBlock DockPanel.Dock="Left" FontWeight="Bold" Text="{Binding Key}"></TextBlock>
+                                    <TextBlock Margin="10,0,10,0"    FontWeight="Normal" Text="{Binding Value}"></TextBlock>
+                                </WrapPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </TreeViewItem>
+            </TreeView>
+            
+        </DataTemplate>
+        <!--for signals-->
+        <DataTemplate x:Key="SymbolTemplate" DataType="{x:Type Image}">
+            <!--<TextBlock Text="{Binding Opacity}" FontWeight="Bold" />-->
+        </DataTemplate>
+        
+        
+        <!--loading templates-->
+        <!--loaded signal from saving-->
+        <DataTemplate  x:Key="loadedSignal"  
+                       DataType="{x:Type helperClasses:CanvasObjectInformation}">
+            <helperClasses:CustomCanvasSignal x:Name="signal" 
+                                              Width="{Binding Scale}" 
+                                              Height="{Binding RelativeSource={RelativeSource self}, Path=Width}" 
+                                              Source="{Binding SignalImageSource}"
+                                              RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <MatrixTransform Matrix="{Binding RenderTransformMatrix}" ></MatrixTransform>
+                </Image.RenderTransform>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Loaded">
+                        <i:InvokeCommandAction 
+                                               Command="{Binding Source={StaticResource drawViewModel}, Path=ObjectLoaded}" 
+                                               CommandParameter="{Binding ElementName=signal}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </helperClasses:CustomCanvasSignal>
+        </DataTemplate>
+        <!--loaded Text from saving-->
+        <DataTemplate  x:Key="loadedText" DataType="{x:Type helperClasses:CanvasObjectInformation}">
+            <helperClasses:CustomCanvasText x:Name="Text"
+                                            Text="{Binding IncludedText}"
+                                            FontSize="{Binding IncludedTextSize}"
+                                            RenderTransformOrigin="0,0"
+                                            >
+                <helperClasses:CustomCanvasText.RenderTransform>
+                    <MatrixTransform Matrix="{Binding RenderTransformMatrix}" ></MatrixTransform>
+                </helperClasses:CustomCanvasText.RenderTransform>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Loaded">
+                        <i:InvokeCommandAction 
+                                               Command="{Binding Source={StaticResource drawViewModel}, Path=ObjectLoaded}" 
+                                               CommandParameter="{Binding ElementName=Text}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </helperClasses:CustomCanvasText>
+        </DataTemplate>
+    </Application.Resources>
+</Application>

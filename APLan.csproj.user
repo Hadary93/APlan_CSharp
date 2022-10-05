@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Views\AboutWPF.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\AddDataWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\CanvasToolsTab.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Draw.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\DrawingLowerTab.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\EulynxValidator.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ExportConfirmationAndValidation.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ExportWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\MainMenu.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\NewProjectWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\PlanningTab.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\PreviewDataWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\RemoveDataWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\RightTabs.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\SelectedItems.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\SignalObjectInfo.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\SymbolsTab.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Tabs.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\VisualizedData.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\AboutWPF.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\AddDataWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\CanvasToolsTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Draw.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\DrawingLowerTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\EulynxValidator.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ExportConfirmationAndValidation.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ExportWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\MainMenu.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\NewProjectWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\PlanningTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\PreviewDataWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\RemoveDataWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\RightTabs.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\SelectedItems.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\SignalObjectInfo.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\SymbolsTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Tabs.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\VisualizedData.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

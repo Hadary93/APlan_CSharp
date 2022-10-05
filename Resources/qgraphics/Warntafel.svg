@@ -1,0 +1,5 @@
+<svg width="45" height="11" viewBox="0 0 45 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+<line y1="-0.5" x2="21.8407" y2="-0.5" transform="matrix(-1 -0.000586217 0.000441028 -1 22.0005 5.04211)" stroke="#FF3434"/>
+<line x1="0.5" y1="2.30005" x2="0.5" y2="8.46978" stroke="#FF3434"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M22 3H45V8H22V3ZM23 4H26V7H23V4ZM32 4H29V7H32V4ZM35 4H38V7H35V4ZM44 4H41V7H44V4Z" fill="#FF3434"/>
+</svg>

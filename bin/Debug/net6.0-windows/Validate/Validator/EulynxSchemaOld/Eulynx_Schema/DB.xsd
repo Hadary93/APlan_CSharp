@@ -1,0 +1,4466 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:db="http://dataprep.eulynx.eu/schema/DB" xmlns:generic="http://dataprep.eulynx.eu/schema/Generic" xmlns:rsmCommon="http://www.railsystemmodel.org/schemas/RSM1.2beta/Common" xmlns:sig="http://dataprep.eulynx.eu/schema/Signalling" elementFormDefault="qualified" targetNamespace="http://dataprep.eulynx.eu/schema/DB">
+  <!--<dc:date>2021-09-27T19:42:13Z</dc:date><dc:creator>rtm2xsd 1.8.5</dc:creator><dc:source>Model , XMI 2.4.1, EA 13</dc:source>-->
+  <xs:import namespace="http://dataprep.eulynx.eu/schema/Generic" schemaLocation="Generic.xsd"/>
+  <xs:import namespace="http://www.railsystemmodel.org/schemas/RSM1.2beta/Common" schemaLocation="../RSM_Schema/Common.xsd"/>
+  <xs:import namespace="http://dataprep.eulynx.eu/schema/Generic" schemaLocation="Generic.xsd"/>
+  <xs:import namespace="http://dataprep.eulynx.eu/schema/Signalling" schemaLocation="Signalling.xsd"/>
+  <xs:complexType name="FlankProtectionNone">
+    <xs:annotation>
+      <xs:documentation>Indicates that non-technical measures provide flank protection.
+This indicates that the system implements non-technical measures to achieve flank protection such as rejecting particular shunting movements or parking.
+&lt;i>The supplier must mark this in the system.&lt;/i>
+
+de-DE: Auswahl der Ma&amp;#223;nahme "Verzicht": Der Flankenschutz wird durch betriebliche Ma&amp;#223;nahmen hergestellt (mittelbarer Flankenschutz). Die Ma&amp;#223;nahmen "unmittelbar" und "Weitergabe" sind aus der Bef&amp;#252;llung anderer Attribute erkennbar, deshalb muss nur die Ma&amp;#223;nahme "Verzicht" explizit angegeben werden. DB-Regelwerk Flankenschutztabelle, Spalte 8 "Flankenschutzumkehr, Verzicht"
+
+</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="db:FlankProtection"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="ApplicationSystemTypes">
+    <xs:annotation>
+      <xs:documentation>de-DE: System der Zugbeeinflussung bzw. -sicherung, mit dem ein bestimmter Streckenbereich ausger&amp;#252;stet ist. </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="level1LS">
+        <xs:annotation>
+          <xs:documentation>ETCS Level Limited Supervision</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="level2WithSignals">
+        <xs:annotation>
+          <xs:documentation>de-DE: Level 2 mit Signale</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="level2WithoutSignals">
+        <xs:annotation>
+          <xs:documentation>de-DE: L2oS</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DerailerIndicatorTypes">
+    <xs:annotation>
+      <xs:documentation>de-DE: Gleissperrensignaltypen.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="reflectiveOneSided">
+        <xs:annotation>
+          <xs:documentation>de-DE: reflektierend einseitig</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="reflectiveDoubleSided">
+        <xs:annotation>
+          <xs:documentation>de-DE: reflektierend beidseitig</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="backlitOneSided">
+        <xs:annotation>
+          <xs:documentation>de-DE: innenbeleuchtet einseitig</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="backlitDoubleSided">
+        <xs:annotation>
+          <xs:documentation>de-DE: innenbeleuchtet beidseitig </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="BgGroupTiltingFunctionTypes">
+    <xs:annotation>
+      <xs:documentation>Balise group types for tilting trains.
+de-DE: Datenpunkttypen B1, B2, B3 gem&amp;#228;&amp;#223; Ril 819.1330
+</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="b1">
+        <xs:annotation>
+          <xs:documentation>Datenpunkttype </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="b2">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="b3">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation>de-De: sonstige</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="BaliseGroup">
+    <xs:annotation>
+      <xs:documentation>Balise group with index referring to predefined telegram set.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:BaliseGroup">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="bgType" nillable="true" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>Index number identifying the type of balise group.
+de-DE: laufende Nummer des Datenpunkttyps.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="TdsDesignation">
+    <xs:annotation>
+      <xs:documentation>Bezeichnung einer FMA Anlage (Train detection section).
+</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="db:Designation">
+        <xs:sequence>
+          <xs:element name="hasCodeLetter" nillable="true" type="db:CodeLetter"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="PredefinedEtcsTelegramSetLs">
+    <xs:annotation>
+      <xs:documentation>Set of predefined telegrams for ETCS Limited Supervision</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="db:PredefinedEtcsTelegramSet">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="announcesSpeed"
+            type="rsmCommon:Speed">
+            <xs:annotation>
+              <xs:documentation>The speed announced by the balise group.
+de-DE: die Geschwindigkeit die durch den Datenpunkt angek&amp;#252;ndigt wird</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="brakingDistance" nillable="true"
+            type="xs:int">
+            <xs:annotation>
+              <xs:documentation>The braking distance in metres.
+de-DE: Regelbremsweg der Strecke, 1000m, 700m or 400m.
+</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="definesParameter"
+            type="db:Parameter">
+            <xs:annotation>
+              <xs:documentation>The telegram set defines a set of parameters</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SpecialPositionArrangement">
+    <xs:annotation>
+      <xs:documentation>DB listing of special system arrangements.
+See parent-class for further description.
+de-DE: Anordnung von Aktiven Signalen bei mehreren parallelen Strecken oder beim Zusammenlauf von Strecken.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:SpecialPositionArrangement">
+        <xs:sequence>
+          <xs:element name="isOfSpecialSignalArrangementType" nillable="true"
+            type="db:SpecialSignalArrangementTypes"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaliseGroupFunctionZbs">
+    <xs:annotation>
+      <xs:documentation>The function of this balise group in the ZBS context.
+de-DE: Durch das Anwendungssystem ZBS definierter Datenpunkttyp.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:BaliseGroupFunction">
+        <xs:sequence>
+          <xs:element name="isOfZbsFunctionType" nillable="true" type="db:ZbsFunctionTypes"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="AreaValidityTypes">
+    <xs:annotation>
+      <xs:documentation>Geltungsbereich, dem das Signal zugeordnet wird (DS/DV). Die Angabe wird zun&amp;#228;chst nur zur Unterscheidung Sh 1/Ra 12 vorgesehen.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="formerWestGermanRailways">
+        <xs:annotation>
+          <xs:documentation>de-DE: Gebiet der ehemaligen Deutschen Bundesbahn</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="formerEastGermanRailways">
+        <xs:annotation>
+          <xs:documentation>de-DE: Gebiet der ehemaligen Deutschen Reichsbahn</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="subUrbanRailwaysHamburg">
+        <xs:annotation>
+          <xs:documentation>de-DE: Gebiet der S-Bahn Hamburg</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="subUrbanRailwaysBerlin">
+        <xs:annotation>
+          <xs:documentation>de-DE: Gebiet der S-Bahn Berlin</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ZbsBgLinking">
+    <xs:annotation>
+      <xs:documentation>Balise group linking for Zugbeeinflussung Berliner S-Bahn (ZBS).
+de-DE: BG Verkettung ZBS</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:BaliseGroupLinking">
+        <xs:sequence>
+          <xs:element name="isOfLinkingType" nillable="true" type="db:ZbsLinkingTypes"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="ModemTypes">
+    <xs:annotation>
+      <xs:documentation>ZBS_Modem types
+de-DE: Modemtypen, welche die Verbindung zwischen ZN Unterstation und ZLV-Bus f&amp;#252;r die Datenkommunikation herstellen.
+</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="comserver">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LOGEM_LGM_28_8_D1">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NOKIA_ECM_FAST_14400">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NOKIA_ECM_FAST_19200">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="GfkIpAddressAssignment">
+    <xs:annotation>
+      <xs:documentation>
+de-DE: Zuordnung von IP-Adressen zu einem Gleisfeldkonzentrator.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:IpAddressAssignment">
+        <xs:sequence>
+          <xs:element name="isOfGfkCategoryType" nillable="true" type="db:GfkCategoryTypes"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="TiltingTrainBgLinking">
+    <xs:annotation>
+      <xs:documentation>Balise group linking specific to tilting trains.
+de-DE: GNT</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:BaliseGroupLinking"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="SpecialSignalArrangementTypes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="signalOnRightSide">
+        <xs:annotation>
+          <xs:documentation>de-DE: Anordnung des Signals rechts am Gleis.
+</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="signalOnRightSideWithoutCheckerBoardSign">
+        <xs:annotation>
+          <xs:documentation>de-DE: Anordnung des Signals rechts am Gleis ohne Schachbretttafel.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="notValidForOppositeTrack">
+        <xs:annotation>
+          <xs:documentation>de-DE: Nichtgeltung f&amp;#252;r Fahrten auf dem Gegengleis.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="PzbDeviceProperties">
+    <xs:annotation>
+      <xs:documentation>Set of properties that apply to a PZB device.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:TpsDeviceProperties">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="InaCalculation" nillable="true"
+            type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>Calculation sheet for PZB configuration.
+de-DE: INA: Induktive Sicherung Anfahrenden Zuege. Liegt ein Bahnsteig zwischen den PZB-Magneten von Vor- und nachfolgendem Hauptsignal, wird eine INA-Berechnung durchgef&amp;#252;hrt. Das Ergebnis wird in einem Wirkbereichsbogen dokumentiert. Daraus geht die Relevanz des PZB-Magneten f&amp;#252;r die Ueberwachung gegen Halt anfahrender Zuege hervor.
+</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="appliesToPlatformEdge"
+            type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Platform edge for which the INA calculation was made.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:PlatformEdge</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasDecisiveDangerpoint"
+            type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The location that has to be protected by the PZB system and that decides where the PZB device must be installed.
+de-DE: massgebende Gefahrenstelle f&amp;#252;r die INA-Berechnung.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>generic:LocationProxy</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="hasFrequency" nillable="true" type="db:PzbFrequencyTypes"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DualFlankProtection">
+    <xs:annotation>
+      <xs:documentation>Points has no distinct position that offers flank protection.
+de-DE: Zwieschutz</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element name="appliesToPoint" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Verweis auf Zwieschutzweiche</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:MovableElement</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="autoRestoration" nillable="true"
+            type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>True when the point seeks a protecting position after the dual flank protection conflict is gone because the train has cleared one of the two points that caused the conflict.
+When false, the point that initially caused the conflict, does not move.
+
+de-DE: : Wahr wenn Nachlaufverhinderung aktiv. Das Nachlaufen der Weiche wird verhindert, wenn die Flankenschutzanforderung, f&amp;#252;r die der Verschluss projektiert ist, nicht mehr besteht. In der Regel wird f&amp;#252;r Eigenzwieschutzweichen die Nachlaufverhinderung projektiert.
+</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="isOfDualFlankProtectionType" nillable="true"
+            type="db:DualFlankProtectionTypes"/>
+          <xs:element name="measureForPositionLeft" nillable="true"
+            type="db:DualFlankProtectionMeasureTypes"/>
+          <xs:element name="measureForPositionRight" nillable="true"
+            type="db:DualFlankProtectionMeasureTypes"/>
+          <xs:element maxOccurs="1" minOccurs="0" name="requiresRemoteFlankProtectionLeft"
+            type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>transmits flank protection request. Ersatzschutzmassnahme bei Fernschutz.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:FlankProtection</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="requiresRemoteFlankProtectionRight"
+            type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>transmits flank protection request. Ersatzschutzmassnahme bei Fernschutz.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:FlankProtection</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LevelCrossingActivationDelaySet">
+    <xs:annotation>
+      <xs:documentation>de-DE: B&amp;#252; Zeitverhalten</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:LevelCrossingActivationDelaySet">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasDefaultPartialTimer"
+            type="rsmCommon:Duration">
+            <xs:annotation>
+              <xs:documentation>de-DE: TeilvorgabeZeit</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="hasSupplierSpecificActivationDelay" nillable="true"
+            type="rsmCommon:Duration">
+            <xs:annotation>
+              <xs:documentation>The activation delay depends on the level crossing system supplier and may differ from the calculated delay.
+Both calculated and supplier values must be stored.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasSupplierSpecificSignalDelay"
+            type="rsmCommon:Duration">
+            <xs:annotation>
+              <xs:documentation>The opening of the main signal covering the level crossing can be delayed.
+Typically, in case of half-barrier crossings, this allows road users to evacuate the danger area.
+This value is adapted to supplier-specific level crossing time behaviour.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="CodeLetter">
+    <xs:annotation>
+      <xs:documentation>Code letters for tagging PZB areas types.
+de-DE: Kennbuchstabe</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="B">
+        <xs:annotation>
+          <xs:documentation>de-DE: Gleisabschnitt B im Bereich mit Streckenblocksicherung.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="G">
+        <xs:annotation>
+          <xs:documentation>de-DE: Gleisabschnitt G im Bereich mit Fahrstrassensicherung (Bahnh&amp;#246;fe, Abzweigstellen).</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="K">
+        <xs:annotation>
+          <xs:documentation>de-DE: Kreuzungsabschnitt K mit mindestens einer Kreuzung.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="W">
+        <xs:annotation>
+          <xs:documentation>de-DE: Weichenabschnitt W mit mindestens einer Weiche.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DirectionArrowType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="left">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="right">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="FootpathCrossingToPlatform">
+    <xs:annotation>
+      <xs:documentation>A footpath crossing that provides access to the platform for passengers.
+de-DE: Reisenden&amp;#252;bergang, Resi.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="db:LevelCrossingSystem">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="hasTechnicalProtection" nillable="true"
+            type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>True: the crossing has technical protection. False otherwise.
+de-DE: Resi (true) oder nicht-technisch gesichterter (Ntg) Reisenden&amp;#252;bergang (false).</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="LtFunctionTypes">
+    <xs:annotation>
+      <xs:documentation>Level transition function types.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="announcement">
+        <xs:annotation>
+          <xs:documentation>de-DE: Ank&amp;#252;ndigungsdatenpunkt</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="transition">
+        <xs:annotation>
+          <xs:documentation>de-DE: Transitionsdatenpunkt</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation>de-DE: Sonstige</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="TrackCrossing">
+    <xs:annotation>
+      <xs:documentation>Bahn&amp;#252;bergangsstelle wo Stra&amp;#223;e/Pfad und Gleise sich kreuzen.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:TrackCrossing">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasCrossingPathBorder"
+            type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The location of the point on the centre of the track where the road/path starts. Needed in case of a track crossing that is protected by an interlocking-integrated level crossing.
+DB: B&amp;#220;-Kante. </xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:SpotLocation</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="SignalSystemTypes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="combined">
+        <xs:annotation>
+          <xs:documentation>de-DE: Ks - Kombinationssignal</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="mainDistant">
+        <xs:annotation>
+          <xs:documentation>de-DE: H/V - Haupt-/Vorsignal</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="mainLight">
+        <xs:annotation>
+          <xs:documentation>de-DE: Hl - Hauptlichtsignal</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="joined">
+        <xs:annotation>
+          <xs:documentation>de-DE: SV - Haupt- und Vorsignalverbindungen</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CommunicationMediumTypes">
+    <xs:annotation>
+      <xs:documentation>Types of physical communication layer type.
+de-DE: Physikalische Auspr&amp;#228;gung des &amp;#220;bertragungsweges</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="cuAdo8">
+        <xs:annotation>
+          <xs:documentation>de-DE: Kupfer ADO8</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="cuKag">
+        <xs:annotation>
+          <xs:documentation>de-DE: Kupfer KAG</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="cuLsaPlus">
+        <xs:annotation>
+          <xs:documentation>de-DE: Kupfer LSA Plus</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="cuRj45">
+        <xs:annotation>
+          <xs:documentation>de-DE: Kupfer RJ45</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="lwlDin">
+        <xs:annotation>
+          <xs:documentation>de-DE: LWL DIN</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="lwlE2000">
+        <xs:annotation>
+          <xs:documentation>de-DE: LWL E2000</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="lwlScLc">
+        <xs:annotation>
+          <xs:documentation>de-DE: LWL SC LC</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation>de-DE: sonstige</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="PzbSpeedCheckingSystemProperties">
+    <xs:annotation>
+      <xs:documentation>For PZB speed checking configurations with a speed checking section (also known as Overspeed sensor, OSS).</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:SpeedCheckingSystemProperties">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="error" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The measurement error of the speed checking system that (co-)informs the length of the speed checking section.
+Typically expressed as "2-3%", "&amp;lt;4%", etc.
+de-DE: Messfehlerbereich.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="hasSpeedCheckingSystemType" nillable="true"
+            type="db:PzbSpeedCheckingSystemTypes"/>
+          <xs:element maxOccurs="1" minOccurs="0" name="reusesPzbDevice"
+            type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>This PZB Magnet is already present and can be reused for speed checking purposes.
+de-DE: PZB Mitnutzung </xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>db:PzbDevice</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="triggerDisactivationDelay"
+            type="rsmCommon:Duration">
+            <xs:annotation>
+              <xs:documentation>The trigger device is disactivated after a given delay that depends on the checked speed.
+
+de-DE: Pr&amp;#252;fzeit der G&amp;#220;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="GfkCategoryTypes">
+    <xs:annotation>
+      <xs:documentation>The types of Gfk used to estimate the number of address needed.
+de-DE: GFK Kategorie</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="small">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="medium">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="big">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ZbsFunctionTypes">
+    <xs:annotation>
+      <xs:documentation>Berlin S-Bahn Funktionstypen gem&amp;#228;&amp;#223; 819.1360</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="rbe">
+        <xs:annotation>
+          <xs:documentation>RBE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="rs">
+        <xs:annotation>
+          <xs:documentation>RS</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="rsp">
+        <xs:annotation>
+          <xs:documentation>RSp</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="za">
+        <xs:annotation>
+          <xs:documentation>ZA</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zbbp">
+        <xs:annotation>
+          <xs:documentation>BBbP</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zbp">
+        <xs:annotation>
+          <xs:documentation>ZBP</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zf">
+        <xs:annotation>
+          <xs:documentation>ZF</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zh">
+        <xs:annotation>
+          <xs:documentation>ZH</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zhf">
+        <xs:annotation>
+          <xs:documentation>ZHF</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zlih">
+        <xs:annotation>
+          <xs:documentation>ZLiH</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zliv">
+        <xs:annotation>
+          <xs:documentation>ZLiV</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zo">
+        <xs:annotation>
+          <xs:documentation>ZO</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zre">
+        <xs:annotation>
+          <xs:documentation>ZRE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zrh">
+        <xs:annotation>
+          <xs:documentation>ZRH</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zhrf">
+        <xs:annotation>
+          <xs:documentation>ZRHF</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zrla">
+        <xs:annotation>
+          <xs:documentation>ZRLa</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zrv">
+        <xs:annotation>
+          <xs:documentation>ZRV</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zue">
+        <xs:annotation>
+          <xs:documentation>Z&amp;#220;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zv">
+        <xs:annotation>
+          <xs:documentation>ZV</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation>de-DE: sonstige</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DriveCabinet">
+    <xs:annotation>
+      <xs:documentation>Cabinet housing a drive of a movable component or level crossing.
+DE: Schranken- oder Weichenantrieb. Eine Au&amp;#223;enelementansteuerung kann in einem Schranken- oder Weichenantrieb untergebracht sein.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:Cabinet"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="PzbRouteRelationTypes">
+    <xs:annotation>
+      <xs:documentation>The various types of effectiveness of the PZB magnet.
+de-DE: Angabe, ob der Gleismagnet/ die G&amp;#220; schaltbar ist oder nicht bzw. wie die Anschaltung erfolgt.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="signalSwitched">
+        <xs:annotation>
+          <xs:documentation>Schaltbar von Signal.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="permanentlyWithRoute">
+        <xs:annotation>
+          <xs:documentation>St&amp;#228;ndig wirksam wenn Fahrstrasse eingestellt.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ineffectiveWithRoute">
+        <xs:annotation>
+          <xs:documentation>Unwirksam when Fahrstrasse eingestellt.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="permanentlyActive">
+        <xs:annotation>
+          <xs:documentation>St&amp;#228;ndig wirksam.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation>Sonstige.
+de-DE:  ein Bearbeitungsvermerk mit entsprechenden Erl&amp;#228;uterungen ist anzuf&amp;#252;gen.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="BaliseLabellingInformation">
+    <xs:annotation>
+      <xs:documentation>Extra location info on the BG label.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element name="labelTakesInfoFrom" nillable="true"
+            type="db:SourceOfLabelInformationTypes">
+            <xs:annotation>
+              <xs:documentation>The label shall include the name of track and chainage, track and signal, etc.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="otherLabelText" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>de-DE: Sonstige Angabe des Balisenstandortes, sofern nicht &amp;#252;bereinstimmend mit Standortangabe_Balisenschild. Beispiele: "60W32L", "BGRU 023" (= Berlin-Grunewald Nr. 23).</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="refersToBaliseGroup" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:BaliseGroup</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ZbsReducedSpeedProperties">
+    <xs:annotation>
+      <xs:documentation>Properties that apply to a reduced speed are in the supervised ZBS-section.
+de-DE: Eigenschaften f&amp;#252;r Bereiche mit V-Einschr&amp;#228;nkung innerhalb des &amp;#220;berwachungsabschnitts.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="distanceToStartOfReducedSpeed" nillable="true" type="rsmCommon:Length">
+        <xs:annotation>
+          <xs:documentation>Distance between BG and start of reduced speed section.
+de-DE: Distanz zwischen Datenpunkt und Beginn der Geschwindigkeitseinschr&amp;#228;nkung.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="hasDesignSlope" nillable="true" type="rsmCommon:Gradient">
+        <xs:annotation>
+          <xs:documentation>Slope, given in the range 0..1, that determines the braking curve in rear of the reduced speed section.
+de-DE: Ma&amp;#223;gebende Neigung im Bereich der Bremskurve vor der Geschwindigkeitseinschr&amp;#228;nkung.
+Achtung: 20,03 Promille wird auf 0,02003 abgebildet!</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="lengthOfReducedSpeedSection" nillable="true" type="rsmCommon:Length">
+        <xs:annotation>
+          <xs:documentation>Length of the reduced speed section.
+de-DE: L&amp;#228;nge des Bereichs der Geschwindigkeitseinschr&amp;#228;nkung.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="reducedSpeed" nillable="true" type="rsmCommon:Speed">
+        <xs:annotation>
+          <xs:documentation>de-DE: Eingeschr&amp;#228;nkte Geschwindigkeit.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FlankProtection">
+    <xs:annotation>
+      <xs:documentation>For DB only one signal (via isProvidedBySignal) or one point (isProvidedByPointInPosition) can provide flank protection.
+In case the track diverges between requestor and provider, the request is transmitted from the diverging point.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:FlankProtection">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="inhibitShuntingRouteExit" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>True, if flank protection is given by signal and this signal must not be the exit of a shunting route.
+</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="2" minOccurs="0" name="transmitsFlankProtectionRequest"
+            type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The point and position that is supposed to provide flank protection transmits the request to the next point and position.
+de-DE: weitergabe</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>db:FlankProtection</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="LevelCrossingTechnologyTypes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="callBarrier">
+        <xs:annotation>
+          <xs:documentation>de-DE: Anrufschranke</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="buep_93">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="buess_72d">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="bues_72z">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="bues2000">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ebuet_80">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ebuet_80_vb">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="fue_58">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="fue_60">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="hl_64_b">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="hl_64_c">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="hs_64_b">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="hs_64_c">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="lo1">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="lo1_57">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ne_bue_90">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="rbuet">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="simis_lc">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="none">
+        <xs:annotation>
+          <xs:documentation>de-DE: keine
+</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation>de-DE: sonstige</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DocumentTypes">
+    <xs:annotation>
+      <xs:documentation>DB document types.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="documentationOfAcceptance">
+        <xs:annotation>
+          <xs:documentation>de-DE: Abnahmeniederschrift</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="connectionIntegrityZone2">
+        <xs:annotation>
+          <xs:documentation>de-DE: Anbindung_IB2</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="connectionIntegrityZone3">
+        <xs:annotation>
+          <xs:documentation>de-DE: Anbindung_IB3</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BAST">
+        <xs:annotation>
+          <xs:documentation>de-DE: Betriebliche Aufgabenstellung</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="areaOverviewAndDetailedView">
+        <xs:annotation>
+          <xs:documentation>de-DE: BELU</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="UserSurface">
+        <xs:annotation>
+          <xs:documentation>de-DE: Benutzeroberfl&amp;#228;che</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="documentationOfEquality">
+        <xs:annotation>
+          <xs:documentation>de-DE: Best&amp;#228;tig_Gleichstellung</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="documentationOfQualityCheck">
+        <xs:annotation>
+          <xs:documentation>de-DE: Best&amp;#228;tig Qualit&amp;#228;tspr&amp;#252;fung</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="documentationOfTakingOver">
+        <xs:annotation>
+          <xs:documentation>de-DE: Best&amp;#228;tig_&amp;#220;bernahme</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="transmissionRoutePlan">
+        <xs:annotation>
+          <xs:documentation>de-DE: &amp;#220;bertragungswegeplan</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="digitalPointSketch">
+        <xs:annotation>
+          <xs:documentation>de-DE: DWS</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="explanatoryReport">
+        <xs:annotation>
+          <xs:documentation>de-DE: Erl&amp;#228;uterungsbericht</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="approvalOfBuildingDocumentAuthority">
+        <xs:annotation>
+          <xs:documentation>de-DE: Freigabe Bvb</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="approvalOfAwardingAuthority">
+        <xs:annotation>
+          <xs:documentation>de-DE: Genehmigung AG Bh Bhv</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="specialInformationForMaterials">
+        <xs:annotation>
+          <xs:documentation>de-DE: Material Besonders</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="listOfPlans">
+        <xs:annotation>
+          <xs:documentation>de-DE: Planverzeichnis</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="checkReport">
+        <xs:annotation>
+          <xs:documentation>de-DE: Pr&amp;#252;fbericht</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="specialBaselineOfRulesAndStandards">
+        <xs:annotation>
+          <xs:documentation>de-DE: Regelwerksstand Besonders</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="recordOfPermittedLinespeeds">
+        <xs:annotation>
+          <xs:documentation>de-DE: VzG</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="traindescribersystemOperationRoomplan">
+        <xs:annotation>
+          <xs:documentation>de-DE: ZN Raumplan Bedienraum</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="traindescribersystemComputerRoomplan">
+        <xs:annotation>
+          <xs:documentation>de-DE: ZN Raumplan Rechnerraum</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="geo">
+        <xs:annotation>
+          <xs:documentation>de-DE: GEO</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="INA">
+        <xs:annotation>
+          <xs:documentation>de-DE: INA</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="furniturePlan">
+        <xs:annotation>
+          <xs:documentation>de-DE: M&amp;#246;belaufstellplan Aufriss</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="furniturePlanGroundplot">
+        <xs:annotation>
+          <xs:documentation>de-DE: M&amp;#246;belaufstellplan Grundriss</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="monitorSubdivision">
+        <xs:annotation>
+          <xs:documentation>de-DE: Monitoraufteilung</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="operationRoomPlan">
+        <xs:annotation>
+          <xs:documentation>de-DE: Raumplan Bedienr&amp;#228;ume</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="computerRoomPlan">
+        <xs:annotation>
+          <xs:documentation>de-DE: Raumplan Rechnerr&amp;#228;ume</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="operationAreaOverview">
+        <xs:annotation>
+          <xs:documentation>de-DE: Steuerbezirks&amp;#252;bersicht</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="senseOfDirection">
+        <xs:annotation>
+          <xs:documentation>de-DE: Richtungssinn</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="companyInternalPermission">
+        <xs:annotation>
+          <xs:documentation>de-DE: UiG</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="specification">
+        <xs:annotation>
+          <xs:documentation>de-DE: Vorgabe</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="specificationTrackOccupancyTable">
+        <xs:annotation>
+          <xs:documentation>de-DE: Vorgabe GBT</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="acceptanceInSingleCase">
+        <xs:annotation>
+          <xs:documentation>de-DE: ZiE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation>de-DE: sonstige</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="EtcsProgrammingFileSet">
+    <xs:annotation>
+      <xs:documentation>Set of binary data files that are used for programming electronic equipment such as balises or LEU.
+A set of load and auxiliary files.
+de-DE: Programmierdateigruppe.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="appliesToEtcsBalise"
+            type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>This set of files is used to program an ETCS balise. </xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:EtcsBalise</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="appliesToLeuModule"
+            type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>This set of files is used to program an LEU module.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:LeuModule</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="1" name="hasEtcsTelegramFile" nillable="true"
+            type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>db:EtcsProgrammingFile</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LevelCrossingTimerSet">
+    <xs:annotation>
+      <xs:documentation>Set of configurable level crossing timers.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:LevelCrossingTimerSet">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasAdditionalTimer"
+            type="rsmCommon:Duration">
+            <xs:annotation>
+              <xs:documentation>de-DE: Nachlaufzeit</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasLeadTimer" type="rsmCommon:Duration">
+            <xs:annotation>
+              <xs:documentation>Lead timer that activates the level crossing earlier.
+de-DE: B&amp;#220; Vorlaufzeit</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="EtcsProgrammingFile">
+    <xs:annotation>
+      <xs:documentation>A binary data file needed to program ETCS components.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="db:BinaryDataFile">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="configurationLabel" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Supplier-specific configuration label of the load file referring to the standardised planning/data prep of the electronic interlocking. </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="displayText" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Text supporting the operator of the balise programming software.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="usageCode" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>Supplier-specific code describing the purpose of the loading file, e.g. allocation to a channel, or auxiliary file e.g. allocation to a channel, check data, localisation code.
+The code can be used to drive programming software.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BinaryDataFile">
+    <xs:annotation>
+      <xs:documentation>Binary file, not-executable.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="data" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Data as a blob of bytes.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="fileType" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>E.g. .txt, .tlg., .bin
+</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="hasFileProperties" nillable="true" type="db:FileProperties"/>
+          <xs:element maxOccurs="1" minOccurs="1" name="name" nillable="true" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LevelTransitionVariables">
+    <xs:complexContent>
+      <xs:extension base="sig:LtProperties">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="d_leveltr" nillable="true" type="xs:double">
+            <xs:annotation>
+              <xs:documentation>de-DE: Entfernung bis zum Punkt wo die Transition stattfindet in Meter.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DerailerComponent">
+    <xs:annotation>
+      <xs:documentation>de-DE: Gleissperre</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:DerailerComponent">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasDerailerIndicatorOfType"
+            type="db:DerailerIndicatorTypes">
+            <xs:annotation>
+              <xs:documentation>de-DE: Hat ein Gleissperrensignal.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ThroughTrack">
+    <xs:annotation>
+      <xs:documentation>de-DE: durchgehendes Hauptgleis</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:MainTrack"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="EtcsProgrammingAuxiliaryFile">
+    <xs:annotation>
+      <xs:documentation>Meta-data used when programming the balise.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="db:EtcsProgrammingFile"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="EtcsBaliseGroupLevelTransition">
+    <xs:annotation>
+      <xs:documentation>The ETCS balise group is used for level transitions.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:EtcsBaliseGroupProperties"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SignalType">
+    <xs:annotation>
+      <xs:documentation>Type of signal as defined by DB</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:SignalType">
+        <xs:sequence>
+          <xs:element name="isOfSignalTypeType" nillable="true" type="db:SignalTypeTypes"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="PredefinedEtcsTelegramSetL2">
+    <xs:annotation>
+      <xs:documentation>Set of predefined telegrams for ETCS Level 2.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="db:PredefinedEtcsTelegramSet"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LocalOperationUiButton">
+    <xs:annotation>
+      <xs:documentation>de-DE: Bedienelement Taste</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:LocalOperationUiButton">
+        <xs:sequence>
+          <xs:element name="hasFunctionType" nillable="true" type="db:ButtonFunctionTypes"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SpecialGauge">
+    <xs:annotation>
+      <xs:documentation>Specific DB gauges.
+de-DE: Bereich wo besondere Lichtraumbedingungen vorhanden sind. Es werden nur die Bereiche angegeben, in denen von der EBO abweichende und LST-relevante Lichtraumbedingungen vorhanden oder zu beachten sind. </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:SpecialGauge">
+        <xs:sequence>
+          <xs:element name="isOfSpecialGaugeType" nillable="true" type="db:SpecialGaugeTypes"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ActiveAspect">
+    <xs:annotation>
+      <xs:documentation>de-DE: Geschalteter Teil des Signalbegriffes.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:ActiveAspect">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="monitored" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>Indicates that the activation of this aspect is monitored by the interlocking.
+de-DE: Angabe, ob die Anschaltung von Zs 2 zu &amp;#252;berwachen ist (true) oder nicht (false). Die Angabe erfolgt nur f&amp;#252;r den Signalbegriff Zs 2.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="CommunicationNetworkTypes">
+    <xs:annotation>
+      <xs:documentation>de-DE: Art des &amp;#220;bertragungsnetzes</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="closedNetwork">
+        <xs:annotation>
+          <xs:documentation>de-DE: geschlossenes Netz</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="openNetwork">
+        <xs:annotation>
+          <xs:documentation>de-DE: offenes Netz</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="kisa">
+        <xs:annotation>
+          <xs:documentation>de-DE: Kommunikationsinfrastruktur f&amp;#252;r sicherheitsrelevante Anwendungen</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="supplierProprietary">
+        <xs:annotation>
+          <xs:documentation>de-DE: SBI-Intern</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="sg">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation>de-DE: sonstige</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="IndicatorFunctionTypes">
+    <xs:annotation>
+      <xs:documentation>List of functions that light indicators can fulfil.
+de-DE: Meldefunktionen von Leuchtmeldern.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="receivingRequest">
+        <xs:annotation>
+          <xs:documentation>de-DE: Anforderungsempfang</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="operationalStatus">
+        <xs:annotation>
+          <xs:documentation>de-DE: Anzeige Betriebszustand</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zp10">
+        <xs:annotation>
+          <xs:documentation>de-DE: Leuchtmelder Zp10</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zp9">
+        <xs:annotation>
+          <xs:documentation>de-DE: Leuchtmelder Zp9
+</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="receivedSignalRequest">
+        <xs:annotation>
+          <xs:documentation>de-DE: Signalanforderung empfangen</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="signalClosed">
+        <xs:annotation>
+          <xs:documentation>de-DE: Signalhaltmelder</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="signalOpen">
+        <xs:annotation>
+          <xs:documentation>de-DE: Signalfahrtmelder</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="blocking">
+        <xs:annotation>
+          <xs:documentation>de-DE: Sperrmelder</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="preparing">
+        <xs:annotation>
+          <xs:documentation>de-DE: Vorbereitungsmeldung</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="point">
+        <xs:annotation>
+          <xs:documentation>de-DE: Weichenmeldung</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="target">
+        <xs:annotation>
+          <xs:documentation>de-DE: Zielmelder</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation>de-DE: sonstige</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="NoHousing">
+    <xs:annotation>
+      <xs:documentation>The equipment has no housing but has housing-properties such as the spot location and position description.
+
+de-DE: Unterbringung_Art : keine</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:Housing"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ZbsPartialRouteBody">
+    <xs:annotation>
+      <xs:documentation>de-DE: Fahrwegteil</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element name="hasEntry" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>db:ZbsPartialRouteExtremity</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasExit" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>db:ZbsPartialRouteExtremity</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="isPartOfAlternativeRoute" nillable="true"
+            type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>de-DE: Fahrwegteil ist Teil einer Umfahrstra&amp;#223;e</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="LocalControlTypes">
+    <xs:annotation>
+      <xs:documentation>Classification according to the local control possibilities.
+de-DE: Festlegung der innerhalb des Nahstellbereiches m&amp;#246;glichen Bedienhandlungen. Die Art des Nahstellbereiches (NB) entscheidet &amp;#252;ber die innerhalb des NB m&amp;#246;glichen Funktionalit&amp;#228;ten. </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="nb_g">
+        <xs:annotation>
+          <xs:documentation>Signals show Kl/Sh1, Only locally-operated points can be thrown, Level crossing operation with shunting switch.
+
+de-DE: NB-G: Signale zeigen Kl/Sh1; nur ortsbediente Weichen umstellbar; B&amp;#220;-Bedienung mit Rangierschalter.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="nb_w">
+        <xs:annotation>
+          <xs:documentation>Like NB-G but also powered points can be operated.
+de-DE: NB-W: wie G, zus&amp;#228;tzlich Umstellung von mit Antrieben ausger&amp;#252;steter Weichen m&amp;#246;glich.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="nb_r">
+        <xs:annotation>
+          <xs:documentation>Like NB-W, but including shunting routes.
+de-DE: NB-R: wie W, zus&amp;#228;tzlich Fahren mit Rangierstra&amp;#223;en innerhalb des NB. Nahstellbereich mit abgesetzen Rangierstellwerk.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="PresignProperties">
+    <xs:annotation>
+      <xs:documentation>Properties and design distances for advanced traffic signs.
+de-DE: Abstandsangaben f&amp;#252;r vorgeschalteten Lichtzeichen.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="db:RoadTrafficSignProperties">
+        <xs:sequence>
+          <xs:element name="hasDistanceAB" nillable="true" type="rsmCommon:Length">
+            <xs:annotation>
+              <xs:documentation>de-DE: R&amp;#228;umstrecke dAB gem&amp;#228;&amp;#223; Ril 815.0033A01 (vorgeschaltete Lichtzeichen).</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasDistanceBK" type="rsmCommon:Length">
+            <xs:annotation>
+              <xs:documentation>de-DE: R&amp;#228;umstrecke dBK gem&amp;#228;&amp;#223; Ril 815.0033A01 (vorgeschaltete Lichtzeichen).</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasDistanceCK" type="rsmCommon:Length">
+            <xs:annotation>
+              <xs:documentation>de-DE: R&amp;#228;umstrecke dCK gem&amp;#228;&amp;#223; Ril 815.0033A01 (vorgeschaltete Lichtzeichen).</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasDistanceSKprime" type="rsmCommon:Length">
+            <xs:annotation>
+              <xs:documentation>de-DE: R&amp;#228;umstrecke dSK' gem&amp;#228;&amp;#223; Ril 815.0033A01 (vorgeschaltete Lichtzeichen).</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="timeNeededForRegulation"
+            type="rsmCommon:Duration">
+            <xs:annotation>
+              <xs:documentation>The time needed for switching the road traffic light installation.
+de-DE: Nur bei BUESTRA: Zeitbedarf f&amp;#252;r die Beeinflussung des Stra&amp;#223;enverkehrs (Parameter tK1 gem&amp;#228;&amp;#223; Ril 815.0051).</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="EtcsBaliseGroupOtherSystem">
+    <xs:annotation>
+      <xs:documentation>The balise group is used in the context of a system and use case that isn't defined yet.
+de-De: sonstiges Anwendungssystem</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:EtcsBaliseGroupProperties">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="system" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Describes the system and/or use case.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="SourceOfLabelInformationTypes">
+    <xs:annotation>
+      <xs:documentation>Indicates the source of the text on the label.
+de-DE: Angabe des Balisenstandortes auf dem Balisenschild. Die Bezeichnung ergibt sich aus weiteren im Datenmodell vorhandenen Angaben.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="trackAndChainage">
+        <xs:annotation>
+          <xs:documentation>de-DE: Streckenkilometer Gleis</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="trackAndSignal">
+        <xs:annotation>
+          <xs:documentation>de-DE: Signal Gleis</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="signal">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="lineAndOtherPosition">
+        <xs:annotation>
+          <xs:documentation>de-DE: Strecke sonstiger Standort</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="TrDrStationAddress">
+    <xs:complexContent>
+      <xs:extension base="generic:BaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="StationNr" nillable="true" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>Station number for identification on the TCS-bus.
+de-DE: Bf_Nr
+Angabe der Bahnhofsadresse zur eindeutigen Identifikation einer Betriebsstelle. Zur eindeutigen Identifikation einer Betriebsstelle auf dem ZLV-Bus ist eine Bahnhofsadresse festzulegen.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="isPriority" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>True if this station number is leading for identifying the TrDr substation.
+de-DE: Angabe der ma&amp;#223;gebenden Bahnhofsnummer der ZN Unterstation. Das Attribut wird nur f&amp;#252;r diejenige Bahnhofsnummer bef&amp;#252;llt, welche f&amp;#252;r die Kommunikation der ZN_Unterstation mit dem ZLV Bus ma&amp;#223;gebend ist. In allen &amp;#252;brigen F&amp;#228;llen wird das Attribut nicht bef&amp;#252;llt</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="refersToOperationalLocality" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>
+de-DE: &amp;#214;rtlichkeit, die einer Bahnhofsnummer zugeordnet ist, welche zus&amp;#228;tzlich von der ZN_Unterstation verwaltet wird</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>generic:OperationalLocality</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="RoadTrafficSignProperties">
+    <xs:annotation>
+      <xs:documentation>Road sign properties and dimensions.
+Road clearance dimensions
+de-DE: Eigenschaften sowie Sperr- und R&amp;#228;umstrecken
+Choice: D or Df or (D1 and D2)</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:RoadTrafficSignProperties">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasDistanceD" type="rsmCommon:Length">
+            <xs:annotation>
+              <xs:documentation>de-DE: Sperrstrecke als Abstand Lz/Andreaskreuz - gegen&amp;#252;berliegende Gefahrraumgrenze (d). Die Angabe ist nur bei unbeschrankten Bahn&amp;#252;berg&amp;#228;ngen erforderlich.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasDistanceD1" type="rsmCommon:Length">
+            <xs:annotation>
+              <xs:documentation>de-DE: Angaben zur Sperrstrecke bei B&amp;#220; der Art LzH bzw. LzHH.
+Teilsperrstrecke als Abstand Lz - Schranke (d1). </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasDistanceD2" type="rsmCommon:Length">
+            <xs:annotation>
+              <xs:documentation>de-DE: Angaben zur Sperrstrecke bei B&amp;#220; der Art LzH bzw. LzHH.
+R&amp;#228;umstrecke als Abstand Schranke - gegen&amp;#252;berliegende Gefahrraumgrenze (d2). </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasDistanceDf" type="rsmCommon:Length">
+            <xs:annotation>
+              <xs:documentation>de-DE: Sperrstrecke als Abstand Lz/Andreaskreuz - gegen&amp;#252;berliegende Schranke (dF). Die Angabe ist nur bei beschrankten Bahn&amp;#252;berg&amp;#228;ngen erforderlich.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="isPartOfSwitchingGroup" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>Allocates the traffic sign to a group that can be operated by a single switching action.
+de-DE: Schaltgruppe
+</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="PzbRouteRelation">
+    <xs:annotation>
+      <xs:documentation>Informs whether the PZB magnet is active which depends on the route. </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element name="appliesToPzbDevice" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>db:PzbDevice</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="appliesToRoute" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:Route</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="hasRelationType" nillable="true" type="db:PzbRouteRelationTypes">
+            <xs:annotation>
+              <xs:documentation>The relation between PZB effectiveness and the route
+de-DE: Wirksamkeit</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="LensDiffuserTypes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="HRL">
+        <xs:annotation>
+          <xs:documentation>de-DE: Streuscheibegattungen</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="HG">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="HN">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ORL">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="VRL">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LED">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="LensDiffuser">
+    <xs:annotation>
+      <xs:documentation>DB lens diffuser.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:LensDiffuser">
+        <xs:sequence>
+          <xs:element name="isOfDiffuserType" nillable="true" type="db:LensDiffuserTypes"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="PredefinedEtcsTelegramSetTilting">
+    <xs:annotation>
+      <xs:documentation>Set of predefined telegrams for tiliting train speed supervision.
+de-DE: Fachtelegramm f&amp;#252;r Geschwindigkeits&amp;#252;berwachung Neigetechnik (GNT)</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="db:PredefinedEtcsTelegramSet">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="controlCharacter" nillable="true"
+            type="xs:int">
+            <xs:annotation>
+              <xs:documentation>control character, one of {2,4}. Used to modulate when the new speed is given (2) or applies (4) after the given length.
+de-DE: Steuerzeichen.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasDelta_VGES" type="rsmCommon:Speed">
+            <xs:annotation>
+              <xs:documentation>Extra speed allowed to tilting trains in the supervised section in the ES profile.
+de-DE: Erh&amp;#246;hung der Grenzgeschwindigkeit im &amp;#220;berwachungsabschnitt im ES-Profil.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasDelta_VLES" type="rsmCommon:Speed">
+            <xs:annotation>
+              <xs:documentation>Differential speed for reduced speed section in ES profile.
+de-DE: Geschwindikeitsdifferenz f&amp;#252;r Langsamfahrbereich im ES-Profil.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasDelta_VZES" type="rsmCommon:Speed">
+            <xs:annotation>
+              <xs:documentation>Differential speed for the target speed in the increased lateral acceleration profile.
+de-DE: Differenz f&amp;#252;r die Zielgeschwindigkeit im ES-Profil.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasGradient" type="rsmCommon:Gradient">
+            <xs:annotation>
+              <xs:documentation>Track gradient in the supervised section
+de-DE: Kennzahl f&amp;#252;r die Streckenneigung im &amp;#220;berwachungsabschnitt.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasLLA" type="rsmCommon:Length">
+            <xs:annotation>
+              <xs:documentation>length of reduced speed section
+de-DE: L&amp;#228;nge des La-Bereichs.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasVGR" type="rsmCommon:Speed">
+            <xs:annotation>
+              <xs:documentation>speed limit in supervised section of the regular lateral acceleration profile (i.e. for non-tilting trains)
+de-DE: Grenzgeschwindigkeit im &amp;#220;berwachungsabschnitt f&amp;#252;r das RS-Profil.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="hasVLA" nillable="true" type="rsmCommon:Speed">
+            <xs:annotation>
+              <xs:documentation>speed limit in section of reduced speed
+de-DE: Zul&amp;#228;ssige Geschwindigkeit im La-Bereich.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="hasVZ" nillable="true" type="rsmCommon:Speed">
+            <xs:annotation>
+              <xs:documentation>target speed at next data point.
+de-DE: Zielgeschwindigkeit.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasZLA" type="rsmCommon:Length">
+            <xs:annotation>
+              <xs:documentation>Target distance up to the start of the section of reduced speed.
+de-DE: Zielentfernung bis zum Beginn des La-Bereichs.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="pointType" nillable="true" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>Type of point that governs the supervising function, one of {1,2,3}
+de-DE: Punktart des GNT-Fachtelegramms, die dessen (&amp;#220;berwachungs-)Funktion bestimmt.
+</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="sbe" nillable="true" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>Identifier of the speed-supervised area, one of {1,2}
+de-DE: Kennung des Sicherungsbereichs.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="BandwidthTypes">
+    <xs:annotation>
+      <xs:documentation>Bandwidth types in bit per second.
+de-DE: Bandbreite in (k/M)bit pro Sekunde</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="_24kbit_s">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="_2Mbit_s">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="_10Mbit_s">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="_100Mbit_s">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ShuntingRoute">
+    <xs:annotation>
+      <xs:documentation>de-DE: Rangierfahrstrasse.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:ShuntingRoute">
+        <xs:sequence>
+          <xs:element name="isOfShuntingRouteType" nillable="true" type="db:ShuntingRouteTypes"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="ButtonFunctionTypes">
+    <xs:annotation>
+      <xs:documentation>List of functions that can be allocated to a button.
+de-DE: Funktionstypen die einer Taste zugeordnet werden k&amp;#246;nnen.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation>Sonstige</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="LocalOperationUiSwitch">
+    <xs:annotation>
+      <xs:documentation>de-DE: Bedienelement Schalter</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:LocalOperationUiSwitch">
+        <xs:sequence>
+          <xs:element name="hasFunctionType" nillable="true" type="db:SwitchFunctionTypes"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="PointElementSideTypes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="left">
+        <xs:annotation>
+          <xs:documentation>de-DE: linker Weichenschenkel</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="right">
+        <xs:annotation>
+          <xs:documentation>de-DE: rechter Weichenschenkel
+</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="facing">
+        <xs:annotation>
+          <xs:documentation>de-De: Weichenspitze</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SwitchFunctionTypes">
+    <xs:annotation>
+      <xs:documentation>de-DE: Funktionstypen die einem Schalter zugeordnet werden k&amp;#246;nnen.
+</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation>sonstige.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DualFlankProtectionTypes">
+    <xs:annotation>
+      <xs:documentation>de-DE: Charakter der Zwieschutzweiche. </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="real">
+        <xs:annotation>
+          <xs:documentation>de-DE: Echte Zwieschutzweiche
+ Flankenschutzweiche, die durch unabh&amp;#228;ngige Fahrten in beiden Stellungen angefordert wird. Ohne spezielle Behandlung kann nur eine der beiden Fahrten zu einem Zeitpunkt eingestellt sein, da sich durch die Zwieschutzweiche ein Fahrstra&amp;#223;enausschluss ergibt.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="selfSelective">
+        <xs:annotation>
+          <xs:documentation>de-DE: Eigenzwieschutzweiche
+Flankenschutzweiche, die durch die gleiche Fahrt in beiden Stellungen angefordert wird. Ohne spezielle Behandlung kann die Fahrt nicht eingestellt werden</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="realAndSelfSelective">
+        <xs:annotation>
+          <xs:documentation>Ede-DE: ine Zwieschutzweiche kann gleichzeitig beide Charaktere annehmen. </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DangerAreaTrack">
+    <xs:annotation>
+      <xs:documentation>de-DE: Gleisbezogener Gefahrraum
+</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:DangerAreaTrack">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="replacementPlug" nillable="true"
+            type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>Plug that masks selected level crossing activations. I.e. the level crossing isn't activated for a given track in case of engineering activities.
+True when the plug is present, not given otherwise.
+
+de-DE: Ein Sensor- bzw. EGL-Ersatzstecker der die Gleisschaltmittel zur Einschaltung des B&amp;#220; f&amp;#252;r dieses B&amp;#220;-Gleis au&amp;#223;er Betrieb setzt und damit eine Einschaltung des B&amp;#220; verhindert (z. B. f&amp;#252;r Baugleis). Das Attribut kann nur den Wert "true" annehmen.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LocalOperationDevice">
+    <xs:complexContent>
+      <xs:extension base="sig:LocalOperationDevice">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasBuzzerSoundingDuration"
+            type="rsmCommon:Duration">
+            <xs:annotation>
+              <xs:documentation>de-DE: Hupdauer in Sekunden</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="TrDrSubstationWithGateway">
+    <xs:annotation>
+      <xs:documentation>A train describer substation that also acts as a gateway to the TCS bus.
+de-DE: Koppelunterstation (KUs)</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="db:TrainDescriberSubstation">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="identityOnTcsBus" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Identity string of the present substation on the TCS-bus
+de-DE: KUs-Kennung auf ZBS</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="ipAddressOnTcsBus" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>IP-Address of the present substation on the TCS bus to which this substation is a gateway.
+de-DE: IP-Adresse COM-Server</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="isHousedIn" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The gateway communication housing, e.g. a dedicated communication room in the central interlocking building. </xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:Housing</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="isOfModemType" type="db:ModemTypes">
+            <xs:annotation>
+              <xs:documentation>Communication uses either modem or IP.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="modemType" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Modem type, only given if the modem isn't in the type list.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SpecificParameter">
+    <xs:complexContent>
+      <xs:extension base="db:Parameter">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="firstRecursion" nillable="true"
+            type="xs:int">
+            <xs:annotation>
+              <xs:documentation>N_ITER index</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="refersToPacket" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Reference to packet number.
+de-DE: Paketnummer</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:EtcsPacket</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="secondLevelRecursion" nillable="true"
+            type="xs:int">
+            <xs:annotation>
+              <xs:documentation>N_ITER second recursion level (geschachtelte </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="NbrFunctionalityTypes">
+    <xs:annotation>
+      <xs:documentation>List of commands that the local operator can issue in zones classified as NB-R.
+de-DE: F&amp;#252;r den Bediener soll das Bedienkommando im freigegebenen NB-Bereich m&amp;#246;glich sein.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="awu">
+        <xs:annotation>
+          <xs:documentation>Control trailed point.
+de-DE: Bedienkommando „Aufgefahrene Weiche umstellen“.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="f_st_z">
+        <xs:annotation>
+          <xs:documentation>Call a route on non-electrified track.
+de-DE: Bedienkommando „Fahrstra&amp;#223;e in ein Gleis ohne Oberleitung einstellen“ (nur beim &amp;#220;bergang in nicht &amp;#252;berspannte Bereiche relevant). </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="fa_fae">
+        <xs:annotation>
+          <xs:documentation>(Partially) release route.
+de-DE: Bedienkommando „Fahrstra&amp;#223;e aufl&amp;#246;sen“ und „Fahrwegelement einzeln aufl&amp;#246;sen“.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="sbue">
+        <xs:annotation>
+          <xs:documentation>Issue command „SBUE“.
+de-DE: Bedienkommando „SBUE“ (Hilfsfunktion schlie&amp;#223;en B&amp;#220;).</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="sle_sls">
+        <xs:annotation>
+          <xs:documentation>Release and block key lock.
+de-DE: Bedienkommando „Schl&amp;#252;sselsperre entsperren“ (freigeben) und „Schl&amp;#252;sselsperre sperren“ (Freigabe zur&amp;#252;cknehmen).</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="whu">
+        <xs:annotation>
+          <xs:documentation>Auxiliary point control command.
+de-DE: Bedienkommando „Weiche hilfsweise umstellen“. </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="wus">
+        <xs:annotation>
+          <xs:documentation>Block point.
+de-DE: Bedienkommando „Weiche gegen umstellen sperren“. </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="LevelCrossingOperationalPlugTypes">
+    <xs:annotation>
+      <xs:documentation>de-DE: Betriebsartensteckertypen.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation>de-DE: sonstige</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="dependencyRepealed">
+        <xs:annotation>
+          <xs:documentation>de-DE: Abh&amp;#228;ngigkeit aufgehoben</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="MainRouteTypes">
+    <xs:annotation>
+      <xs:documentation>de-DE: Fahrstrassentypen </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="zr">
+        <xs:annotation>
+          <xs:documentation>de-DE: Zugregel</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zu">
+        <xs:annotation>
+          <xs:documentation>de-DE: ZugUmfahr</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zz">
+        <xs:annotation>
+          <xs:documentation>de-DE: ZugZentralblock
+Anwendung im Zentralblock oder an Schnittstellen zu anderen Stellwerkstechniken bei Mehrabschnittssignalisierung, Signalabh&amp;#228;ngigkeiten von Fahrwegelementen auf der freien Strecke oder bei Bedienung einer Awanst. DB-Regelwerk Zug-/Rangierstra&amp;#223;entabelle, Spalte 2</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zh">
+        <xs:annotation>
+          <xs:documentation>de-DE: Zughilfs</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zm">
+        <xs:annotation>
+          <xs:documentation>de-DE: ZugMittelweichenteil</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zuh">
+        <xs:annotation>
+          <xs:documentation>de-DE: ZugUmfahrhilfs</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zum">
+        <xs:annotation>
+          <xs:documentation>de-DE: ZugUmfahrmittelweichenteil</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zt">
+        <xs:annotation>
+          <xs:documentation>de-DE: ZugTeil</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ztu">
+        <xs:annotation>
+          <xs:documentation>de-DE: ZugTeilUmfahr</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DualFlankProtectionMeasureTypes">
+    <xs:annotation>
+      <xs:documentation>de-DE: Ma&amp;#223;nahme, durch die der Flankenschutz im linken Strang der Zwieschutzweiche hergestellt wird</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="locking">
+        <xs:annotation>
+          <xs:documentation>de-DE: Verschluss
+Die Flankenschutzweiche wird in der Linkslage verschlossen. </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="remote">
+        <xs:annotation>
+          <xs:documentation>When flank protection measure is remote, the remote flank protection measure is given.
+de-DE: Fernschutz. Der Flankenschutz wird durch das n&amp;#228;chste Flankenschutzelement hergestellt. (Ersatzschutzma&amp;#223;nahme)
+                                                   </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="lockingOrRemote">
+        <xs:annotation>
+          <xs:documentation>In case of "locked or remote" the first route gets the direct flank protection by the related point position; the second route gets the indirect flank protection, e.g. given by a signal.
+
+de-DE: Verschluss/Fernschutz</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="none">
+        <xs:annotation>
+          <xs:documentation>de-DE: Verzicht
+Der Flankenschutz wird durch betriebliche Ma&amp;#223;nahmen hergestellt; technisch wird darauf verzichtet</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="BgFunctionLevelTransition">
+    <xs:annotation>
+      <xs:documentation>The function of this balise group is to order level transitions.
+de-DE: Angabe, ob es sich um einen Ank&amp;#252;ndigungs- oder Transitions-Datenpunkt handelt</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:BaliseGroupFunction">
+        <xs:sequence>
+          <xs:element name="isOfLtFunctionType" nillable="true" type="db:LtFunctionTypes"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="TrainDescriberBus">
+    <xs:annotation>
+      <xs:documentation>Bus system that carries train describer telegrams.
+de-DE: ZN Bussystem</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="maxNrSubstations" nillable="true" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>Maximum number of substations that can connect to a TrDr bus
+de-DE: Ust. max, Anzahl der maximal auf einen ZLV-Bus anschlie&amp;#223;baren Unterstationen</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="modemType" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Modem used for the Train Describer bus and not yet in the enum-list.
+de-DE: Modem, welches die Verbindung zwischen ZN Unterstation und ZLV-Bus f&amp;#252;r die Datenkommunikation herstellt. Je ZLV-Bus ist nur eine Modembauart zul&amp;#228;ssig. </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="usesModemType" type="sig:TrDrModemTypes"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="PositioningMeasurementInfo">
+    <xs:annotation>
+      <xs:documentation>Provides the reference point with respect to which the position of the balise group has been measured.
+This can be used to validate the measure.
+de-DE: Einmesspunkt</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="extraInfo" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>description and extra information of the reference location.
+E.g. 7,5 m north of catenary post x.y.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="refersToBaliseGroup" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>db:BaliseGroup</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="refersToLocation"
+            type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>generic:LocationProxy</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="TrainDescriberBusProperties">
+    <xs:annotation>
+      <xs:documentation>Properties that apply to a bus connection.
+de-DE: Zuordnung von ZLV-Bussen zur ZN Unterstation und Angabe durchzureichender Telegramme. Logisches Objekt, falls eine ZN Unterstation an mehrere ZLV-Busse angebunden wird.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element name="appliesToTrDrBus" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Reference to the TrDr-bus that is allocated to the substation.
+de-DE: Verweis auf die ID des ZLV-Busses, an den die Unterstation angebunden wird. </xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>db:TrainDescriberBus</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="appliesToTrDrSubstation" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Reference to the substation that is allocated to the TrDr-bus
+de-DE: Verweis auf die ID der ZLV-Bus-Unterstation, die an den ZLV-Bus angeschlossen wird.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>db:TrainDescriberSubstation</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="connectionNumber" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>de-DE: Anschlussnummer, das Attribut wird nur bei KUs gef&amp;#252;llt.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="relaysTelegram" type="db:RelayedTelegram">
+            <xs:annotation>
+              <xs:documentation>This substation is configured to relay telegrams of the given type received on this bus.
+de-De: durchzureichende Telegramme</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="subStationNr" nillable="true" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>Substation number on the present TrDr-bus.
+de-DE: Angabe der Unterstationsnummer auf diesem ZLV-Bus.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="RemainingShuntingRouteRelease">
+    <xs:annotation>
+      <xs:documentation>Release the remainder of a shunting route.
+de-DE: Aufloesung einer nicht angefahrenen Rangierstra&amp;#223;e bei einer wendenden Rangierfahrt &amp;#252;ber mehrere Rangierstra&amp;#223;en. </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element name="appliesToSignal" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>db:Signal</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="ZbsFixedBgFunctionTypes">
+    <xs:annotation>
+      <xs:documentation>Hinweis zum Signalbegriff bzw. der Funktion des Fachtelegramms bei Festdatenpunkten (z. B. ZBS-Ende, Ortsreferenz).</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="zbsEnd">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="location">
+        <xs:annotation>
+          <xs:documentation>de-DE: Ortung</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation>de-DE: sonstige</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="partialRouteExtremity">
+    <xs:annotation>
+      <xs:documentation>Provides a reference to a left, right or facing branch of a point.
+de-DE: Verweis auf linken, rechten Weichenschenkel oder auf Weichenspitze.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="refersToPointElement" nillable="true" type="rsmCommon:tElementWithIDref">
+        <xs:annotation>
+          <xs:documentation>Reference to a point element</xs:documentation>
+          <xs:appinfo>
+            <ObjectTypeRef>sig:MovableElement</ObjectTypeRef>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="refersToPointSide" nillable="true" type="db:PointElementSideTypes"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RouteSignalling">
+    <xs:annotation>
+      <xs:documentation>Per Route, the signal aspect that cannot be derived trivially from the interlocking functionality.
+de-DE: Je Fahrstra&amp;#223;e zu zeigende Signalisierung, die sich nicht eindeutig aus den Stellwerksfunktionen ergibt. Der Verweis auf targetAspect ist optional da es nur bei verk&amp;#252;rztem Signalabstand eine Abh&amp;#228;ngigkeit zum Signalbegriff des Zielsignals gibt.
+</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element name="appliesToRoute" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:Route</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="entryAspect" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>de-DE: Signalbegriff Einfahrsignal</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:Aspect</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="targetAspect"
+            type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>de-DE: Signalbegriff Ausfahrsignal</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:Aspect</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="SpecialGaugeTypes">
+    <xs:annotation>
+      <xs:documentation>de-DE: Lichtraumprofile</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="_1SMDR">
+        <xs:annotation>
+          <xs:documentation>1SMDR</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SBahn_80003">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="sBahn_Berlin">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GC">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation>In case 'other' is chosen, a reference drawing must be referred to.
+de-DE: sonstige; bei Auswahl des Werts 'sonstige' ist eine Profilzeichnung als Reference Drawing beizulegen. </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="EtcsTelegramLoadFile">
+    <xs:annotation>
+      <xs:documentation>Binary data file for loading into the balise data segment.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="db:EtcsProgrammingFile"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="StAndrewsCross">
+    <xs:annotation>
+      <xs:documentation>German St Andrews cross
+de-DE: Andreaskreuz</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:StAndrewsCross">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="displaysText" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Text that is displayed on a separate board informing about restrictions such as private crossing.
+de-DE: Zusatzschild zum Andreaskreuz, z. B. "Privatweg" oder "&amp;#220;bergang nur f&amp;#252;r Berechtigte".</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasDirectionArrow"
+            type="db:DirectionArrowType">
+            <xs:annotation>
+              <xs:documentation>The andreas cross is fitted with an arrow that points in the given direction.
+de-DE: Zus&amp;#228;tzlich zum Andreaskreuz ist ein Richtungspfeil als Schild vorzusehen. Entf&amp;#228;llt, sofern kein Richtungspfeil ben&amp;#246;tigt wird.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="hasElectrificationSymbol" nillable="true"
+            type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>True when the andreas cross displays a symbol warning that the railway tracks are electrified.
+de-DE: Auf dem Andreaskreuz ist ein Blitzfeil anzuordnen (true). Das Attribut entf&amp;#228;llt, sofern kein Blitzfeil ben&amp;#246;tigt wird.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="mountingInstructions" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Instructions for special mountings such as a cantilever construction.
+de-DE: Angaben zur besonderen Montage, z. B. f&amp;#252;r horizontale Befestigung am Peitschenmastausleger.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="protectiveBracket" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>The andreas cross is fitted with a protection that prevents passers-by from being caught by protruding parts of the andreas cross.
+de-De: Das Andreaskreuz ist mit einem Schutzb&amp;#252;gel auszur&amp;#252;sten (true). Das Attribut entf&amp;#228;llt, sofern kein Schutzb&amp;#252;gel ben&amp;#246;tigt wird.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="CommunicationLevelTypes">
+    <xs:annotation>
+      <xs:documentation>The kind of user of the communication channel.
+de-DE: Uebertragungsweg_Art</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="levelCrossing">
+        <xs:annotation>
+          <xs:documentation>de-DE: B&amp;#252;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="diagnostics">
+        <xs:annotation>
+          <xs:documentation>de-DE: Diagnose</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="interlocking">
+        <xs:annotation>
+          <xs:documentation>de-DE: Elektronisches Stellwerk (ESTW)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="centralOperationSystem">
+        <xs:annotation>
+          <xs:documentation>de-DE: zentrales Bediensystem (ZBS)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation>de-DE: sonstige</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="PzbDevice">
+    <xs:annotation>
+      <xs:documentation>PZB Magnet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:TpsSpotDevice"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="EtcsSignalProperties">
+    <xs:annotation>
+      <xs:documentation>DB class for ETCS signal properties</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:EtcsSignalProperties">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="groupId" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Used for grouping signals to facilitate communicating to the RBC.
+de-DE: Zuordnung zu einer Gruppe, um im Falle einer Rechnerst&amp;#246;rung im ESTW dem RBC die gest&amp;#246;rten Elemente einfach &amp;#252;bertragen zu k&amp;#246;nnen. Siehe Ril 819.1344 4 (36). Die Angabe entf&amp;#228;llt ggf. zu einem sp&amp;#228;teren Zeitpunkt.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasEpsProperties"
+            type="sig:EpsSignalProperties">
+            <xs:annotation>
+              <xs:documentation>This signal has a set of properties defining the Encounter Prohibition System.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="shortestOverlap200" type="rsmCommon:Length">
+            <xs:annotation>
+              <xs:documentation>Shortest overlap in the category 200m and upwards.
+Only given when the interlocking can't dynamically provide the overlap length to the RBC.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="shortestOverlap50" type="rsmCommon:Length">
+            <xs:annotation>
+              <xs:documentation>The shortest overlap in the category less than 50 metres.
+Only given when the interlocking can't dynamically provide the overlap length to the RBC.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="shortestOverlap50_200"
+            type="rsmCommon:Length">
+            <xs:annotation>
+              <xs:documentation>The shortest overlap in the category 50 to less than 200m.
+Only given when the interlocking can't dynamically provide the overlap length to the RBC.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="subGroupId" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Used to sub-group signals.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="TrainDescriberSubstation">
+    <xs:annotation>
+      <xs:documentation>Node on the Train Describer bus.
+de-DE: ZN-Unterstation</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasDrawingLocation" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Spot location; paper coordinates for the purpose of plotting a scheme plan - not a geographical position.
+de-DE: Positionierung der ZN-Unterstation(en) auf dem ZLV-Bus-&amp;#220;bersichtsplan.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:SpotLocation</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="hasStationAddress" nillable="true" type="db:TrDrStationAddress">
+            <xs:annotation>
+              <xs:documentation>Properties of the station to which this TrDr Substation is allocated.
+de-DE: Parameter der verwalteten Oertlichkeiten, zB. Bahnhoefe.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="isAllocatedToTrDrSystem" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Reference to the train describer system to which this substation is allocated.
+de-DE: Verweis auf zugeh&amp;#246;rigen ZN-System</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:TrainDescriberSystem</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="stationId" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Station identifier, disambiguates the substation's name when there's a risk of duplicate station address numbers.
+de-DE: Bf_Kennung, Angabe der Bahnhofskennung. In BZ-Bereichen kann die Vergabe von gleichen Bahnhofsadressen nicht ausgeschlossen werden. Ganzzahl im Bereich [0..4]</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="SignalFunctionTypes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="entry">
+        <xs:annotation>
+          <xs:documentation>de-DE: Einfahrsignal</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="exit">
+        <xs:annotation>
+          <xs:documentation>de-DE: Ausfahrsignal</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="intermediate">
+        <xs:annotation>
+          <xs:documentation>de-DE: Zwischensignal</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="advance">
+        <xs:annotation>
+          <xs:documentation>de-DE: Nachruecksignal</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="block">
+        <xs:annotation>
+          <xs:documentation>de-DE: Blocksignal</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="protection">
+        <xs:annotation>
+          <xs:documentation>de-DE: Deckungssignal</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="trainProtection">
+        <xs:annotation>
+          <xs:documentation>de-DE: Zugdeckungssignal</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="groupMain">
+        <xs:annotation>
+          <xs:documentation>de-DE: Gruppenausfahrsignal</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="groupIntermediate">
+        <xs:annotation>
+          <xs:documentation>de-DE: Gruppenzwischensignal</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="groupMainAndIntermediate">
+        <xs:annotation>
+          <xs:documentation>de-DE: Gruppenausfahr- und Gruppenzwischensignal</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="standAloneIndicator">
+        <xs:annotation>
+          <xs:documentation>de-DE: Alleinstehendes Zusatzsignal</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="trainDestinationOnlySignal">
+        <xs:annotation>
+          <xs:documentation>de-DE: Zug_Ziel_Signal</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="intermediateExitSignal">
+        <xs:annotation>
+          <xs:documentation>de-DE: Ausfahrzwischensignal</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="entryAndExit">
+        <xs:annotation>
+          <xs:documentation>de-DE: Einfahr und Ausfahrsignal</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="entryAndBlock">
+        <xs:annotation>
+          <xs:documentation>de-DE: Einfahr Block Signal</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="further">
+        <xs:annotation>
+          <xs:documentation>de-DE: Andere Signalfunktionen, die nicht explizit aufgef&amp;#252;hrt werden m&amp;#252;ssen.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="lxProtectionSignal">
+        <xs:annotation>
+          <xs:documentation>de-DE: B&amp;#220;-&amp;#220;berwachungssignal</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="distantOrRepeater">
+        <xs:annotation>
+          <xs:documentation>de-DE: Vorsignal oder Vorsignalwiederholer</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ZbsPartialRouteExtremity">
+    <xs:annotation>
+      <xs:documentation>Extremity of a partial route body as used by ZBS.
+de: ZBS-Fahrwegteilbegrenzung</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="isAssociatedWithBaliseGroup"
+            type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Partial route body is limited by balise group
+de-DE: Fahrwegteil wird begrenzt durch einen Datenpunkt</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:EtcsBaliseGroup</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="isAssociatedWithPointElement"
+            type="db:partialRouteExtremity"/>
+          <xs:element maxOccurs="1" minOccurs="0" name="isAssociatedWithSignal"
+            type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Partial route body is limited by signal
+de-DE: Fahrwegteil wird begrenzt durch einen Signal</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:Signal</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="CommunicationTechnologyTypes">
+    <xs:annotation>
+      <xs:documentation>Types of communication technology
+de-DE: Technik_Art. Technische Auspr&amp;#228;gung der physikalischen Schnittstelle</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="analogueFsk">
+        <xs:annotation>
+          <xs:documentation>de-DE: analog FSK</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ethernet">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="g703">
+        <xs:annotation>
+          <xs:documentation>ITU-T G.703</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="cuSupplierProprietary">
+        <xs:annotation>
+          <xs:documentation>de-DE: SBI intern Kupferkabel.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="focSupplierProprietary">
+        <xs:annotation>
+          <xs:documentation>Supplier-proprietary Fibre optical cable
+de-DE: SBI-intern LWL-Faser</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation>de-DE: sonstige</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="LevelCrossingLocalOperationUiElement">
+    <xs:complexContent>
+      <xs:extension base="sig:LevelCrossingLocalOperationUiElement">
+        <xs:sequence>
+          <xs:element name="hasFunctionType" nillable="true" type="db:LevelCrossingUiFunctionTypes"
+          />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="TiltingTransitionMarker">
+    <xs:annotation>
+      <xs:documentation>Marks a transition into  an area fitted for tilting trains. This deploys Eurobalises as datapoints.
+de-DE: Einstieg in Geschwindigkeits&amp;#252;berwachung f&amp;#252;r Neigetechnik (GNT)</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:TpTransitionMarker"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="PredefinedEtcsTelegramSet">
+    <xs:annotation>
+      <xs:documentation>A predefined set of ETCS telegrams that a balise group sends in a given context such as a signal aspect.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element name="appliesToBaliseGroup" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>in case the individual balises have not yet been planned, one may need to associate the ETCS telegram with a balise group.
+</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:EtcsBaliseGroup</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="appliesToEtcsTelegram"
+            type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Lists a number of ETCS telegrams.
+In early design, this may be unknown so one may give 0 telegrams. The list can be filled later.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:EtcsTelegram</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="index" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>The index of the predefined telegram set that the engineer picks when designing the balise group contents.
+This number is found in the telegram specification.
+de-DE:
+Level 1 LS (ESG): laufende Nummer Telegrammspezifikation gem&amp;#228;&amp;#223; Ril 819.1348 Anhang 2
+Level 2: Datenpunkttyp
+Not used for transition telegram sets.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="relatesToUnusedPartialRouteBody"
+            type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Part of the route body that the train will not travel.
+de-DE: nicht-befahrener Fahrwegteil
+</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>db:ZbsPartialRouteBody</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="relatesToUsedPartialRouteBody"
+            type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Part of the route body that the train will travel.
+de-DE: befahrener Fahrwegteil</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>db:ZbsPartialRouteBody</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="LevelCrossingUiFunctionTypes">
+    <xs:annotation>
+      <xs:documentation>List of function types that a switch or button for a level crossing can fulfil.
+de-DE: </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="deactivationSwitch">
+        <xs:annotation>
+          <xs:documentation>de-DE: AT Ausschalttaste</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="activationSwitch">
+        <xs:annotation>
+          <xs:documentation>de-DE: ET Einschalttaste</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="auxiliaryDeactivationSwitch">
+        <xs:annotation>
+          <xs:documentation>de-DE: HAT Hilfsausschalttaste</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="auxiliaryActivationSwitch">
+        <xs:annotation>
+          <xs:documentation>de-DE: HET Hilfseinschalttaste</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="shuntingSwitch">
+        <xs:annotation>
+          <xs:documentation>de-DE: RS Rangierschalter</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="shuntingButton1">
+        <xs:annotation>
+          <xs:documentation>Shunting button variant 1: first key press on, second key press off.
+
+de-DE: RT ein aus</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="shuntingButton2">
+        <xs:annotation>
+          <xs:documentation>Shunting button variant 2: shunting switch on and shunting switch off.
+de-DE: RT ein RT aus
+</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="neutralisationSwitch">
+        <xs:annotation>
+          <xs:documentation>de-DE: UT Unwirksamheitstaste, z.B. f&amp;#252;r B&amp;#220; Kontakt.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="TpsToPointRelation">
+    <xs:annotation>
+      <xs:documentation>The TPS speed checking system protects a given point.
+de-DE: PZB Element Bezugspunkt Weiche.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element name="refersToMovableElement" nillable="true"
+            type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:MovableElement</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="refersToSpeedCheckingSystem" nillable="true"
+            type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:TpsDataTransmissionSystem</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="TrainDescriberTelegram">
+    <xs:annotation>
+      <xs:documentation>The telegrams of the given type shall be sent for every shunting/main route
+de-DE: F&amp;#252;r alle Fahrstra&amp;#223;en und diesen ZN soll das Telegramm 84/85 gesendet werden. </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element name="isGeneratedByTrDrSystem" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:TrainDescriberSystem</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="isOfTelegramType" nillable="true" type="db:TrDrTelegramTypes"/>
+          <xs:element maxOccurs="1" minOccurs="0" name="relayedOnTrDrBus" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The telegram may need to be relayed onto this TrDr bus system.
+de-DE: Verweis auf den ZLV-Bus, auf den das Telegramm durchgereicht wird.
+Der Verweis wird gef&amp;#252;llt, wenn das Telegramm durchzureichen ist. </xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>db:TrainDescriberBus</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="renounce" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>Renounce sending the telegram except in case of the HaGT operation.
+de-DE: Verzicht auf Sendung des Telegramms. Bei Bedienung der HaGT wird das Telegramm unabh&amp;#228;ngig von der Projektierung des Verzichts gesendet.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="zbsTypes">
+    <xs:annotation>
+      <xs:documentation>de-DE: Merkmal ZBS-Typ</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="_null">
+        <xs:annotation>
+          <xs:documentation>Null</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="rbe">
+        <xs:annotation>
+          <xs:documentation>RBE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="rs">
+        <xs:annotation>
+          <xs:documentation>RS</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="rsp">
+        <xs:annotation>
+          <xs:documentation>RSp</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="tla">
+        <xs:annotation>
+          <xs:documentation>TLa</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="za">
+        <xs:annotation>
+          <xs:documentation>ZA</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zbbp">
+        <xs:annotation>
+          <xs:documentation>ZBbP</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zbp">
+        <xs:annotation>
+          <xs:documentation>ZBP</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zf">
+        <xs:annotation>
+          <xs:documentation>ZF</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zh">
+        <xs:annotation>
+          <xs:documentation>ZH</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zhf">
+        <xs:annotation>
+          <xs:documentation>ZHF</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zlih">
+        <xs:annotation>
+          <xs:documentation>ZLiH</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zliv">
+        <xs:annotation>
+          <xs:documentation>ZLiH</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zo">
+        <xs:annotation>
+          <xs:documentation>ZO</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zre">
+        <xs:annotation>
+          <xs:documentation>ZRE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zrh">
+        <xs:annotation>
+          <xs:documentation>ZRH</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zrhf">
+        <xs:annotation>
+          <xs:documentation>ZRHF</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zrla">
+        <xs:annotation>
+          <xs:documentation>ZRLa</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zrv">
+        <xs:annotation>
+          <xs:documentation>ZRV</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zue">
+        <xs:annotation>
+          <xs:documentation>Z&amp;#220;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zv">
+        <xs:annotation>
+          <xs:documentation>ZV</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation>de-DE: sonstige</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PzbSpeedCheckingSystemTypes">
+    <xs:annotation>
+      <xs:documentation>Defines the order in which magnets are activated / deactivated.
+de-DE: Angabe des Anordnungsfalles des Pr&amp;#252;f- und der Pr&amp;#252;fmagneten einer G&amp;#220;.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="activation_deactivation">
+        <xs:annotation>
+          <xs:documentation>EA: In Fahrtrichtung zuerst Einschaltmagnet (GSE), dann Wirkmagnet, dann Ausschaltmagnet (GSA)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="deactivation_activation">
+        <xs:annotation>
+          <xs:documentation>AE: in Fahrtrichtung zuerst Ausschaltmagnet (GSA) dann Einschaltmagnet (GSE), dann Wirkmagnet</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="Designation">
+    <xs:annotation>
+      <xs:documentation>Designation of DB track assets.
+zB. Weiche 5 in P-Hausen
+&lt;ul>
+ &lt;li>index (Kennzahl) = 60&lt;/li>
+&lt;/ul>
+&lt;ul>
+ &lt;li>localName = 5&lt;/li>
+ &lt;li>shortNameLayoutPlan = W5&lt;/li>
+ &lt;li>longNameLayoutPlan = 60W5&lt;/li>
+ &lt;li>nameInTable = 60W5 &lt;/li>
+ &lt;li>nameOnSite = 60W5&lt;/li>
+&lt;/ul></xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:Designation">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="index" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>de-DE: Kennzahl</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="localName" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>de-DE: &amp;#214;rtlicher_Elementbezeichner</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="longNameLayoutPlan" nillable="true"
+            type="xs:string">
+            <xs:annotation>
+              <xs:documentation>de-DE: Bezeichnung_Lageplan_Lang. Kurze Bezeichnung eines bedienbaren Elements im Lageplan.
+Die Bezeichnung besteht i. d. R. ausschlie&amp;#223;lich aus dem &amp;#214;rtlichen Elementbezeichner (siehe Bildung der Bezeichnungen).</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="nameInTable" nillable="true"
+            type="xs:string">
+            <xs:annotation>
+              <xs:documentation>de-DE: Bezeichnung_Tabelle</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="nameOnSite" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>de-DE: Bezeichnung_Aussenanlage</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="shortNameLayoutPlan" nillable="true"
+            type="xs:string">
+            <xs:annotation>
+              <xs:documentation>de-DE: Bezeichnung_Lageplan_Kurz
+Kurze Bezeichnung eines bedienbaren Elements im Lageplan.
+Die Bezeichnung besteht i. d. R. ausschlie&amp;#223;lich aus dem &amp;#214;rtlichen Elementbezeichner.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="ShuntingRouteTypes">
+    <xs:annotation>
+      <xs:documentation>de-DE: Rangierfahrstrassentypen</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="rr">
+        <xs:annotation>
+          <xs:documentation>de-DE: RangierRegel</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ru">
+        <xs:annotation>
+          <xs:documentation>de-DE: RangierUmfahr</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="rt">
+        <xs:annotation>
+          <xs:documentation>de-DE: RangierTeil</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="rtu">
+        <xs:annotation>
+          <xs:documentation>de-DE: RangierTeilUmfahr</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PzbFrequencyTypes">
+    <xs:annotation>
+      <xs:documentation>Frequency in Hertz of the PZB magnet.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Hz_1000">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Hz_2000">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Hz_1000_2000">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Hz_500">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="BaliseGroupFunctionL2">
+    <xs:annotation>
+      <xs:documentation>Balise group function for level 2
+</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:BaliseGroupFunction">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="bgTypeL2Number" nillable="true"
+            type="xs:int">
+            <xs:annotation>
+              <xs:documentation>The balise group type as defined in engineering rule set 819.1344. This links to the packets that carry the balise message.
+</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SelfSupervisedLevelCrossingSystem">
+    <xs:annotation>
+      <xs:documentation>de-DE: F&amp;#252;-B&amp;#220;, Fern&amp;#252;berwachter Bahn&amp;#252;bergang</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:SelfSupervisedLevelCrossing">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="activationMethod" nillable="true"
+            type="xs:int">
+            <xs:annotation>
+              <xs:documentation>de-DE: F&amp;#220;-Schaltfall
+Schaltfall 2
+Schaltfall 12</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="automaticAuxiliaryActivation"
+            nillable="true" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>de-DE: automatische Hilfseinschaltung</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="connectionLostIndicator" nillable="true"
+            type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>A hint is placed on the TMS display indicating that connection to the level crossing is lost.
+de-DE: st&amp;#246;rhaltmerkhinweis</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="hasTimeOut" nillable="true" type="rsmCommon:Duration">
+            <xs:annotation>
+              <xs:documentation>Timer starts when train is announced and reports time-out after the given duration.
+de-DE: Zeit&amp;#252;berschreitungsmeldung.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="malfunctionSignalClosure" nillable="true"
+            type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>Tech note that an extra signal must be closed when the level crossing safety level is deemed insufficient.
+de-DE: st&amp;#246;rhaltHaltfall. Haltfall des vor einem F&amp;#220;-B&amp;#220; liegenden Signals, wenn dieser gest&amp;#246;rt ist.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="reportsBatteryStatus" nillable="true"
+            type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>Has a battery that can report health status.
+de-DE: Ladefern&amp;#252;berwachungimpuls</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="CommunicationRelation">
+    <xs:annotation>
+      <xs:documentation>Informs about the communication relation between two nodes.
+The communication technology can be described in the inherited description property.
+de-DE: Physikalischer/logischer &amp;#220;bertragungsweg zwischen zwei Objekten f&amp;#252;r eine erforderliche Informations&amp;#252;bertragung. Die Angabe erfolgt, wenn der &amp;#220;bertragungsweg vom Betreiber beigestellt wird oder die Informations&amp;#252;bertragung vom Lieferanten zus&amp;#228;tzlich zu schalten ist.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasDescriptionForEndPointA"
+            type="generic:Attachment">
+            <xs:annotation>
+              <xs:documentation>Description of the communication configuration at end point A.
+de-DE: Anhang mit Beschreibung zum Informationsabgriff.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasDescriptionForEndPointB"
+            type="generic:Attachment">
+            <xs:annotation>
+              <xs:documentation>Description of the communication configuration at end point B.
+de-DE: Anhang mit Beschreibung zum Informationsabgriff.
+</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="isPartOfCommunicationLevel" nillable="true"
+            type="db:CommunicationLevelTypes">
+            <xs:annotation>
+              <xs:documentation>de-DE: Art des Uebertragungsweges</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="needsBandwidth" type="db:BandwidthTypes">
+            <xs:annotation>
+              <xs:documentation>de-DE: die noetige Bandbreite.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="nodeA" nillable="true" type="db:CommunicationNode">
+            <xs:annotation>
+              <xs:documentation>Node A of a communication relation.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="nodeB" nillable="true" type="db:CommunicationNode">
+            <xs:annotation>
+              <xs:documentation>Terminal B of a communication relation.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="usesCommunicationMedium"
+            type="db:CommunicationMediumTypes">
+            <xs:annotation>
+              <xs:documentation>Type of medium.
+de-DE: physikalischer Kommunikationstr&amp;#228;ger</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="usesCommunicationNetworkType"
+            type="db:CommunicationNetworkTypes"/>
+          <xs:element name="usesCommunicationTechnology" nillable="true"
+            type="db:CommunicationTechnologyTypes"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LevelCrossingSystem">
+    <xs:annotation>
+      <xs:documentation>DB level crossing system.
+de-DE: B&amp;#220;-Anlage, Attribute Technology Type und Protection Type nicht ausf&amp;#252;llen weil die Pflichtangaben der Enumliste angegeben werden. </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:LevelCrossingSystem">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="isOfLxProtectionType"
+            type="db:LevelCrossingProtectionTypes">
+            <xs:annotation>
+              <xs:documentation>de-DE: Ersetzt das Textattribut protectionType.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="isOfLxTechnologyType"
+            type="db:LevelCrossingTechnologyTypes">
+            <xs:annotation>
+              <xs:documentation>de-DE: Ersetzt das Textattribut technologyType.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LocalOperationUiIndicator">
+    <xs:annotation>
+      <xs:documentation>de-DE: Melder</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:LocalOperationUiIndicator">
+        <xs:sequence>
+          <xs:element name="hasFunctionType" nillable="true" type="db:IndicatorFunctionTypes">
+            <xs:annotation>
+              <xs:documentation>The function of the indicator lamp.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="TriggerAssignment">
+    <xs:annotation>
+      <xs:documentation>DB specific class.
+de-DE: Schaltmittelzuordnung. </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:TriggerAssignment">
+        <xs:sequence>
+          <xs:element name="triggersActionOfType" nillable="true" type="db:TriggeredActionTypes">
+            <xs:annotation>
+              <xs:documentation>de-DE: Schaltmittelfunktion; dient zur markanten Kennzeichnung der Funktionalit&amp;#228;t des Schaltmittels. </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="MainSignalProtectedLevelCrossing">
+    <xs:annotation>
+      <xs:documentation>de-DE: B&amp;#220; mit deckendem Signal (Haupt-/LS-Signal) </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:MainSignalProtectedLevelCrossing">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasEmulationPlug"
+            type="db:LevelCrossingOperationalPlugTypes">
+            <xs:annotation>
+              <xs:documentation>A plug that emulates the behaviour of the level crossing.
+DE: Hp-Ersatzstecker</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasShortTrainCircuitry" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>The level crossing is kept closed even when a short train has stopped at the platform and cleared the level crossing.
+</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="reportsBatteryState" nillable="true"
+            type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>Has a battery that can report health status.
+de-DE: Ladefern&amp;#252;berwachungimpuls</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="LevelCrossingProtectionTypes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="callBarrierAndSpeedReduction">
+        <xs:annotation>
+          <xs:documentation>de-DE: A und Lf</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="callBarrierAndVoiceCommunication">
+        <xs:annotation>
+          <xs:documentation>de-DE: A und Sprechverbindung</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="lightSignal">
+        <xs:annotation>
+          <xs:documentation>de-DE: Lz</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="lightSignalAndHalfBarrier">
+        <xs:annotation>
+          <xs:documentation>de-DE: LzH</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="pathWithBarrierLzH_2F">
+        <xs:annotation>
+          <xs:documentation>Light signal and half barrier and two separate foot/cycle paths with own barrier.
+
+de-DE: LzH_2F</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="pathWithBarrierLzH_F">
+        <xs:annotation>
+          <xs:documentation>Light signal and half barrier and separate footpath/cycle path with own barrier.
+
+de-DE: LzH_F</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="lightSignalWithHalfBarriers">
+        <xs:annotation>
+          <xs:documentation>Light signal and two half barriers.
+
+de-DE: LzH_F</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="lightSignalWithFullBarrier">
+        <xs:annotation>
+          <xs:documentation>Light signal and full barrier.
+
+de-DE: LzV</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="whistlePost">
+        <xs:annotation>
+          <xs:documentation>de-DE: P</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="whistlePostAndSpeedReduction">
+        <xs:annotation>
+          <xs:documentation>de-DE: P und Lf</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="keyDependent">
+        <xs:annotation>
+          <xs:documentation>de-DE: schl&amp;#252;sselabh&amp;#228;ngig</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation>de-DE: sonstige</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="overview">
+        <xs:annotation>
+          <xs:documentation>de-DE: Ue</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="overviewAndWhistlePost">
+        <xs:annotation>
+          <xs:documentation>de-DE: Ue und P</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="signallingEntities" type="db:SignallingEntities"/>
+  <xs:complexType name="SignallingEntities">
+    <xs:complexContent>
+      <xs:extension base="generic:SignallingEntities">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsBaliseLabelingInformation" type="db:BaliseLabellingInformation"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsCommunicationRelation" type="db:CommunicationRelation"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsDualFlankProtection" type="db:DualFlankProtection"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsEtcsApplicationSystem" type="db:ApplicationSystem"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsEtcsProgrammingFileSet" type="db:EtcsProgrammingFileSet"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsPzbRouteRelation" type="db:PzbRouteRelation"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsRemainingShuntingRouteRelease" type="db:RemainingShuntingRouteRelease"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsRouteSignalling" type="db:RouteSignalling"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsShuntingTargetAuthDep" type="db:ShuntingTargetAuthorityDependent"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsTpsToPointRelation" type="db:TpsToPointRelation"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsTrainDescriberAcoustic" type="sig:TrainDescriberAcoustic"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsTrainDescriberBus" type="db:TrainDescriberBus"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsTrainDescriberBusProperties" type="db:TrainDescriberBusProperties"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsTrainDescriberSteppingCriteria" type="sig:TrainDescriberSteppingCriterion"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsTrainDescriberSubstation" type="db:TrainDescriberSubstation"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsZbsPartialRouteBody" type="db:ZbsPartialRouteBody"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsZbsPartialRouteExtremity" type="db:ZbsPartialRouteExtremity"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="PredefinedEtcsTelegramSetTransition">
+    <xs:annotation>
+      <xs:documentation>Set of predefined telegrams for a transition.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="db:PredefinedEtcsTelegramSet">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="definesParameter"
+            type="db:SpecificParameter">
+            <xs:annotation>
+              <xs:documentation>The telegram set defines a set of parameters for packet N.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="1" name="definesVariables" nillable="true"
+            type="sig:LtProperties"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Attachment">
+    <xs:annotation>
+      <xs:documentation>Attachment, adorned with document type information.
+de-DE: Anhang</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:Attachment">
+        <xs:sequence>
+          <xs:element name="isOfDocumentType" nillable="true" type="db:DocumentTypes"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Signal">
+    <xs:annotation>
+      <xs:documentation>DB Signal.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:Signal">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="isValidInArea" type="db:AreaValidityTypes">
+            <xs:annotation>
+              <xs:documentation>de-DE: Geltungsbereich</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="FileProperties">
+    <xs:complexContent>
+      <xs:extension base="generic:BaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="checksum" nillable="true" type="xs:string"/>
+          <xs:element maxOccurs="1" minOccurs="1" name="checksumType" nillable="true"
+            type="xs:string">
+            <xs:annotation>
+              <xs:documentation>e.g.
+MD4
+MD5
+SHA-1
+SHA-256</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="deliveryVersion" nillable="true" type="xs:string"/>
+          <xs:element name="hasDeliveryDate" nillable="true" type="rsmCommon:DateTimeDescription">
+            <xs:annotation>
+              <xs:documentation>de-DE: Lieferdatum</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ApplicationSystem">
+    <xs:annotation>
+      <xs:documentation>Information for labelling the balise group.
+de-DE: Auf dem Balisenschild angegebenes Hauptanwendungssystem des Datenpunkts (z. B. GNT, ETCS)</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element name="isOfApplicationSystemType" nillable="true" type="db:ApplicationSystemTypes"/>
+          <xs:element maxOccurs="1" minOccurs="0" name="isPartOfBaliseLabelInfo" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>db:BaliseLabellingInformation</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="LensDiffuserOrientationTypes">
+    <xs:annotation>
+      <xs:documentation>Diffuser orientations.
+de-DE: Bezeichnung der Stellung der Streuscheibe eines Schirm-Signals, die der Signalsichtbestimmung zugrunde liegt. DB-Regelwerk Planungsdaten: Signaltabelle 1, Zeile 9 (zweiter Eintrag)
+</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="HG1">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="HG1_gw">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="HG2">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="HG2_gw">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="HG3">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="HG3_gw">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="HG4">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="HG4_gw">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="HL">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="HR">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="OL">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="OR">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="VL">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="VR">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="LightSignalTyped">
+    <xs:annotation>
+      <xs:documentation>de-DE: Lichtsignal mit Typangabe.
+DE &lt;i>may &lt;/i>wish to associate a signal system with the signal.
+if the signal system type isn't needed, use the EULYNX DP light signal </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:LightSignal">
+        <xs:sequence>
+          <xs:element name="isOfSignalSystemType" nillable="true" type="db:SignalSystemTypes"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SignalFunction">
+    <xs:annotation>
+      <xs:documentation>Signal function as defined by DB</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:SignalFunction">
+        <xs:sequence>
+          <xs:element name="isOfSignalFunctionType" nillable="true" type="db:SignalFunctionTypes"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="TrDrTelegramSelective">
+    <xs:annotation>
+      <xs:documentation>The telegrams of the given type shall be sent, for the given shunting/main route.
+de-DE: F&amp;#252;r die gegebene Fahrstra&amp;#223;en und diesen ZN soll das Telegramm 84/85 gesendet werden</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="db:TrainDescriberTelegram">
+        <xs:sequence>
+          <xs:element name="appliesToRoute" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Informs that the TrDr system shall send a telegram of the given type in conjunction with the given route. The relaying of telegram 84/85 apply to either main or shunting routes.
+de-DE: F&amp;#252;r diese ZN und Fahrstra&amp;#223;e, soll das Telegramm 84/85 gesendet werden.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:Route</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LensDiffuserWithOrientation">
+    <xs:annotation>
+      <xs:documentation>de-DE: Stellung des Streuscheibe eines Schirm-Signals.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="db:LensDiffuser">
+        <xs:sequence>
+          <xs:element name="isOfOrientationType" nillable="true"
+            type="db:LensDiffuserOrientationTypes"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="CommunicationNode">
+    <xs:annotation>
+      <xs:documentation>This is a fa&amp;#231;ade to the nodes in the communication network. Also known as communication participant. </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="0" name="appliesToControlledTrackAsset"
+        type="rsmCommon:tElementWithIDref">
+        <xs:annotation>
+          <xs:appinfo>
+            <ObjectTypeRef>sig:ControlledTrackAsset</ObjectTypeRef>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element maxOccurs="1" minOccurs="0" name="appliesToController"
+        type="rsmCommon:tElementWithIDref">
+        <xs:annotation>
+          <xs:appinfo>
+            <ObjectTypeRef>sig:Controller</ObjectTypeRef>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element maxOccurs="1" minOccurs="0" name="appliesToHousing"
+        type="rsmCommon:tElementWithIDref">
+        <xs:annotation>
+          <xs:appinfo>
+            <ObjectTypeRef>sig:Housing</ObjectTypeRef>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ZbsArea">
+    <xs:annotation>
+      <xs:documentation>Area equipped with ATP specific to Berlin S-Bahn.
+de-DE: Zugbeeinflussungssystem Berlin S-Bahn.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:TpArea"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="PlatformEdge">
+    <xs:complexContent>
+      <xs:extension base="sig:PlatformEdge">
+        <xs:sequence>
+          <xs:element name="hasPredefinedHeight" nillable="true" type="db:PlatformHeights">
+            <xs:annotation>
+              <xs:documentation>de-DE: Pflichtangabe.
+Im Falle von Sonderh&amp;#246;he ist "hasPredefinedHeight=other, hasHeight=&lt;i>xx&lt;/i> (cm)" vor zu geben.
+</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="MainRoute">
+    <xs:annotation>
+      <xs:documentation>de-DE: Zugfahrstra&amp;#223;e</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:MainRoute">
+        <xs:sequence>
+          <xs:element name="isOfMainRouteType" nillable="true" type="db:MainRouteTypes"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="SignalTypeTypes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="main">
+        <xs:annotation>
+          <xs:documentation>de-DE: Hauptsignal</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="mainShunting">
+        <xs:annotation>
+          <xs:documentation>de-DE: Hauptsperrsignal</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="multiSection">
+        <xs:annotation>
+          <xs:documentation>de-DE: Mehrabschnittssignal</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="multiSectionShunting">
+        <xs:annotation>
+          <xs:documentation>de-DE: Mehrabschnittssperrsignal</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="shunting">
+        <xs:annotation>
+          <xs:documentation>de-DE: Sperrsignal</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="distant">
+        <xs:annotation>
+          <xs:documentation>de-DE: Vorsignal</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="repeater">
+        <xs:annotation>
+          <xs:documentation>de-DE: Vorsignalwiederholer</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="trainProtection">
+        <xs:annotation>
+          <xs:documentation>de-DE: Zugdeckungssignal</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="FictitiousSignal">
+    <xs:annotation>
+      <xs:documentation>de-DE: Fiktive Signale sind als Start- oder Zielpunkte in den Zug- oder Rangierstra&amp;#223;entabellen erkennbar. Ihre Funktion ist nicht unmittelbar dargestellt, sie ergibt sich aus der Verwendung.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:FictitiousSignal">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="1" name="hasFunction" nillable="true"
+            type="db:FictitiousSignalFunctionTypes"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Parameter">
+    <xs:annotation>
+      <xs:documentation>Parameter for selecting a telegram by index during the planning process. E.g. big metal mass.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:BaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="description" nillable="true" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>the meaning of the parameter</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="name" nillable="true" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>de-DE: Parametername</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="value" nillable="true" type="xs:int"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LocalOperatingArea">
+    <xs:annotation>
+      <xs:documentation>de-DE: Nahstellbereich</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:LocalOperatingArea">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="hasNbrFunctionality"
+            type="db:NbrFunctionalityTypes">
+            <xs:annotation>
+              <xs:documentation>Functionality that can apply to local operating zones of type NB-R &lt;i>only&lt;/i>.
+de-DE: NR-R Funktionen </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="isOfLocalControlType" nillable="true" type="db:LocalControlTypes">
+            <xs:annotation>
+              <xs:documentation>The area allows this subset of control possibilities.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ShuntingTargetAuthorityDependent">
+    <xs:annotation>
+      <xs:documentation>A shunting route towards the referenced exit signal is allowed only when the referenced block is set in direction of the open line.
+de-DE: Eine Rangierstra&amp;#223;e mit diesem Zielsignal ist nur einstellbar, wenn die Erlaubnis des Streckenblocks in Richtung Strecke zeigt. Abhaengigkeit einer auf ein Signal zufuehrenden Rangierstra&amp;#223;e von der Stellung der Erlaubnis einer Block Anlage. </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element name="appliesToSignal" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>db:Signal</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="refersToBlockElement" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:BlockElement</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaliseGroupFunctionTilting">
+    <xs:annotation>
+      <xs:documentation>This balise group function concerns tilting trains.
+de-DE: Neigetechnik gem&amp;#228;&amp;#223; Ril 819.1330</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:BaliseGroupFunction">
+        <xs:sequence>
+          <xs:element name="isOfTiltingFunctionType" nillable="true"
+            type="db:BgGroupTiltingFunctionTypes">
+            <xs:annotation>
+              <xs:documentation>The balise group type as specified in Ril 819.1330</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="FictitiousSignalFunctionTypes">
+    <xs:annotation>
+      <xs:documentation>The uses of a fictitious signal.
+de-DE: Funktion (Verwendungsm&amp;#246;glichkeit) eines fiktiven Signals.
+</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="entryInterlockingControlArea">
+        <xs:annotation>
+          <xs:documentation>de-DE: FAP Start
+</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="exitInterlockingControlArea">
+        <xs:annotation>
+          <xs:documentation>de-DE: FAP Ziel</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="shuntingEntryOrExit">
+        <xs:annotation>
+          <xs:documentation>de-DE: Rangierfahrstart/-ziel ohne Signal</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="shuntingSidingEntry">
+        <xs:annotation>
+          <xs:documentation>de-DE: Start Zugfahrt Awanst</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="shuntingSidingExit">
+        <xs:annotation>
+          <xs:documentation>de-DE: Ziel Zugfahrt Awanst</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="trainEntryIntermediatePoint">
+        <xs:annotation>
+          <xs:documentation>de-DE: Start Zugfahrt Mittelweiche</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="trainEntryWithoutSignal">
+        <xs:annotation>
+          <xs:documentation>de-DE: Start Zugfahrt ohne Signal</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="trainExitWithoutSignal">
+        <xs:annotation>
+          <xs:documentation>de-DE: Ziel Zugfahrt ohne Signal</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="trainExitOpenLine">
+        <xs:annotation>
+          <xs:documentation>de-DE: Ziel Zugfahrt Strecke</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation>de-DE: sonstige</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TriggeredActionTypes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="approachIndicator">
+        <xs:annotation>
+          <xs:documentation>de-DE: ARM, Anr&amp;#252;ckmelder</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="toRefugeSiding">
+        <xs:annotation>
+          <xs:documentation>de-DE: Awanst, Ausweichanschlussstelle.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="levelCrossingActivation">
+        <xs:annotation>
+          <xs:documentation>de-DE: EIN_BUE, Einschaltung B&amp;#220;.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="signalClosing">
+        <xs:annotation>
+          <xs:documentation>de-DE: Signalhaltfall</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="arsTrigger">
+        <xs:annotation>
+          <xs:documentation>Automatic Route Setting
+de-DE: Zuglenk (ZL) Anstoss</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation>de-DE: sonstige.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ZbsLinkingTypes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="normal">
+        <xs:annotation>
+          <xs:documentation>Normal linking.
+de-DE: Grundverkettung</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="auxiliary">
+        <xs:annotation>
+          <xs:documentation>Auxiliary linking if normal linking is insufficient.
+de-DE: Hilfsverkettung</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="AirgapDataFile">
+    <xs:annotation>
+      <xs:documentation>Binary dataset as sent over airgap from balise to the train.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="db:BinaryDataFile">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasAuxiliaryDataFile"
+            type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The balise can send meta-data for consistency testing.
+Siemens balises may send such meta-data.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>db:AirgapDataFile</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="implementsEtcsTelegram"
+            type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The data file is the binary representation of this telegram.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:EtcsTelegram</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="implementsPredefinedEtcsTelegramSet" nillable="true"
+            type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>db:PredefinedEtcsTelegramSet</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="isSentByEtcsBalise" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:EtcsBalise</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ZbsBaliseGroup">
+    <xs:annotation>
+      <xs:documentation>Balise group is used in the context Berlin S-Bahn.
+ de-DE: Zugbeeinflussung Berliner S-Bahn (ZBS).
+</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:EtcsBaliseGroupProperties"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="TrDrTelegramTypes">
+    <xs:annotation>
+      <xs:documentation>de-DE: Telegramme vom Type 84/85</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="T84">
+        <xs:annotation>
+          <xs:documentation>Telegramm 84 - Fahrstra&amp;#223;e aufgel&amp;#246;st</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="T85">
+        <xs:annotation>
+          <xs:documentation>Telegramm 85 - Fahrstra&amp;#223;e eingestellt</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="RelayedTelegram">
+    <xs:annotation>
+      <xs:documentation>Telegram that must be relayed.
+de-DE: durchzureichendes Telegramm</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:BaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="telegramType" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Telegram type, written as two digit string, possibly with leading 0, that must be relayed to another substation.
+de-DE: Telegramm xx ist durchzureichen, xx ist einer von  02, 03, 04, 10, 21, 30.
+</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="PlatformHeights">
+    <xs:annotation>
+      <xs:documentation>de-DE: Systemh&amp;#246;he der Bahnsteigoberkante am Gleis, gemessen ab Schienenoberkante.
+Bei Bahnsteigkanten mit mehreren H&amp;#246;hen wird die H&amp;#246;he angegeben, an der der Schwerpunkt des Reisendenzustiegs liegt</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="cm38">
+        <xs:annotation>
+          <xs:documentation>de-DE: 38 cm: niedrigste zul&amp;#228;ssige H&amp;#246;he</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="cm55">
+        <xs:annotation>
+          <xs:documentation>de-DE: 55 cm: Zwischenh&amp;#246;he</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="cm76">
+        <xs:annotation>
+          <xs:documentation>de-DE: 76 cm: Regelh&amp;#246;he</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="cm96">
+        <xs:annotation>
+          <xs:documentation>de-DE: 96 cm: gr&amp;#246;sste zul&amp;#228;ssige H&amp;#246;he (nur f&amp;#252;r ausschliesslich daf&amp;#252;r vorgesehene S-Bahnfahrzeuge)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation>de-DE: Sonderh&amp;#246;he: Abweichende H&amp;#246;hen sind m&amp;#246;glich, vor allem aeltere Bahnsteigkanten k&amp;#246;nnen auch andere H&amp;#246;hen aufweisen. </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="PredefinedZbsTelegramSet">
+    <xs:complexContent>
+      <xs:extension base="db:PredefinedEtcsTelegramSet">
+        <xs:sequence>
+          <xs:element maxOccurs="4" minOccurs="0" name="containsReducedSpeedInformation"
+            type="db:ZbsReducedSpeedProperties"/>
+          <xs:element maxOccurs="1" minOccurs="1" name="hasBoard" nillable="true" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>Indicates whether the signal mast carries a board ws-sw-ws-sw-ws.
+de-DE: Gibt an, ob am zugeh&amp;#246;rigen Signal ein Mastschild ws-sw-ws-sw-ws vorhanden ist.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasDesignSlope" type="rsmCommon:Gradient">
+            <xs:annotation>
+              <xs:documentation>Slope, given in the range 0..1, that determines the braking curve within the supervised speed section.
+de-DE: Ma&amp;#223;gebende Neigung im &amp;#220;berwachungsabschnitt.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasMaxSpeed" type="rsmCommon:Speed">
+            <xs:annotation>
+              <xs:documentation>Maximum speed in the supervised speed section.
+de-DE: V-Zul-Strecke; Zul&amp;#228;ssige Geschwindigkeit im Bereich des &amp;#220;berwachungsabschnitts. </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasOperationalSpeed" type="rsmCommon:Speed">
+            <xs:annotation>
+              <xs:documentation>Ordered operational speed.
+de-DE: V-Befehl-Z; Befehlsfahrgeschwindigkeit f&amp;#252;r Zugfahrt.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasOrderedShuntingSpeed"
+            type="rsmCommon:Speed">
+            <xs:annotation>
+              <xs:documentation>Ordered speed for shunting trip.
+de-DE: V-Befehl-R; Befehlsfahrgeschwindigkeit f&amp;#252;r Rangierfahrt.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasReleaseSpeed" type="rsmCommon:Speed">
+            <xs:annotation>
+              <xs:documentation>release speed
+de-DE: V-frei; Freigabegeschwindigkeit </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasSafetyDistance" type="rsmCommon:Length">
+            <xs:annotation>
+              <xs:documentation>The safety distance that is actually available beyond the target signal of the supervised section.
+de-DE: Vorhandene Schutzstrecke; hinter dem Zielsignal des &amp;#220;berwachungsabschnitts vorhandene Ist-L&amp;#228;nge der Schutzstrecke.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasSafetyDistanceDesignSlope"
+            type="rsmCommon:Gradient">
+            <xs:annotation>
+              <xs:documentation>Slope, given in the range 0..1, that determines the safety distance.
+de-DE: Ma&amp;#223;gebende Neigung f&amp;#252;r die Ermittlung der Schutzstreckenl&amp;#228;nge. </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasSectionOfLength" type="rsmCommon:Length">
+            <xs:annotation>
+              <xs:documentation>Length of the supervised section.
+de-DE: L&amp;#228;nge des &amp;#220;berwachungsabschnitts.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasVgr1" type="rsmCommon:Speed">
+            <xs:annotation>
+              <xs:documentation>Highest supervised speed within the supervised section.
+de-DE: VGR-1; Gr&amp;#246;&amp;#223;te &amp;#220;berwachungsgeschwindigkeit im &amp;#220;berwachungsabschnitt.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasVgr2" type="rsmCommon:Speed">
+            <xs:annotation>
+              <xs:documentation>Supervised speed at the end of the supervised section.
+de-DE: VGR-2; &amp;#220;berwachungsgeschwindigkeit am Ende des &amp;#220;berwachungsabschnitts.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="implementsFixedBgFunction"
+            type="db:ZbsFixedBgFunctionTypes"/>
+          <xs:element name="isOfZbsType" nillable="true" type="db:zbsTypes">
+            <xs:annotation>
+              <xs:documentation>Fachtelegramm ZBS Typ</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="lamp" nillable="true" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>Indicates whether or not the indicator light G is still active.
+de-DE: Angabe, ob der Leuchtmelder G (Hinweis f&amp;#252;r den Tf, dass eine &amp;#220;berwachung auf eine niedrigere Geschwindigkeit am n&amp;#228;chsten Signal noch aktiv ist)</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="needsSafetyDistance" type="rsmCommon:Length">
+            <xs:annotation>
+              <xs:documentation>Safety distance that is needed beyond the target signal, given the release speed.
+de-DE: Erforderliche Schutzstrecke; hinter dem Zielsignal des &amp;#220;berwachungsabschnitts f&amp;#252;r die gew&amp;#228;hlte Freigabegeschwindigkeit geforderte Soll-L&amp;#228;nge der Schutzstrecke.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>

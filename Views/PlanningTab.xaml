@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="APLan.Views.PlanningTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:APLan.Views"
+             mc:Ignorable="d"
+             DataContext="{StaticResource planTabViewModel}"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="Transparent"></Setter>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Margin" Value="5,0,0,0"/>
+        </Style>
+    </UserControl.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Disabled">
+        <WrapPanel VerticalAlignment="Center">
+            <!--<Button Grid.Column="0" Content="Modify Data" VerticalAlignment="Stretch"/>-->
+            <StackPanel>
+                <Button Width="40" Height="40"
+                    Grid.Column="1" ToolTip="Plan"
+                        Command="{Binding PlanButton}">
+                    <Image Source="/Resources/Icons/plan.png" Stretch="Fill"/>
+                </Button>
+                <ComboBox SelectedItem="{Binding PlanType, Mode=TwoWay}" >
+                    <ComboBoxItem Content="ETCS"/>
+                </ComboBox>
+                <Label Content="Plan" HorizontalAlignment="Center"></Label>
+            </StackPanel>
+                 <StackPanel>
+                     <Button Grid.Column="2"
+                             Command="{Binding ExportButton}">
+                        <Image Source="/Resources/Icons/export_2.png" Stretch="Fill"/>
+                     </Button>
+                    <ComboBox SelectedItem="{Binding ExportType, Mode=TwoWay}">
+                         <ComboBoxItem Content="Eulynx"/>
+                         <ComboBoxItem Content="Plan Pro" IsEnabled="False"/>
+                    </ComboBox>
+                    <Label Content="Export"></Label>
+            </StackPanel>
+            <!--<Button Grid.Column="3"  Content="Symbol"/>
+            <Button Grid.Column="4"  Content="Grab"/>-->
+        </WrapPanel>
+    </ScrollViewer>
+</UserControl>

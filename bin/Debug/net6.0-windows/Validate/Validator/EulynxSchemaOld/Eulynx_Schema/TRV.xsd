@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:generic="http://dataprep.eulynx.eu/schema/Generic" xmlns:rsmCommon="http://www.railsystemmodel.org/schemas/RSM1.2beta/Common" xmlns:sig="http://dataprep.eulynx.eu/schema/Signalling" xmlns:trv="http://dataprep.eulynx.eu/schema/TRV" elementFormDefault="qualified" targetNamespace="http://dataprep.eulynx.eu/schema/TRV">
+  <!--<dc:date>2021-09-27T19:42:13Z</dc:date><dc:creator>rtm2xsd 1.8.5</dc:creator><dc:source>Model , XMI 2.4.1, EA 13</dc:source>-->
+  <xs:import namespace="http://dataprep.eulynx.eu/schema/Generic" schemaLocation="Generic.xsd"/>
+  <xs:import namespace="http://dataprep.eulynx.eu/schema/Generic" schemaLocation="Generic.xsd"/>
+  <xs:import namespace="http://www.railsystemmodel.org/schemas/RSM1.2beta/Common" schemaLocation="../RSM_Schema/Common.xsd"/>
+  <xs:import namespace="http://dataprep.eulynx.eu/schema/Signalling" schemaLocation="Signalling.xsd"/>
+  <xs:complexType name="AtcBalise">
+    <xs:annotation>
+      <xs:documentation>EBICAB balise.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:Balise"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="signallingEntities" type="trv:SignallingEntities"/>
+  <xs:complexType name="SignallingEntities">
+    <xs:complexContent>
+      <xs:extension base="generic:SignallingEntities"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="MovableElement">
+    <xs:complexContent>
+      <xs:extension base="sig:MovableElement">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="canReportDegradedStatus" nillable="true" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>True: this movable element can report a degraded status which means a loss of full detection.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>
+

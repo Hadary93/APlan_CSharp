@@ -1,0 +1,308 @@
+Error: Line: 12, Position 10: "The required attribute 'ref' is missing." 
+
+Error: Line: 18, Position 10: "The required attribute 'ref' is missing." 
+
+Error: Line: 24, Position 10: "The required attribute 'ref' is missing." 
+
+Error: Line: 30, Position 10: "The required attribute 'ref' is missing." 
+
+Error: Line: 132, Position 10: "The required attribute 'ref' is missing." 
+
+Error: Line: 149, Position 10: "The required attribute 'ref' is missing." 
+
+Error: Line: 166, Position 10: "The required attribute 'ref' is missing." 
+
+Error: Line: 183, Position 10: "The required attribute 'ref' is missing." 
+
+Error: Line: 10078, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10089, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10100, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10111, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10122, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10133, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10144, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10155, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10166, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10177, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10188, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10199, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10210, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10221, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10232, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10243, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10254, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10265, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10276, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10287, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10298, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10309, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10320, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10331, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10342, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10353, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10364, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10375, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10386, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10397, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10408, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10419, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10430, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10441, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10452, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10463, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10474, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10485, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10496, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10507, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10518, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10529, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10540, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10551, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10562, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10573, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10584, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10595, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10606, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10617, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10628, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10639, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10650, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10661, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10672, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10683, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10694, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10705, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10716, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10727, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10738, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10749, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10760, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10771, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10782, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10793, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10804, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10815, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10826, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10837, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10848, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10859, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 10870, Position 12: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 21423, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 21445, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 21467, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 21485, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 21503, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 21521, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 21543, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 21570, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 21588, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 21610, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 21637, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 21664, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 21682, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 21709, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 21731, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 21753, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 21775, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 21797, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 21824, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 21842, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 21860, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 21887, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 21909, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 21936, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 21963, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 21981, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22008, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22035, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22062, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22084, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22102, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22124, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22151, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22173, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22200, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22218, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22245, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22267, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22294, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22316, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22343, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22365, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22392, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22410, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22432, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22459, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22477, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22504, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22526, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22548, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22575, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22602, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22629, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22651, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22673, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22700, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22718, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22740, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22762, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22784, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22811, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22838, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22860, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22878, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22900, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22922, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22944, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22966, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 22993, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 23015, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 23037, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 23059, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+
+Error: Line: 23086, Position 16: "The element 'polyLines' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2' has invalid child element 'positioningSystem' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'. List of possible elements expected: 'coordinates' in namespace 'http://www.railsystemmodel.org/schemas/Common/1.2'." 
+

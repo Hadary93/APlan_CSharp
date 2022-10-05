@@ -1,0 +1,178 @@
+﻿<Window x:Class="APLan.Views.NewProjectWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:APLan.Views"
+        mc:Ignorable="d"
+        DataContext="{StaticResource newProjectViewModel}"
+        x:Name="newProjectWindow"
+        Title="NewProjectWindow" Height="600" Width="800">
+    
+    <Grid x:Name="container" Margin="20">
+        <!--planning-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <!--content Left-->
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Text="Project Name"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Text="Directory"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Text="Country Code"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" Text="File Format"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0" Text="json files" x:Name="jsonFiles"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="5" Grid.Column="0" Text="mdb file" x:Name="mdbfile"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="6" Grid.Column="0" Text="euxml file" x:Name="euxmlfile"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="7" Grid.Column="0" Text="ppxml file" x:Name="ppxmlfile"/>
+        <!--content Right-->
+        <TextBox Height="30" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"
+                 Text="{Binding ProjectName, Mode=TwoWay}"/>
+        <Grid  Height="30" Grid.Row="1" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="directortPath" 
+                     Grid.Column="0" 
+                     HorizontalAlignment="Stretch" 
+                     VerticalAlignment="Stretch"
+                     Text="{Binding ProjectPath}"/>
+            <Button  Grid.Column="1" 
+                     HorizontalAlignment="Stretch" 
+                     VerticalAlignment="Stretch" 
+                     Content="Add Path"
+                     Command="{Binding AddPath}"
+                     />
+        </Grid>
+
+        <ComboBox x:Name="countCode" Height="30" Grid.Row="2" Grid.Column="1" SelectedIndex="0" SelectedItem="{Binding Country, Mode=TwoWay}">
+            <ComboBoxItem Content = "de" />
+            <ComboBoxItem Content = "fr" />
+        </ComboBox>
+
+        <ComboBox x:Name="fileType" Height="30" Grid.Row="3" Grid.Column="1" SelectedIndex="0" SelectedItem="{Binding Format, Mode=TwoWay}" SelectionChanged="fileType_SelectionChanged">
+            <ComboBoxItem Content = ".json" />
+            <ComboBoxItem Content = ".mdb" />
+            <ComboBoxItem Content = ".euxml" IsEnabled="False" />
+            <ComboBoxItem Content = ".ppxml" IsEnabled="False" />
+        </ComboBox>
+
+        <Grid x:Name="n1" Height="30" Grid.Row="4" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="TextEntwurfselement_KM"  
+                       Grid.Column="0" 
+                       HorizontalAlignment="Stretch" 
+                       VerticalAlignment="Stretch"
+                       Text="{Binding JsonFiles}"/>
+            <Button   x:Name="ButtonEntwurfselement_KM" 
+                      Grid.Column="1" 
+                      HorizontalAlignment="Stretch" 
+                      VerticalAlignment="Stretch" 
+                      Content="Browse" 
+                      Command="{Binding BrowseJson}"
+                      CommandParameter="{Binding ElementName=createProject}"/>
+        </Grid>
+        <Grid x:Name="n2"  Height="30" Grid.Row="5" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock  x:Name="Tmdbtext"  
+                        Grid.Column="0" 
+                        HorizontalAlignment="Stretch" 
+                        VerticalAlignment="Stretch"
+                        Text="{Binding MDB}"/>
+            <Button     x:Name="Buttonmdb" 
+                        Grid.Column="1" 
+                        HorizontalAlignment="Stretch" 
+                        VerticalAlignment="Stretch" 
+                        Content="Browse" 
+                        Command="{Binding BrowseMDB}"
+                        CommandParameter="{Binding ElementName=createProject}"></Button>
+        </Grid>
+        <Grid x:Name="n3"  Height="30" Grid.Row="6" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock  x:Name="exumltext"  
+                        Grid.Column="0" 
+                        HorizontalAlignment="Stretch" 
+                        VerticalAlignment="Stretch"
+                        Text="{Binding EUXML}"/>
+            <Button     x:Name="Buttoneuxml" 
+                        Grid.Column="1" 
+                        HorizontalAlignment="Stretch" 
+                        VerticalAlignment="Stretch" 
+                        Content="Browse" 
+                        Command="{Binding BrowseEuxml}"
+                        CommandParameter="{Binding ElementName=createProject}"></Button>
+        </Grid>
+        <Grid x:Name="n4"  Height="30" Grid.Row="7" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock  x:Name="ppxmltext"  
+                        Grid.Column="0" 
+                        HorizontalAlignment="Stretch" 
+                        VerticalAlignment="Stretch"
+                        Text="{Binding EUXML}"/>
+            <Button     x:Name="ppxml" 
+                        Grid.Column="1" 
+                        HorizontalAlignment="Stretch" 
+                        VerticalAlignment="Stretch" 
+                        Content="Browse" 
+                        Command="{Binding BrowsePpxml}"
+                        CommandParameter="{Binding ElementName=createProject}"></Button>
+        </Grid>
+        <Grid  Height="30" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button  Content="Cancel"  
+                     Grid.Column="0" 
+                     Margin="50,0,50,0" 
+                     HorizontalAlignment="Stretch" 
+                     VerticalAlignment="Stretch"
+                     Command="{Binding Cancel}"
+                     CommandParameter="{Binding RelativeSource={RelativeSource
+                                                   Mode=FindAncestor,
+                                                   AncestorType={x:Type Window}}}"></Button>
+            <Button
+                x:Name="createProject"
+                Content="Create"  
+                Grid.Column="1" 
+                Margin="50,0,50,0" 
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Stretch"
+                IsEnabled="False"
+                Command="{Binding Create}"
+                >
+                <Button.CommandParameter>
+                    <MultiBinding Converter="{StaticResource multiBindingConverter}">
+                        <Binding ElementName="fileType" Path="SelectedItem"/>
+                        <Binding ElementName="newProjectWindow"/>
+                    </MultiBinding>
+                </Button.CommandParameter>
+            </Button>
+        </Grid>
+    </Grid>
+    
+</Window>

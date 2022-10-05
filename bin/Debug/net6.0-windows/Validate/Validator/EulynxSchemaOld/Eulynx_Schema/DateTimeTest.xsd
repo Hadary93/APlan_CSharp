@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    xmlns:rsmCommon="http://www.railsystemmodel.org/schemas/RSM1.2beta/Common">
+
+    <xs:import namespace="http://www.railsystemmodel.org/schemas/RSM1.2beta/Common"
+        schemaLocation="../RSM%20Schema/Common.xsd"/>
+    <xs:element name="TimeDimensionTest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Date" type="rsmCommon:DateTimeDescription"/>
+                <xs:element name="DateTimeStamp" type="rsmCommon:DateTimeDescription"/>
+                <xs:element name="DurationInterval" type="rsmCommon:SimpleTimeInterval"/>
+                <xs:element name="DurationInSecs" type="rsmCommon:Duration"/>
+                <xs:element name="tijdstempel" type="xs:dateTimeStamp"/>
+                <xs:element maxOccurs="unbounded" name="Units" type="rsmCommon:Unit"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

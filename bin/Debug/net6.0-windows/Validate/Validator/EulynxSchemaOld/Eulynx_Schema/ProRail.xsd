@@ -1,0 +1,1095 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:generic="http://dataprep.eulynx.eu/schema/Generic" xmlns:prorail="http://dataprep.eulynx.eu/schema/ProRail" xmlns:rsmCommon="http://www.railsystemmodel.org/schemas/RSM1.2beta/Common" xmlns:sig="http://dataprep.eulynx.eu/schema/Signalling" elementFormDefault="qualified" targetNamespace="http://dataprep.eulynx.eu/schema/ProRail">
+  <!--<dc:date>2021-09-27T19:42:13Z</dc:date><dc:creator>rtm2xsd 1.8.5</dc:creator><dc:source>Model , XMI 2.4.1, EA 13</dc:source>-->
+  <xs:import namespace="http://www.railsystemmodel.org/schemas/RSM1.2beta/Common" schemaLocation="../RSM_Schema/Common.xsd"/>
+  <xs:import namespace="http://dataprep.eulynx.eu/schema/Generic" schemaLocation="Generic.xsd"/>
+  <xs:import namespace="http://dataprep.eulynx.eu/schema/Signalling" schemaLocation="Signalling.xsd"/>
+  <xs:import namespace="http://dataprep.eulynx.eu/schema/Generic" schemaLocation="Generic.xsd"/>
+  <xs:complexType name="TrackCrossingProperties">
+    <xs:complexContent>
+      <xs:extension base="sig:TrackCrossingProperties">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="hasBattery" nillable="true" type="xs:int"/>
+          <xs:element maxOccurs="1" minOccurs="1" name="isEquippedWithSuicidePrevention" nillable="true" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>True when this crossing is fitted with suicide prevention measures that prevent people accessing the track.
+False otherwise.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="WeightLimitMarker">
+    <xs:annotation>
+      <xs:documentation>Selective slow/stop-order for heavy freight trains. Used only in transition areas for connecting to legacy signalling.
+NL: Een H- of L-lichtbak.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:EtcsMarker">
+        <xs:sequence>
+          <xs:element name="isOfTypeLorH" nillable="true" type="prorail:WeightLimitMarkerTypes"/>
+          <xs:element name="refersToLightSignal" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>reference to signal equipped with L or H board</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:LightSignal</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="RouteBody">
+    <xs:annotation>
+      <xs:documentation>ProRail route body</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:RouteBody">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="hasMovableOverheadLine" nillable="true" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>True if there's a movable overhead line, over a point or crossing (needed for checking the route conditions).
+
+nl-NL: Een indicatie of een beweegbaar bovenleidingkruis in de route is opgenomen.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="SignalRestrictionTypes">
+    <xs:annotation>
+      <xs:documentation>Signal aspect modifiers displayed as letters by boards or switchable matrix boards.
+
+Letters welke borden of lichtbakken kunnen tonen.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="G">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="X">
+        <xs:annotation>
+          <xs:documentation>Letters in lichtbakken.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="L">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="H">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="A">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="E">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="V">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="VssLimit">
+    <xs:annotation>
+      <xs:documentation>Limit of a virtual subsection (VSS).</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:TdsComponent"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="AtbngLoop">
+    <xs:annotation>
+      <xs:documentation>A loop in the ATB NG train protection system.
+NL: ATB NG lus</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="prorail:AtbLoop">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="intersectionCount" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>Count of crossings in the loop.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="WeightLimitMarkerTypes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="L">
+        <xs:annotation>
+          <xs:documentation>Announces H-signal
+nl-NL: Langzaam</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="H">
+        <xs:annotation>
+          <xs:documentation>Halt for freight trains.
+nl-NL: stoppen voor het sein.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="RouteSettingProperties">
+    <xs:complexContent>
+      <xs:extension base="sig:RouteProperty">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="hasCargoCriteriumOption" nillable="true" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>nl-NL: Geeft aan of bij de rijweg een goederen criterium kan worden opgegeven.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="hasExtraControlOption" nillable="true" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>nl-NL: Een indicatie dat de verhindering voor rijweginstelling van het beginsein van de route met een Extra Bediening genegeerd moet worden.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="hasNormalControlOption" nillable="true" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>nl-NL: Een indicatie of de route normaal instelbaar is.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="hasStopSignalControlOption" nillable="true" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>nl-NL: Een indicatie of de route met een Stoptonend Sein instelbaar is.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LevelCrossingKeyBox">
+    <xs:annotation>
+      <xs:documentation>Key box for disconnecting the announcement during engineering activities. Only used for open line level crossings.
+&lt;font color="#26282a"&gt;nl-NL: overweg sleutelschakelaar Alleen toegepast op de vrije baan. &lt;/font&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element name="appliesToLevelCrossingSystem" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>nl-NL: behoort bij overweginstallatie op de vrije baan.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:LocallyMonitoredLevelCrossing</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="isLocatedAt" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The key box is located at the given spot location.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:SpotLocation</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="RouteLevelTypes">
+    <xs:annotation>
+      <xs:documentation>The different system levels that use routes.
+nl-NL: ontwerplaag die de route gebruikt c.q. de route ontwerpt.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="signalling">
+        <xs:annotation>
+          <xs:documentation>TB route</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="trainControl">
+        <xs:annotation>
+          <xs:documentation>Route voor treinbeheersing </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="Designation">
+    <xs:annotation>
+      <xs:documentation>Dutch track assets are labeled with a series of strings:
+areaname + areatype + assetname + assettype
+
+E.g.  areaname="Ut", areatype="Wisselgebied", assetname="41A", assettype="Wissel"</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:Designation">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="areaName" nillable="true" type="xs:string"/>
+          <xs:element maxOccurs="1" minOccurs="1" name="areaType" nillable="true" type="xs:string"/>
+          <xs:element maxOccurs="1" minOccurs="1" name="assetName" nillable="true" type="xs:string"/>
+          <xs:element maxOccurs="1" minOccurs="1" name="assetType" nillable="true" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LxDepartureDetection">
+    <xs:annotation>
+      <xs:documentation>Parameters for activating the level crossing by detection of departure of an ETCS-supervised train. 
+nl-NL: vertrekdetectiepunt</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:BaseObject">
+        <xs:sequence>
+          <xs:element name="hasDepartureDetectionPoint" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The spot up to where ETCS train departure detection can activate the level crossing.
+nl-NL: vertrekdetectiepunt</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:SpotLocation</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasOperationalDepartureArea" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The operational point from which the train leaves (platform track; used for calibrating train runs to the time table).
+nl-NL: verwijzing naar het dienstregelpunt (perronspoor) waar vanuit de trein vertrekt.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:PlatformEdge</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="hasSpeedRestrictionLength" nillable="true" type="rsmCommon:Length">
+            <xs:annotation>
+              <xs:documentation>The distance over which the restricted speed applies. This allows the LX sufficient time to close.
+nl-NL: de lengte van de conditionele snelheidsbeperking naar de overweg van het vertrekdetectiepunt.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="RouteReleaseTypes">
+    <xs:annotation>
+      <xs:documentation>Modifies the behaviour of the interlocking's occupancy sequence checking pertaining to this section.
+nl-NL: configuratie van de volgordedwang voor deze sectie.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="active">
+        <xs:annotation>
+          <xs:documentation>Sections are crossed in direction x-y-z. Section x is released if y has been released, x turns vacant and z is occupied.
+nl-NL: Actief, de sectie y wordt vrijgereden als de voorgaande sectie x vrijgereden is, de eigen sectie y niet meer bezet is en de volgende sectie z wel. </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="passive">
+        <xs:annotation>
+          <xs:documentation>The section is released together with the route's last active section.
+nl-NL: Passief: De sectie wordt vrijgereden samen met de laatste actieve sectie van die rijweg. </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="simplifiedActive">
+        <xs:annotation>
+          <xs:documentation>nl-NL: vereenvoudigd actief. De sectie wordt vrijgereden als de vorige sectie vrijgereden is, de eigen sectie vervolgens gelijktijdig bezet is met de volgende sectie.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="VirtualSubSection">
+    <xs:annotation>
+      <xs:documentation>A subdivision of the trackside train detection (TTD) used for positioning trains by means of reported position and length.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:TdsSection">
+        <xs:sequence>
+          <xs:element name="disconnectPropagationTime" nillable="true" type="rsmCommon:Duration">
+            <xs:annotation>
+              <xs:documentation>Time between mute and start of propagation of the unknown occupancy status.
+</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="integrityLossPropagationTime" nillable="true" type="rsmCommon:Duration">
+            <xs:annotation>
+              <xs:documentation>Time after which the train's loss-of-integrity propagates. Starts counting when trackside detects loss-of-integrity.
+After expiry, occupancy spills over to adjacent sections. 
+
+</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="FictitiousSignal">
+    <xs:annotation>
+      <xs:documentation>Fictieve sein</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:FictitiousSignal">
+        <xs:sequence>
+          <xs:element name="hasFunction" nillable="true" type="prorail:FictitiousSignalFunctionTypes"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="AtbVvController">
+    <xs:annotation>
+      <xs:documentation>Controller of the ATB VV system, housed in an ASK cabinet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:Controller"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Symbol">
+    <xs:annotation>
+      <xs:documentation>Symbols shown on ProRail signals.
+nl-NL: symbolen die op Nederlandse seinen getoond kunnen worden.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:Symbol">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasSpeedSymbolType" type="prorail:SignalSpeedRestrictionTypes"/>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasSymbolType" type="prorail:SignalRestrictionTypes"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="AtbvvLoop">
+    <xs:annotation>
+      <xs:documentation>A loop for the ATB VV system.
+NL: ATB VV lus</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="prorail:AtbLoop"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LevelCrossingConfiguration">
+    <xs:annotation>
+      <xs:documentation>nl-NL: eigenschappen van overweginstallatie.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:LevelCrossingConfiguration">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasBatteryLocatedAt" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The level crossing system is fitted with a battery that is located at the given location.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:SpotLocation</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasLevelCrossingKeyBox" type="prorail:LevelCrossingKeyBox">
+            <xs:annotation>
+              <xs:documentation>Level crossing system is fitted with a key box. nl-NL: &lt;font color="#26282a"&gt;overweg sleutelschakelaar, alleen toegepast op de vrije baan.&lt;/font&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="AtbEgLoop">
+    <xs:annotation>
+      <xs:documentation>A loop in the ATB EG train protection system.
+NL: ATB EG lus</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="prorail:AtbLoop"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="NotCentralControlledAreaDepartureTrack">
+    <xs:annotation>
+      <xs:documentation>nl-NL: Een vertrekspoor NCBG in de context van ERTMS is een spoor waarbij een Movement Authority nodig is voor een vertrek op basis van een vervolgrijweg (in dezelfde richting of voor een kerende trein).</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="prorail:DepartureTrack">
+        <xs:sequence>
+          <xs:element name="hasMaxSpeed" nillable="true" type="rsmCommon:Speed">
+            <xs:annotation>
+              <xs:documentation>De maximale snelheid aan het begin van het vertrekspoor (V_NVSTIFF).</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="refersToBaliseGroup" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Reference to the 8m balise group at a shortened departure track.
+nl-NL: Een verwijzing naar de 8m balise groep bij een ingekort vertrekspoor in een NCBG.  </xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:EtcsBaliseGroup</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="SignalSpeedRestrictionTypes">
+    <xs:annotation>
+      <xs:documentation>Speed restriction that boards or switchable matrix boards can display.
+nl-NL: snelheidsborden of lichtbakken kunnen deze symbolen voor snelheidsbeperkingen tonen</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="_4">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="_6">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="_8">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="_10">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="_12">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="_14">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="EtcslLevelCrossingSystem">
+    <xs:annotation>
+      <xs:documentation>Configuration for an ETCS level crossing.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:EtcsLevelCrossingSystem">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="hasLxDepartureDetection" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>prorail:LxDepartureDetection</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="hasLxMalfunction" type="prorail:LevelCrossingMalfunction"/>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasRestrictedSpeed" type="rsmCommon:Speed">
+            <xs:annotation>
+              <xs:documentation>Speed with which the level crossing can be passed when not protected</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasStopZone" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Section of platform line where ETCS train departure can activate the level crossing.
+nl-NL: spoorgedeelte tussen het begin van het perron en het punt vanaf waar de aankondigingstijd van de overweg voor een vertrekkende trein altijd aan de minimale tijd voldoet. </xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:LinearLocation</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="HybridLevel3Timers">
+    <xs:annotation>
+      <xs:documentation>Set of timers for HL3 operation.
+Paragraph 3.4.1 in the &lt;a href="$inet://http://www.ertms.be/sites/default/files/2018-03/16E0421A_HL3.pdf"&gt;&lt;font color="#0000ff"&gt;&lt;u&gt;HL3 specification&lt;/u&gt;&lt;/font&gt;&lt;/a&gt;.
+Waiting timers are implemented in the track side to avoid unnecessary changes in the state of a VSS due to the asynchronicity of train position, train integrity and TTD information.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="appliesToRegion" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:AreaLocation</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="muteTime" nillable="true" type="rsmCommon:Duration">
+            <xs:annotation>
+              <xs:documentation>Time starts counting down each time information is received from the train. After expiry the train is considered mute. This allows recovery from a short communication gap. 
+Paragraph 3.4.1.2</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="waitIntegrityTime" nillable="true" type="rsmCommon:Duration">
+            <xs:annotation>
+              <xs:documentation>Timer start counting when the trackside has ascertained train integrity from the train report. 
+Paragraph 3.4.1.3</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="AtbVvInstallation">
+    <xs:annotation>
+      <xs:documentation>Installation consisting of ATB VV beacons (transponders) and an optional loop.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:TpsDataTransmissionSystem"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="OnSightRoute">
+    <xs:annotation>
+      <xs:documentation>ProRail on-sight route
+nl-NL: Rijden op zicht rijweg (ROZ)</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:OnSightRoute">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="allowedWhenSectionOccupied" nillable="true" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>True: the on-sight route is possible even when the section in advance of the signal is already occupied. </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="AtbngBeacon">
+    <xs:annotation>
+      <xs:documentation>Transponder for the ATB NG system.
+nl-NL: ATB NG baken</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:TpsSpotDevice">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="isPsrBeacon" nillable="true" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>True if this is a Permanent Speed Restriction beacon. 
+False otherwise.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="WorkzoneDepartureTrack">
+    <xs:annotation>
+      <xs:documentation>Departure track from a work zone.
+nl-NL: Vertrekspoor van werkzone</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="prorail:DepartureTrack">
+        <xs:sequence>
+          <xs:element name="hasMaxSpeed" nillable="true" type="rsmCommon:Speed">
+            <xs:annotation>
+              <xs:documentation>De maximale snelheid op het vertrekspoor.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ActiveAspect">
+    <xs:annotation>
+      <xs:documentation>Aspects that ProRail light signals can show.
+nl-NL: de aspecten die Nederlandse lichtseinen kunnen tonen.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:ActiveAspect">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="flashing" nillable="true" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>true if the aspect flashes
+nl-NL: waar als het een knipperend aspect betreft.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="showsLight" type="prorail:SignalColourTypes">
+            <xs:annotation>
+              <xs:documentation>toont licht</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DepartureTrackExtension">
+    <xs:annotation>
+      <xs:documentation>Extension area of a departure track.
+nl-NL: vertrekspooruitbreiding. Het spoorgedeelte mag maximaal &amp;#233;&amp;#233;n sectie ten behoeve van treindetectie bevatten. Er mogen wissels in voorkomen, maar geen overwegen of beweegbare bruggen.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element name="isLocatedAt" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:LinearLocation</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DepartureTrack">
+    <xs:annotation>
+      <xs:documentation>Track equipped to allow trains to depart and enter ETCS supervision. One instance is created per departure direction.
+nl-NL: Een vertrekspoor in de context van ERTMS is een spoor waarbij een Movement Authority nodig is voor een vertrek op basis van een vervolgrijweg (in dezelfde richting of voor een kerende trein).
+Een spoor – en daarmee ook een vertrekspoor – bestaat uit een verzameling secties en een sein dat de begrenzing van het vertrekspoor vormt.   </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="hasDepartureTrackExtension" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>prorail:DepartureTrackExtension</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="isLocatedAt" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:LinearLocation</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="refersToSignal" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The signal whence the train leaves the departure track.
+nl-NL: &lt;u&gt;Referentie&lt;/u&gt; &lt;u&gt;naar&lt;/u&gt; &lt;u&gt;het&lt;/u&gt; (&lt;u&gt;vertrek&lt;/u&gt;)&lt;u&gt;sein&lt;/u&gt;. &lt;u&gt;Hiermee&lt;/u&gt; &lt;u&gt;wordt&lt;/u&gt; &lt;u&gt;de&lt;/u&gt; &lt;u&gt;rijrichting&lt;/u&gt; &lt;u&gt;bepaald&lt;/u&gt;.
+</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:Signal</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="CentralControlledAreaDepartureTrack">
+    <xs:annotation>
+      <xs:documentation>Departure track in an area that is centrally controlled.
+nl-NL: vertrekspoor in CBG</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="prorail:DepartureTrack">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="driveOnSightPossible" nillable="true" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>True if the departure track allows On Sight departure.
+False otherwise.
+nl-NL: Indicatie of het vertrekspoor een ROZ-Rijweg mogelijkheid heeft.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="hasTimerValue" nillable="true" type="rsmCommon:Duration"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="hasUsableLength" type="rsmCommon:Length">
+            <xs:annotation>
+              <xs:documentation>Length of track that departing trains can use.
+nl-NL: bruikbare lengte. De maximale doorlopende lengte van een spoor waarop een trein in normale omstandigheden moet stoppen rekening houdend met een passende stoptolerantie. Normale exploitatie betekent dat er geen sprake is van gestoord bedrijf namelijk normale adhesie, werkende seinen, alle systemen functioneren naar behoren)</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="isReverseTrack" nillable="true" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>True if the departure track can be used for reversing. 
+False otherwise.
+nl-NL: Indicatie of het vertrekspoor ook als keerspoor kan worden gebruikt.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="1" name="refersToSections" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>List of sections in the departure track.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:TvpSection</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="PermanentWarningSystem">
+    <xs:annotation>
+      <xs:documentation>Permanent installation for warning line-side staff. 
+nl-NL: vaste waarschuwingsinstallatie</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:PermanentWarningSystem">
+        <xs:sequence>
+          <xs:element name="isOfType" nillable="true" type="prorail:WarningsystemTypes"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="TemporaryShuntingAreaDepartureTrack">
+    <xs:annotation>
+      <xs:documentation>Departure track from a temporary shunting area.
+nl-NL: Vertrekspoor VR-Gebied</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="prorail:DepartureTrack"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="signallingEntities" type="prorail:SignallingEntities"/>
+  <xs:complexType name="SignallingEntities">
+    <xs:annotation>
+      <xs:documentation>Container for classes needed for signalling engineering and the Data Preparation. This translates into the XSD as an XML-element that contains ProRail-specific signalling entities.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:SignallingEntities">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsDepartureTrack" type="prorail:DepartureTrack"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsDepartureTrackExtension" type="prorail:DepartureTrackExtension"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="AtbvvConnectionCabinet">
+    <xs:annotation>
+      <xs:documentation>Small line-side cabinet for housing the ATB VV controller. It is spot located.
+nl-NL: Aansluitkast (ASK)</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:Cabinet"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LevelCrossingMalfunction">
+    <xs:annotation>
+      <xs:documentation>Parameters governing behaviour when the level crossing malfunctions.
+nl-NL: gedragsconfiguratie bij het defect raken van een overweg.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="hasSpeedRestrictionArea" nillable="true" type="rsmCommon:tElementWithIDref">
+        <xs:annotation>
+          <xs:documentation>The area astride the level crossing to which the indicated speed restriction applies.
+This area may differ from the track crossing.
+nl-NL: het gebied, over de overweg, waarvoor de aangegeven snelheidsbeperking geldt.
+</xs:documentation>
+          <xs:appinfo>
+            <ObjectTypeRef>rsmCommon:LinearLocation</ObjectTypeRef>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element maxOccurs="1" minOccurs="0" name="hasStoppingArea" type="rsmCommon:tElementWithIDref">
+        <xs:annotation>
+          <xs:documentation>A spot on the level crossing track or track straddling the level crossing.
+This is where a train has to stop before crossing an unprotected crossing.
+
+nl-NL: punt of een gebied op een overwegspoor aan weerszijden van de overweg.</xs:documentation>
+          <xs:appinfo>
+            <ObjectTypeRef>rsmCommon:LinearLocation</ObjectTypeRef>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RouteExit">
+    <xs:annotation>
+      <xs:documentation>nl-NL: een route exit, doorgaans een sein, voorzien van een RV-timer.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:RouteExit">
+        <xs:sequence>
+          <xs:element name="hasResidualRouteReleaseTimer" nillable="true" type="rsmCommon:Duration">
+            <xs:annotation>
+              <xs:documentation>Timer Restrijweg Vrijmaken (RV)
+De RV timer is bepaald aan hand van alle routes en de langste sectie naar het eindsein. Deze tijd wordt dan toegepast op elke rijweg naar het eindsein.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasSpadDetection" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>If a train passes the route exit signal at danger, the associated signals are closed.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:TriggerAssignment</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Route">
+    <xs:annotation>
+      <xs:documentation>ProRail Route</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:Route">
+        <xs:sequence>
+          <xs:element name="usedByRouteLevelType" nillable="true" type="prorail:RouteLevelTypes"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="FictitiousSignalFunctionTypes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="bufferstop">
+        <xs:annotation>
+          <xs:documentation>stootjuk.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="stop">
+        <xs:annotation>
+          <xs:documentation>S-bord (stop-bord).</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="operatedMainSignal">
+        <xs:annotation>
+          <xs:documentation>Hoofdsein bediend (kan fictief geprojecteerd worden).</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="limitOfProtectedArea">
+        <xs:annotation>
+          <xs:documentation>Einde beveiligd gebied. Aan de andere zijde is een opstelterrein of terra incognita.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="optionalStop">
+        <xs:annotation>
+          <xs:documentation>Facultatief stopbord.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="AtbvvBeacon">
+    <xs:annotation>
+      <xs:documentation>A transponder for the ATB VV system.
+NL: ATB VV baken
+</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:TpsSpotDevice"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LineBlockInformation">
+    <xs:annotation>
+      <xs:documentation>Line Block information used by ProRail.
+nl-NL: informatievelden in gebruik bij ProRail.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:LineBlockInformation">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="hasLH" nillable="true" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>The block is equipped for L/H operation.
+nl-NL: de vrije baan is met een L/H schakeling uitgerust.
+</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="hasStopDoor" nillable="true" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>The block is equipped for stop/door.
+nl-NL: de vrije baan is met een stop-door schakeling uitgerust.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="hasXG" nillable="true" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>The block is equipped for X/G operation.
+nl-NL: de vrije baan is met een X/G schakeling uitgerust.
+</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="signalbook" type="prorail:Signalbook"/>
+  <xs:complexType name="Signalbook">
+    <xs:annotation>
+      <xs:documentation>Set of regulations describing ProRail signals, signalled messages and aspects.
+nl-NL: seinenboek</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="1" name="ownsAspect" nillable="true" type="sig:Aspect">
+            <xs:annotation>
+              <xs:documentation>nl-NL: seinaspect, actief (schakelbaar) of passief (bord)</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="1" name="ownsAspectSet" nillable="true" type="sig:SignalMessage">
+            <xs:annotation>
+              <xs:documentation>nl-NL: samenstelling van seinaspecten die samen een bericht vormen voor de mcn.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="1" name="usesEulynxSignalVector" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The EULYNX SCI-LS signal vector that commands a given set of active signal aspects.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:SignalVector</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType abstract="true" name="AtbLoop">
+    <xs:annotation>
+      <xs:documentation>A loop in the ATB train protection system.
+NL: ATB lus</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:TpsLinearDevice">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasSwitchOffTimer" type="rsmCommon:Duration">
+            <xs:annotation>
+              <xs:documentation>The timer during which the loop stays active. Timer starts at activation.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="TvpSectionConfiguration">
+    <xs:annotation>
+      <xs:documentation>A set of properties that applies to a ProRail TVP section.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:TvpSectionConfiguration">
+        <xs:sequence>
+          <xs:element name="appliesIndirection" nillable="true" type="rsmCommon:ApplicationDirection">
+            <xs:annotation>
+              <xs:documentation>The train travel direction for which the section release applies, with respect to the orientation of the underlying linear element.
+If the section contains a point, with respect to the linear element of the point's toe.
+nl-NL: rijrichting van de trein die de sectie vrijrijdt. Gegeven t.o.v. de topologische orientering van het lineaire element.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="hasRouteReleaseType" nillable="true" type="prorail:RouteReleaseTypes">
+            <xs:annotation>
+              <xs:documentation>The interlocking normally holds a route if section occupancy sequence doesn't match normal train progress. This function can be configured per section to facilitate shunting movements.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="TriggerAssignmentWithDelay">
+    <xs:annotation>
+      <xs:documentation>The given signal is cleared/closed when the warning system is triggered &lt;i&gt;and&lt;/i&gt; after the delay expires.
+Not used for LC warning (use &lt;a href="$element://{E6CD35A8-D498-4cf6-9818-716CD127386D}"&gt;&lt;font color="#0000ff"&gt;&lt;u&gt;this&lt;/u&gt;&lt;/font&gt;&lt;/a&gt; instead).
+nl-NL: seinvertraging wordt door de eigenschappen van de waarschuwingsinstallatie bepaald zoals rijtijd plus marge.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:TriggerAssignment">
+        <xs:sequence>
+          <xs:element name="hasDelay" nillable="true" type="rsmCommon:Duration">
+            <xs:annotation>
+              <xs:documentation>The signal clearing/closing is delayed by this value.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="StAndrewsCross">
+    <xs:annotation>
+      <xs:documentation>nl-NL: Andreaskruis.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:StAndrewsCross">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="numberOfTracks" nillable="true" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>nl-NL: Aantal sporen; een kruis per spoor.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="WarningsystemTypes">
+    <xs:annotation>
+      <xs:documentation>ProRail fixed warning system types.
+nl-NL: WaarschuwingsInstallatieTypes</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="WIT">
+        <xs:annotation>
+          <xs:documentation>Tunnel warning system.
+nl-NL: Waarschuwingsinstallatie in tunnels.
+ProRail: Can be equipped with a key that switches on an audible warning.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="WIBR">
+        <xs:annotation>
+          <xs:documentation>Bridge warning system.
+nl-NL: Waarschuwingsinstallatie op bruggen.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="WUBO">
+        <xs:annotation>
+          <xs:documentation>Warning installation at obscuring objects.
+nl-NL: Waarschuwingsinstallate bij uitzichtsbelemmerende objecten</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="WIDO">
+        <xs:annotation>
+          <xs:documentation>Warning installation at staff crossing.
+nl-NL: Waarschuwingslichten bij dienstoverpad.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="HL3SectionTimers">
+    <xs:annotation>
+      <xs:documentation>Set of timers that apply to a set of physical train detection sections. 
+Definitions are found in the &lt;a href="$inet://http://www.ertms.be/sites/default/files/2018-03/16E0421A_HL3.pdf"&gt;&lt;font color="#0000ff"&gt;&lt;u&gt;HL3 specification&lt;/u&gt;&lt;/font&gt;&lt;/a&gt;.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="prorail:HybridLevel3Timers">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="1" name="appliesToTTD" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:TdsSection</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="ghostTrainPropagationTime" nillable="true" type="rsmCommon:Duration">
+            <xs:annotation>
+              <xs:documentation>Timer starts counting when a TTD section becomes unexpectedly occupied so that "ghost" rolling stock is assumed present. 
+Paragraph 4.2.2.1</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="shadowTrainTime" nillable="true" type="rsmCommon:Duration">
+            <xs:annotation>
+              <xs:documentation>Time starts counting when the trackside has ascertained that there can't be a shadow train in the wake of a HL3 train. 
+Paragraph 3.4.1.4 </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="SignalColourTypes">
+    <xs:annotation>
+      <xs:documentation>Signal colours, both steady and flashing.
+
+nl-NL: NS54 Kleuraspecten.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="RD">
+        <xs:annotation>
+          <xs:documentation>Red
+nl-NL: Rood</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GL">
+        <xs:annotation>
+          <xs:documentation>Yellow
+nl-NL: Geel</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GR">
+        <xs:annotation>
+          <xs:documentation>Green
+nl-NL: groen</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="WIT">
+        <xs:annotation>
+          <xs:documentation>White: released voor shunting
+nl-NL: wit; vrijgave rangeren</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
+

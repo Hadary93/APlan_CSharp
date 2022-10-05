@@ -1,0 +1,1429 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:generic="http://dataprep.eulynx.eu/schema/Generic" xmlns:nr="http://dataprep.eulynx.eu/schema/NR" xmlns:rsmCommon="http://www.railsystemmodel.org/schemas/RSM1.2beta/Common" xmlns:sig="http://dataprep.eulynx.eu/schema/Signalling" elementFormDefault="qualified" targetNamespace="http://dataprep.eulynx.eu/schema/NR">
+  <!--<dc:date>2021-09-27T19:42:13Z</dc:date><dc:creator>rtm2xsd 1.8.5</dc:creator><dc:source>Model , XMI 2.4.1, EA 13</dc:source>-->
+  <xs:import namespace="http://dataprep.eulynx.eu/schema/Generic" schemaLocation="Generic.xsd"/>
+  <xs:import namespace="http://dataprep.eulynx.eu/schema/Generic" schemaLocation="Generic.xsd"/>
+  <xs:import namespace="http://dataprep.eulynx.eu/schema/Signalling" schemaLocation="Signalling.xsd"/>
+  <xs:import namespace="http://www.railsystemmodel.org/schemas/RSM1.2beta/Common" schemaLocation="../RSM_Schema/Common.xsd"/>
+  <xs:complexType name="AtpBeacon">
+    <xs:annotation>
+      <xs:documentation>A beacon in the ATP system. </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:TpsSpotDevice"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LightSignal">
+    <xs:annotation>
+      <xs:documentation>NR Light signal</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:LightSignal">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasBackBoard" type="nr:BackBoardTypes"/>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasHoodLength" type="nr:HoodsLengthTypes"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Designation">
+    <xs:complexContent>
+      <xs:extension base="generic:Designation">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="longName" nillable="true" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LensDiffuserWithHotStrip">
+    <xs:complexContent>
+      <xs:extension base="nr:LensDiffuser">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="value" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The hot strip indicates the direction of the focus of the light beam and is given in terms like  "left upper quadrant (LUQ)" or "5 o'clock ".</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="OverheadLineMastPairingTypes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="headSpan">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="gantry">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="RoadTrafficSign">
+    <xs:annotation>
+      <xs:documentation>Road (traffic) light </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:RoadTrafficSign">
+        <xs:sequence>
+          <xs:element name="isOfRtlType" nillable="true" type="nr:RtlTypes"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SignalFrame">
+    <xs:annotation>
+      <xs:documentation>NR signal frame.
+The type of frame is inherent to the aspect, i.e. speed warning, termination, repeater, spate, enhanced permissible speed.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:SignalFrame">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="hasComponent" type="nr:SignalFrameComponent"/>
+          <xs:element name="hasFrameDimension" nillable="true" type="nr:FrameDimension"/>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasMountingPoint" type="nr:GridLocation"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="TractionFeedTypes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="subStation">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="feederStation">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="trackParallelingHut">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="trackSectioningCabin">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="LevelCrossingLCU">
+    <xs:annotation>
+      <xs:documentation>Level crossing Local Control Unit</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:LocalOperationDevice">
+        <xs:sequence>
+          <xs:element name="isLocatedInQuadrant" nillable="true" type="sig:Quadrants"/>
+          <xs:element name="worksLevelCrossingSystem" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:LevelCrossingSystem</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="TpwsSystemProperties">
+    <xs:annotation>
+      <xs:documentation>TPWS system property set.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:TpsDataTransmissionSystemProperties">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasTpwsFunction" type="nr:TpwsFunctionTypes"/>
+          <xs:element maxOccurs="unbounded" minOccurs="1" name="hasTpwsTrainCategorySpecificProperties" nillable="true" type="nr:TpwsTrainCategorySpecificProperties"/>
+          <xs:element maxOccurs="1" minOccurs="0" name="isOfTpwsSystemType" type="nr:TpwsSystemTypes"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="TrainStop">
+    <xs:annotation>
+      <xs:documentation>Line-side mechanical device that activates the train's trip cock.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:TpsSpotDevice">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="type" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="SignalBeyondVisibleTypes">
+    <xs:annotation>
+      <xs:documentation>Is the signal ahead visible?</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="yes">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="no">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="notApplicable">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="TripcockTester">
+    <xs:annotation>
+      <xs:documentation>Line-side device for testing the trainborne trip cock.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:TpsSpotDevice">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="type" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Informs about the powering.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="EquipmentLocation">
+    <xs:annotation>
+      <xs:documentation>The construct for defining the types of equipment location references able to be located on the infrastructure.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfigurationProperty">
+        <xs:sequence>
+          <xs:element name="isOfEquipmentLocationType" nillable="true" type="nr:EquipmentLocationTypes"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="AwsMagnet">
+    <xs:annotation>
+      <xs:documentation>Class for storing information about an AWS magnet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:TpsSpotDevice">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="positionInGroup" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>Position in group of the individual AWS magnet.
+
+Increases in the track chainage direction from 1 onwards.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="type" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Can inform about
+&lt;ul&gt;
+ &lt;li&gt;strong magnet&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+ &lt;li&gt;suppression&lt;/li&gt;
+&lt;/ul&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LockoutDevice">
+    <xs:annotation>
+      <xs:documentation>NR device
+Patrol man lockout device (PLOD).</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:LockoutDevice">
+        <xs:sequence>
+          <xs:element name="isOfType" nillable="true" type="nr:LockoutDeviceTypes"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ApcMagnet">
+    <xs:annotation>
+      <xs:documentation>Automatic Power Control Magnet.
+Strictly speaking, this is not a train protection device but it uses the same technology to transmit information about the neutral section. </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:TpsSpotDevice">
+        <xs:sequence>
+          <xs:element name="appliesToNeutralSection" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:ElectrificationGap</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LevelCrossingSystem">
+    <xs:annotation>
+      <xs:documentation>NR level crossing system.
+Note that it is not necessary to define the type or streetname of the protected track crossing, its spot location suffices.
+</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:LevelCrossingSystem">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="isFittedWithFloodLight" type="nr:Floodlight">
+            <xs:annotation>
+              <xs:documentation>The level crossing system is fitted with a headlight unit.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="1" name="isOfLevelCrossingSystemType" nillable="true" type="nr:LevelCrossingControlTypes"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="FullDesignation">
+    <xs:annotation>
+      <xs:documentation>Used to be the signal box short code. Today, the line code is used.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="nr:Designation">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="name" nillable="true" type="xs:string"/>
+          <xs:element maxOccurs="1" minOccurs="1" name="prefix" nillable="true" type="xs:string"/>
+          <xs:element maxOccurs="1" minOccurs="0" name="suffix" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Used for special objects like banner or co-acting signals.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="RtlTypes">
+    <xs:annotation>
+      <xs:documentation>Types of road traffic light.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="msl_pedestrian">
+        <xs:annotation>
+          <xs:documentation>Miniature stop light, pedestrian
+(previously known as miniature warning lights) </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="msl_vehicular">
+        <xs:annotation>
+          <xs:documentation>Miniature stop light, vehicular
+(previously known as miniature warning lights) 
+</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="barrowCrossingLights">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="roadTrafficLight">
+        <xs:annotation>
+          <xs:documentation>Road traffic light; can have a St. Andrews cross</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GiveWay">
+        <xs:annotation>
+          <xs:documentation>Give-way sign usually has a St Andrew's cross.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="stAndrewsCrossOnly">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TpwsFrequencyTypes">
+    <xs:annotation>
+      <xs:documentation>TPWS frequencies for Arming and Trigger loops. The loops are stated to be Normal or Opposite Direction.
+&lt;ol&gt;
+ &lt;li&gt;f1 - 64.25 kHz&lt;/li&gt;
+ &lt;li&gt;f2 - 65.25 kHz&lt;/li&gt;
+ &lt;li&gt;f3 - 66.25 kHz&lt;/li&gt;
+ &lt;li&gt;f4 - 64.75 kHz&lt;/li&gt;
+ &lt;li&gt;f5 - 65.75 kHz&lt;/li&gt;
+ &lt;li&gt;f6 - 66.75 kHz&lt;/li&gt;
+&lt;/ol&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="f1">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="f2">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="f3">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="f4">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="f5">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="f6">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="f5_f6">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="SignalFrameComponent">
+    <xs:annotation>
+      <xs:documentation>Lamps or indicators that are part of a signal housing.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:SignalFrameComponent">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasGridLocation" type="nr:GridLocation"/>
+          <xs:element maxOccurs="1" minOccurs="0" name="pitchAngle" type="xs:double">
+            <xs:annotation>
+              <xs:documentation>The pitch of the lamp on the component for SSiFT integration</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="yawAngle" type="xs:double">
+            <xs:annotation>
+              <xs:documentation>The yaw of the lamp on the component for SSiFT integration.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="PopGroup">
+    <xs:annotation>
+      <xs:documentation>Predicted Overrun Protection (POP) group of signals.
+Overrun of any of the signals in the POP group triggers a closing of all signals.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="OverheadLineMast">
+    <xs:annotation>
+      <xs:documentation>NR class for overhead lines carrying mast. 
+Also known as stanchion (en-GB).</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:OverheadLineMast">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="isOfPairingType" type="nr:OverheadLineMastPairingTypes">
+            <xs:annotation>
+              <xs:documentation>Indicates the type of pairing with another mast.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="2" minOccurs="0" name="isPairedWithMast" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Allows pairing a mast with up to 2 other masts across the tracks. </xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>nr:OverheadLineMast</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="stanchionType" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="TpwsTrainCategorySpecificProperties">
+    <xs:sequence>
+      <xs:element name="appliesToTrainCategoryForMaximumOverrunDistance" nillable="true" type="rsmCommon:tElementWithIDref">
+        <xs:annotation>
+          <xs:appinfo>
+            <ObjectTypeRef>sig:TrainCategory</ObjectTypeRef>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="hasMaximumOverrunDistance" nillable="true" type="rsmCommon:Length"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SignallingEquivalentUnit">
+    <xs:annotation>
+      <xs:documentation>Signalling Equivalent Unit (SEU) is used as a way of estimating the size of a signalling project , so this determines if a piece of equipment is counted as an SEU or part of one.
+E.g. a signal &amp;amp; a point are 1 SEU each regardless complexity and components.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfigurationProperty">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="rate" nillable="true" type="xs:float">
+            <xs:annotation>
+              <xs:documentation>The SEU rate.
+Allows weighting the cost of the asset for accounting purposes.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="FrameDimension">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="isMiniature" nillable="true" type="xs:boolean"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="width" nillable="true" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Width in mm.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="LockoutDeviceTypes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="p">
+        <xs:annotation>
+          <xs:documentation>Protects line-side workers, patrol men, by preventing train movement in the wrong direction.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="k">
+        <xs:annotation>
+          <xs:documentation>Removing the captive key prevents train movements in both directions.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="o">
+        <xs:annotation>
+          <xs:documentation>Like type "k" except that authorised staff keeps the keys that activate the lockout devices in a lockout area.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="d">
+        <xs:annotation>
+          <xs:documentation>Disallows main route setting into the lockout area but shunting movements are allowed.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="e">
+        <xs:annotation>
+          <xs:documentation>Similar to type k except that the key is in possession of platform staff and sometimes siding staff.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="switchLock">
+        <xs:annotation>
+          <xs:documentation>Old type of lockout device.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ConfusionRisk">
+    <xs:annotation>
+      <xs:documentation>Features that may present confusion risk such as station lights or road lights.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="0" name="backgroundFeatures" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="isReadingThrough" type="nr:ReadThroughRiskTypes"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="isSignalAheadVisible" type="nr:SignalBeyondVisibleTypes"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="isWithOtherSignals" type="nr:ConfusionRiskWithOtherSignalsTypes"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PopGroupAssociation">
+    <xs:annotation>
+      <xs:documentation>Association class describing the conditions applying to individual signals in the POP group.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:BaseObject">
+        <xs:sequence>
+          <xs:element name="appliesToPopGroup" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>nr:PopGroup</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="appliesToSignal" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:Signal</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="condition" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Note describing the condition.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="hasDerailerElementCondition" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:DerailerElementAndPosition</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="hasPointElementCondition" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:PointElementAndPosition</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="LevelCrossingControlTypes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="AHB">
+        <xs:annotation>
+          <xs:documentation>automatic half barrier crossing</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ABCL">
+        <xs:annotation>
+          <xs:documentation>locally-monitored automatic barrier crossing</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MCB">
+        <xs:annotation>
+          <xs:documentation>Manually Controlled Barriers</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MCB_OD">
+        <xs:annotation>
+          <xs:documentation>Manually Controlled Barriers with obstacle detection.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MCB_RBC">
+        <xs:annotation>
+          <xs:documentation>MCB(RBC)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MCB_CCTV">
+        <xs:annotation>
+          <xs:documentation>Equipped with a camera which is viewed by the operator who confirms that the crossing is clear.
+</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AOCL">
+        <xs:annotation>
+          <xs:documentation>Automatic open crossing locally monitored</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="barrow">
+        <xs:annotation>
+          <xs:documentation>Barrow crossing</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="footpath">
+        <xs:annotation>
+          <xs:documentation>Footpath crossing</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="bridleway">
+        <xs:annotation>
+          <xs:documentation>Bridleway crossing</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="authorisedStaffCrossing">
+        <xs:annotation>
+          <xs:documentation>Crossing for authorised staff</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="userWorkedTelephone">
+        <xs:annotation>
+          <xs:documentation>Crossing equipped with a telephone and worked by the user.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="userWorkedMsl">
+        <xs:annotation>
+          <xs:documentation>user worked miniature stop lights. Formerly known as miniature warning lights.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="userWorkedBarrierMsl">
+        <xs:annotation>
+          <xs:documentation>user worked barrier with miniature stopping lights</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="trainCrewOperatedBarriers">
+        <xs:annotation>
+          <xs:documentation>Crossing equipped with barriers operated by the train crew.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="trainCrewOperatedGates">
+        <xs:annotation>
+          <xs:documentation>Crossing equipped with a gate that is opened and closed by the train crew.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="openCrossing">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="pedestrianMsl">
+        <xs:annotation>
+          <xs:documentation>pedestrian miniature stop lights</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="vehicularMsl">
+        <xs:annotation>
+          <xs:documentation>vehicular miniature stop lights</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="mannedGates">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AFBC">
+        <xs:annotation>
+          <xs:documentation>Automatic Full Barrier Crossing</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TpwsFunctionTypes">
+    <xs:annotation>
+      <xs:documentation>TPWS function types.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="uniDirectionalOverSpeed">
+        <xs:annotation>
+          <xs:documentation>OverSpeed Sensor (OSS - speed check).</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="uniDirectionalTrainStop">
+        <xs:annotation>
+          <xs:documentation>Trains Stop (TSS).</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="signallingEntities" type="nr:SignallingEntities"/>
+  <xs:complexType name="SignallingEntities">
+    <xs:complexContent>
+      <xs:extension base="generic:SignallingEntities">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="hasPowerLineCrossing" type="nr:PowerLineCrossing"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsBoosterTransformer" type="nr:Transformer"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsObscuration" type="nr:Obscuration"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsPopGroup" type="nr:PopGroup"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsPopGroupAssociation" type="nr:PopGroupAssociation"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsSwitchGear" type="nr:SwitchGear"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ownsTractionFeed" type="nr:TractionFeed"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="MrotTypes">
+    <xs:annotation>
+      <xs:documentation>Minimum road opening time.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Mrot10">
+        <xs:annotation>
+          <xs:documentation>Minimum road opening time of 10 seconds.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Mrot20">
+        <xs:annotation>
+          <xs:documentation>Minimum road opening time of 20 seconds.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ConfusionRiskWithOtherSignalsTypes">
+    <xs:annotation>
+      <xs:documentation>Could the signal be confused with other signals or signs so that a driver reads the wrong one?</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="yes">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="no">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="notApplicable">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="GroundFrame">
+    <xs:annotation>
+      <xs:documentation>Mechanical lever frame for manually throwing movable elements like points. </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="nr:ControlFrame">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="numberOfLevers" nillable="true" type="xs:int"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="LensDiffuserTypes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="longRangeWideBeam">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="longRangeNarrowBeam">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="mediumRangeWideBeam">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="mediumRangeNarrowBeam">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="shortRange">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="TractionFeed">
+    <xs:annotation>
+      <xs:documentation>Traction feed information for the purpose of avoiding interference.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element name="isLocatedAt" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The location of the connection point.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:SpotLocation</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="isOfTractionFeedType" type="nr:TractionFeedTypes"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Floodlight">
+    <xs:sequence>
+      <xs:element name="isLocatedAt" nillable="true" type="rsmCommon:tElementWithIDref">
+        <xs:annotation>
+          <xs:documentation>The headlight is located at the given spot location.</xs:documentation>
+          <xs:appinfo>
+            <ObjectTypeRef>rsmCommon:SpotLocation</ObjectTypeRef>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SwitchGear">
+    <xs:annotation>
+      <xs:documentation>Traction power switch gear.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element name="isLocatedAt" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The location of the connection point.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:SpotLocation</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="TurnoutComponentConfiguration">
+    <xs:annotation>
+      <xs:documentation>A set of properties that applies to a movable component with Network Rail.
+</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:MovableComponentConfiguration">
+        <xs:sequence>
+          <xs:element name="isOfPointControlType" nillable="true" type="nr:PointControlTypes"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DerailmentDetector">
+    <xs:annotation>
+      <xs:documentation>The associated track section is occupied when interrupter is activated/broken (only placed in derailer section; detects a train even if it is not on the rails anymore)
+Can be associated with a buffer stop that constrains the position of the derailment detector.
+Also known as track circuit interruptor.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:VehicleSensor">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="repeated" nillable="true" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>True: the detector is hard-wired to the track circuit occupancy.
+False: relay-based detection so that the derailment signal can be relayed for other functions.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ControlFrame">
+    <xs:annotation>
+      <xs:documentation>A trackside frame for locally controlling movable elements.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:LocalOperationDevice">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="covered" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>True if the device is covered. False otherwise.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="releaseNumber" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The release number from the associated signal box</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="PointControlTypes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="sixFootPointMachine">
+        <xs:annotation>
+          <xs:documentation>Point Operating Mechanism in the 6-foot.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="fourFootPointMachine">
+        <xs:annotation>
+          <xs:documentation>Point Operating Mechanism in the 4-foot.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="yardPointMachine">
+        <xs:annotation>
+          <xs:documentation>Trailable Power Operated Point Mechanism.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="BackBoardTypes">
+    <xs:annotation>
+      <xs:documentation>Information if there is a board behind the signal.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="yes">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="no">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="notApplicable">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="EquipmentLocationTypes">
+    <xs:annotation>
+      <xs:documentation>All equipment is grouped into these categories.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="junction">
+        <xs:annotation>
+          <xs:documentation>Equipment mounted at junctions (Junction Equipment).</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="sleeper">
+        <xs:annotation>
+          <xs:documentation>Equipment mounted between the rails (Sleeper Equipment).</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="rail">
+        <xs:annotation>
+          <xs:documentation>Equipment mounted on the rail (Rail Equipment).</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="track">
+        <xs:annotation>
+          <xs:documentation>Equipment mounted at a point related to the track (Track Equipment).</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="section">
+        <xs:annotation>
+          <xs:documentation>Equipment covering a section or sections of track (Section Equipment).</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="area">
+        <xs:annotation>
+          <xs:documentation>Equipment covering an area related to the track.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="PhysicalSignal">
+    <xs:annotation>
+      <xs:documentation>NR Physical signal</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:PhysicalSignal">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="GsmRadioCoverage" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>States whether this signal has GSM radio coverage.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="hasConfusionRisk" nillable="true" type="nr:ConfusionRisk"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="hasImageAttachment" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>nr:ImageAttachment</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="isObscuredBy" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:appinfo>
+                <ObjectTypeRef>nr:Obscuration</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="LevelCrossingTimerSet">
+    <xs:annotation>
+      <xs:documentation>Timer that applies to NR level crossing.
+Mrot: minimum road open time. Time during which a level crossing is guaranteed to be available to road traffic. 
+
+</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:LevelCrossingTimerSet">
+        <xs:sequence>
+          <xs:element name="isOfMrotType" nillable="true" type="nr:MrotTypes">
+            <xs:annotation>
+              <xs:documentation>Minimum road opening time.
+Either 10 or 20 seconds, depending on the type of LX.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ImageAttachment">
+    <xs:annotation>
+      <xs:documentation>Supporting images, photos and diagrams for signal sighting.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:Attachment">
+        <xs:sequence>
+          <xs:element name="isOfImageType" nillable="true" type="nr:ImageTypes"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="HoodsLengthTypes">
+    <xs:annotation>
+      <xs:documentation>Type of the cover of the signal lamp against glaring sun.
+</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="standard">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="longHood">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="none">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TpwsSystemTypes">
+    <xs:annotation>
+      <xs:documentation>Type given for choosing frequencies for this TPWS.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="normal">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="opposite">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="PowerLineCrossing">
+    <xs:annotation>
+      <xs:documentation>Indication that a non-railway power line crosses the track.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="1" name="crossesTrackAt" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>A power line can cross one or more tracks at the given location.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:SpotLocation</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Transformer">
+    <xs:annotation>
+      <xs:documentation>The transformer typically is located inside an &lt;a href="$element://{4CAA34FD-50C5-4575-AC2D-B86AB3ECE659}"&gt;&lt;font color="#0000ff"&gt;&lt;u&gt;electrification gap&lt;/u&gt;&lt;/font&gt;&lt;/a&gt; where stopping is disallowed.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element name="connectsAt" nillable="true" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>Spot location where the transformer connects to the track.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:SpotLocation</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="isPlacedAtElectrificationOverlap" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>A transformer is placed at an electrification overlap that must be protected.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:ElectrificationOverlap</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="isTransformerType" type="nr:TransformerTypes"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Obscuration">
+    <xs:annotation>
+      <xs:documentation>A trackside object that obscures the view.
+</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="generic:ConfiguredBaseObject">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="description" nillable="true" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SignalPostTelephone">
+    <xs:annotation>
+      <xs:documentation>Special information for SignalPostTelephone required by NR. 
+Driver safety must be assessed and extra measures may be needed so that the driver can safely access the telephone. </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:SignalPostTelephone">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="conductorRailGuardBoardRequired" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>States whether a guard board is provided, e.g. third rail electrification; can be N/A.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="handSignalProhibited" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>States whether hand signalling is allowed; can be N/A.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="limitedClearance" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Provides information about the area with limited clearance the phone is located in.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="safeHandRailRequired" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>States whether a safe hand rail is required; can be N/A.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="1" name="walkway" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>States whether a walkway is provided (details such as length or width); can be N/A.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="ImageTypes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CloseImage">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RearImage">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MinimumReadingDistanceImage">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="VegetationImage">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="VisionPlot">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PlatformStartingSignal">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PhotoTrainDispatch">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="LensDiffuser">
+    <xs:annotation>
+      <xs:documentation>NR Lens diffuser</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:LensDiffuser">
+        <xs:sequence>
+          <xs:element name="isOfLensDiffuserType" nillable="true" type="nr:LensDiffuserTypes"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="AwsSystemProperties">
+    <xs:annotation>
+      <xs:documentation>Class for storing information about the properties of the AWS system.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:TpsDataTransmissionSystemProperties">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="type" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>General description of the AWS configuration.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SignalSightingDistance">
+    <xs:annotation>
+      <xs:documentation>NR Signal sighting distance</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:SignalSightingDistance">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="0" name="appliesToSignalFrame" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>for route indicator or shunting signal aspect.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>sig:SignalFrame</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="bannerSignalRequired" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>In case a repeater is needed, the distance in meter to the banner repeater signal.
+Otherwise the value NO is given (hence the use of  type string.)</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasAchievableDistance" type="rsmCommon:Length">
+            <xs:annotation>
+              <xs:documentation>Reading distance with the help of mitigation works, e.g. removing obstruction by foliage.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasApproachSpeed" type="rsmCommon:Speed">
+            <xs:annotation>
+              <xs:documentation>Speed of trains approaching the signal if different from the line speed.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasCombinedReadableDistance" type="rsmCommon:Length">
+            <xs:annotation>
+              <xs:documentation>Combined reading distance for the signal and any associated repeaters.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasMinimumViewingDistance" type="rsmCommon:Length">
+            <xs:annotation>
+              <xs:documentation>Smallest distance where the signal can be read. Closer to the signal, the driver may not be able to view the signal.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="hasSupplementaryResponseTime" type="rsmCommon:Duration">
+            <xs:annotation>
+              <xs:documentation>The supplementary response time for the train driver to interpret the signal information in seconds.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="GridLocation">
+    <xs:annotation>
+      <xs:documentation>(X,Y) coordinates of the signal frame components as assigned in the Signal Head Editor tool.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="X" nillable="true" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>The location of the mounting point on the signal drawing grid; x-coordinate.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element maxOccurs="1" minOccurs="1" name="Y" nillable="true" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>The location of the mounting point on the signal drawing grid; y-coordinate.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="ReadThroughRiskTypes">
+    <xs:annotation>
+      <xs:documentation>Is there a read through risk with the signal?</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="nil">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="slight">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="significant">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TransformerTypes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="booster">
+        <xs:annotation>
+          <xs:documentation>A transformer that balances traction from overhead line and traction return current for high voltage. A train, or rather the pantograph shouldn't stop where the gap in the overhead line to accommodate the booster transformer is situated.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="auto">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="tractionMountedAuxilary">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="other">
+        <xs:annotation>
+          <xs:documentation/>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="TpwsDevice">
+    <xs:annotation>
+      <xs:documentation>TPWS loop. </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:TpsSpotDevice">
+        <xs:sequence>
+          <xs:element maxOccurs="2" minOccurs="1" name="hasFrequency" nillable="true" type="nr:TpwsFrequencyTypes">
+            <xs:annotation>
+              <xs:documentation>The arming and the trigger loop of the TSS or OSS is each associated with a frequency.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element maxOccurs="1" minOccurs="0" name="positionInGroup" type="xs:int"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="CableBridge">
+    <xs:annotation>
+      <xs:documentation>A raised construction for guiding cables across an obstacle.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="sig:CableBridge">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" name="bridgeNumber" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The number of the cable bridge, if used.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>
+

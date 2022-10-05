@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:rsmCommon="http://www.railsystemmodel.org/schemas/RSM1.2beta/Common" xmlns:rsmNE="http://www.railsystemmodel.org/schemas/RSM1.2beta/NetEntity" elementFormDefault="qualified" targetNamespace="http://www.railsystemmodel.org/schemas/RSM1.2beta/NetEntity">
+  <!--<dc:date>2021-09-09T14:48:26Z</dc:date><dc:creator>rtm2xsd 1.8.5</dc:creator><dc:source>Model , XMI 2.4.1, EA 13</dc:source>-->
+  <xs:import namespace="http://www.railsystemmodel.org/schemas/RSM1.2beta/Common" schemaLocation="Common.xsd"/>
+  <xs:complexType abstract="true" name="LocatedNetEntity">
+    <xs:annotation>
+      <xs:documentation>An entity in the network that can be located, i.e. most infrastructure-related objects.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="rsmNE:NetEntity">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="locations" type="rsmCommon:tElementWithIDref">
+            <xs:annotation>
+              <xs:documentation>The location of a net entity.
+Specialised classes such as junctions provide their own location information and need not use this role.</xs:documentation>
+              <xs:appinfo>
+                <ObjectTypeRef>rsmCommon:BaseLocation</ObjectTypeRef>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType abstract="true" name="NetEntity">
+    <xs:annotation>
+      <xs:documentation>An entity of the infrastructure that is anchored to the topology.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="rsmCommon:NetworkResource"/>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>
+
