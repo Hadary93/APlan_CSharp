@@ -54,14 +54,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="eulynx-validator.exe" size="2592256">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="eulynx-validator.exe" size="3988992">
       <assemblyIdentity name="eulynx-validator" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>lDzJ7dcdXqy56KHhQdO06+0PMY2oAP8WqwJueYsMmOY=</dsig:DigestValue>
+        <dsig:DigestValue>7MqJRpLKC4YTUwOxsZGeYZIjuyukzd5g4X2xpFvRZFo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

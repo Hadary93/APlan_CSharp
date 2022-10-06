@@ -625,16 +625,6 @@ namespace APLan.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        public static byte[] eulynxMeggenTrialNew {
-            get {
-                object obj = ResourceManager.GetObject("eulynxMeggenTrialNew", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to &lt;xsl:transform version=&quot;1.0&quot;
         ///               xmlns:schxslt=&quot;https://doi.org/10.5281/zenodo.1495494&quot;
         ///               xmlns:sch=&quot;http://purl.oclc.org/dsdl/schematron&quot;

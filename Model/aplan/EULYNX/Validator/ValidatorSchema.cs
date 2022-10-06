@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Xml;
 using System.Xml.Schema;
 
@@ -21,18 +22,18 @@ namespace aplan.eulynx.validator
             this.inputUri = inputUri;
             xsdFilePath = new string[]
             {
-                @"..\..\..\resources\EulynxSchema\DB.xsd",
-                @"..\..\..\resources\EulynxSchema\Generic.xsd",
-                @"..\..\..\resources\EulynxSchema\NR.xsd",
-                @"..\..\..\resources\EulynxSchema\ProRail.xsd",
-                @"..\..\..\resources\EulynxSchema\RFI.xsd",
-                @"..\..\..\resources\EulynxSchema\RsmCommon.xsd",
-                @"..\..\..\resources\EulynxSchema\RsmNetEntity.xsd",
-                @"..\..\..\resources\EulynxSchema\RsmSignalling.xsd",
-                @"..\..\..\resources\EulynxSchema\RsmTrack.xsd",
-                @"..\..\..\resources\EulynxSchema\Signalling.xsd",
-                @"..\..\..\resources\EulynxSchema\SNCF.xsd",
-                @"..\..\..\resources\EulynxSchema\TRV.xsd"
+                System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "/Validate/Validator/EULYNX_DP_V1.0_Schema/DB.xsd",
+                System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "/Validate/Validator/EULYNX_DP_V1.0_Schema/Generic.xsd",
+                System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "/Validate/Validator/EULYNX_DP_V1.0_Schema/NR.xsd",
+                System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "/Validate/Validator/EULYNX_DP_V1.0_Schema/ProRail.xsd",
+                System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "/Validate/Validator/EULYNX_DP_V1.0_Schema/RFI.xsd",
+                System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "/Validate/Validator/EULYNX_DP_V1.0_Schema/RsmCommon.xsd",
+                System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "/Validate/Validator/EULYNX_DP_V1.0_Schema/RsmNetEntity.xsd",
+                System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "/Validate/Validator/EULYNX_DP_V1.0_Schema/RsmSignalling.xsd",
+                System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "/Validate/Validator/EULYNX_DP_V1.0_Schema/RsmTrack.xsd",
+                System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "/Validate/Validator/EULYNX_DP_V1.0_Schema/Signalling.xsd",
+                System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "/Validate/Validator/EULYNX_DP_V1.0_Schema/SNCF.xsd",
+                System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "/Validate/Validator/EULYNX_DP_V1.0_Schema/TRV.xsd"
             };
             targetNamespace = new string[]
             {
@@ -67,7 +68,7 @@ namespace aplan.eulynx.validator
             settings.ValidationEventHandler += new ValidationEventHandler(validationCallback);
 
             // Create the XmlReader object
-            XmlReader xmlReader = XmlReader.Create(new StringReader(File.ReadAllText(inputUri)), settings);
+            XmlReader xmlReader = XmlReader.Create(new StringReader(File.ReadAllText(@inputUri)), settings);
 
             // Parse the file
             while (xmlReader.Read()) { }
@@ -79,18 +80,26 @@ namespace aplan.eulynx.validator
             xmlReader.Close();   
         }
 
-        public void makeReport()
+        public string makeReport()
         {
+            string report = null;
             // Set a variable to the Documents path.
-            string docPath = Environment.CurrentDirectory;
+            //string docPath = Environment.CurrentDirectory;
 
             // Write the string array to a new file named "logs.txt".
-            DirectoryInfo di = Directory.CreateDirectory(@"..\..\..\report");
-            using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, @"..\..\..\report\XML Schema Report.txt")))
+            //DirectoryInfo di = Directory.CreateDirectory(@"..\..\..\report");
+            if (xmlSchemaReport.Count == 0)
+            {
+                return "Validation is Successful";
+            }
+            else
             {
                 foreach (string line in xmlSchemaReport)
-                    outputFile.WriteLine(line);
+                {
+                    report += line;
+                }
             }
+            return report;
 
         }
 

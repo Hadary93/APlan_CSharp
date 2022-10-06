@@ -23,17 +23,19 @@ namespace aplan.eulynx.validator
             return eulynxXmlValidator;
         }
 
-        public void validate()
+        public string validate(string _inputUri)
         {
+            string report=null;
             // Schema 
-            validatorSchema = new ValidatorSchema(inputUri);
+            validatorSchema = new ValidatorSchema(_inputUri);
             validatorSchema.validate();
-            validatorSchema.makeReport();
+            report=validatorSchema.makeReport();
 
             // Schematron
-           validatorSchematron = new ValidatorSchematron(inputUri);
-           validatorSchematron.validate();
-           validatorSchematron.makeReport();
+            //validatorSchematron = new ValidatorSchematron(inputUri);
+            //validatorSchematron.validate();
+            //validatorSchematron.makeReport();
+            return report;
         }
 
         public void reportConsole()

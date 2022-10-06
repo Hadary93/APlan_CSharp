@@ -1,4 +1,5 @@
-﻿using APLan.Commands;
+﻿using aplan.eulynx.validator;
+using APLan.Commands;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -91,13 +92,23 @@ namespace APLan.ViewModels
             Path = folderBrowserDialog1.SelectedPath;
         }
         public void ExecuteValidate(object parameter)
-        {  
-            string command = $"/k cd validate & eulynx-validator.exe -s{xml} -o{path} & exit";
+        {
+
+            //XSD validation
+            EulynxXmlValidator validator = EulynxXmlValidator.getInstance();
+            Report = "XSD Validation : " + "\n";
+            Report +=validator.validate(XML)+"\n";
+            Report += "\n";
+
+            //Schematron Validation
+            //add % exit at the end to close the cmd after finishing
+            string command = $"/k cd validate & eulynx-validator.exe -s{xml} -o{path}";
             var myProcess=Process.Start("cmd.exe", command);
 
-            Thread.Sleep(2000);
+            Report += "Schematron Validation : " + "\n";
 
-            Report = File.ReadAllText(path+ "/XML Schema Report.txt");
+            Thread.Sleep(5000); // wait for a while until the file is written by the external .exe.
+            Report += File.ReadAllText(path+ "/Schematron Report.txt");
         }
         public void ExecuteCancel(object parameter)
         {
